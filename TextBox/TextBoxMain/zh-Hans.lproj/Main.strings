@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "8Ex-gV-5sz"; */
+"8Ex-gV-5sz.normalTitle" = "Close";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "OGN-Dr-Mpx"; */
+"OGN-Dr-Mpx.normalTitle" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Model"; ObjectID = "w2b-Uc-z6N"; */
+"w2b-Uc-z6N.normalTitle" = "Model";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."; ObjectID = "wJQ-u2-SuU"; */
+"wJQ-u2-SuU.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";

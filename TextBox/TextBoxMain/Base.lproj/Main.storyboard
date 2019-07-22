@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Songti.ttc">
+            <string>STSongti-SC-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TextBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gh-xn-LVN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q39-9P-KW3">
+                                <rect key="frame" x="0.0" y="44" width="375" height="664"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dse-iy-ZoB">
+                                        <rect key="frame" x="52.666666666666657" y="197" width="270" height="270"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                                <real key="value" value="0.14999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                                <size key="value" width="0.0" height="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvW-6n-Sbi" customClass="TextBox" customModule="TextBox" customModuleProvider="target">
+                                        <rect key="frame" x="52.666666666666657" y="197" width="270" height="270"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJQ-u2-SuU">
+                                                <rect key="frame" x="20" y="28.000000000000014" width="230" height="214.33333333333337"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                                                <fontDescription key="fontDescription" name="STSongti-SC-Regular" family="Songti SC" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9P-57-GeO">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="270"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKf-pC-eyb" customClass="EditView" customModule="TextBox" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="20" width="230" height="230"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="tOi-b8-1Qz"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="270" id="HKD-0i-bBm"/>
+                                            <constraint firstAttribute="trailing" secondItem="J9P-57-GeO" secondAttribute="trailing" id="I68-zZ-PLo"/>
+                                            <constraint firstAttribute="trailing" secondItem="wJQ-u2-SuU" secondAttribute="trailing" constant="20" id="LgM-GM-g00"/>
+                                            <constraint firstItem="wJQ-u2-SuU" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" constant="20" id="PYs-dJ-gkA"/>
+                                            <constraint firstAttribute="bottom" secondItem="J9P-57-GeO" secondAttribute="bottom" id="SCr-5s-LVM"/>
+                                            <constraint firstItem="J9P-57-GeO" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" id="Tap-Tc-aDb"/>
+                                            <constraint firstAttribute="bottom" secondItem="DKf-pC-eyb" secondAttribute="bottom" constant="20" id="VYL-BA-nvx"/>
+                                            <constraint firstAttribute="height" constant="270" id="Y7V-bb-iaF"/>
+                                            <constraint firstItem="DKf-pC-eyb" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" constant="20" id="bOm-tY-uhB"/>
+                                            <constraint firstItem="J9P-57-GeO" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" id="fAS-Mf-8Ol"/>
+                                            <constraint firstItem="DKf-pC-eyb" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" constant="20" id="h0Z-Sa-u81"/>
+                                            <constraint firstAttribute="trailing" secondItem="DKf-pC-eyb" secondAttribute="trailing" constant="20" id="mUY-pz-InI"/>
+                                            <constraint firstItem="wJQ-u2-SuU" firstAttribute="centerY" secondItem="uvW-6n-Sbi" secondAttribute="centerY" id="sTw-Wu-ebH"/>
+                                            <constraint firstItem="wJQ-u2-SuU" firstAttribute="centerX" secondItem="uvW-6n-Sbi" secondAttribute="centerX" id="sqT-1z-oeh"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="NW4-KD-LwY" appends="YES" id="Xky-DQ-zFW"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Dse-iy-ZoB" firstAttribute="bottom" secondItem="uvW-6n-Sbi" secondAttribute="bottom" id="2fq-RZ-EMv"/>
+                                    <constraint firstAttribute="trailing" secondItem="uvW-6n-Sbi" secondAttribute="trailing" id="5NW-6g-CWg"/>
+                                    <constraint firstItem="Dse-iy-ZoB" firstAttribute="trailing" secondItem="uvW-6n-Sbi" secondAttribute="trailing" id="7aX-gz-wdf"/>
+                                    <constraint firstItem="Dse-iy-ZoB" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" id="Sz1-vn-rtM"/>
+                                    <constraint firstItem="uvW-6n-Sbi" firstAttribute="top" secondItem="q39-9P-KW3" secondAttribute="top" constant="197" id="WYX-FN-hKO"/>
+                                    <constraint firstItem="Dse-iy-ZoB" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" id="Zah-zz-gnP"/>
+                                    <constraint firstItem="uvW-6n-Sbi" firstAttribute="centerX" secondItem="q39-9P-KW3" secondAttribute="centerX" id="bT2-IJ-GKY"/>
+                                    <constraint firstAttribute="bottom" secondItem="uvW-6n-Sbi" secondAttribute="bottom" constant="20" id="s5Q-4Z-Gbh"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QUj-7P-Usn" appends="YES" id="evC-sZ-Y8j"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2O-52-Diw">
+                                <rect key="frame" x="172.66666666666666" y="728" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Xag-sz-LfP"/>
+                                    <constraint firstAttribute="height" constant="30" id="iEM-36-hHU"/>
+                                </constraints>
+                                <state key="normal" image="Adjustment"/>
+                                <connections>
+                                    <action selector="AdjustmentButtonUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WLg-oj-NnW"/>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="ebg-Ov-vsN"/>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="w8C-oW-46Y"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Wx-dd-nik"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchCancel" id="UPs-ek-XCO"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchDragExit" id="hho-TZ-kO5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2b-Uc-z6N">
+                                <rect key="frame" x="20" y="728" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="aSt-jz-qgz"/>
+                                    <constraint firstAttribute="height" constant="30" id="wr7-Dr-euC"/>
+                                </constraints>
+                                <state key="normal" image="ModelIcon"/>
+                                <connections>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Joa-om-UcO"/>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="Q3a-7F-D2H"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchCancel" id="0JP-C7-OSZ"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="76g-ng-R3e"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchDragExit" id="r5t-vI-dha"/>
+                                    <action selector="ModelButtonUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Qa-HO-BqH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGN-Dr-Mpx">
+                                <rect key="frame" x="325" y="728" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="E73-30-0xf"/>
+                                    <constraint firstAttribute="width" constant="30" id="r8o-P7-EGB"/>
+                                </constraints>
+                                <state key="normal" image="Export">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="DhG-Tc-Ujf"/>
+                                    <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="OMM-WF-jAi"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BbE-tn-ty2"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchCancel" id="WjE-WN-iOY"/>
+                                    <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchDragExit" id="mh5-li-9Sl"/>
+                                    <action selector="ExportButtonUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YOx-oo-5wU"/>
+                                </connections>
+                            </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfU-ab-s00" customClass="PopView" customModule="TextBox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="812" width="375" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Sf-Dp-CoA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="WPy-mz-MvX"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ex-gV-5sz">
+                                        <rect key="frame" x="330" y="15" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="NRc-jM-3RV"/>
+                                            <constraint firstAttribute="width" constant="30" id="olU-SK-hmv"/>
+                                        </constraints>
+                                        <state key="normal" image="X"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="0mx-48-ykH"/>
+                                            <action selector="ButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="dTs-r8-teS"/>
+                                            <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PsC-Um-qKT"/>
+                                            <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchDragExit" id="bXS-7W-fA0"/>
+                                            <action selector="ButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchCancel" id="eb9-ei-WtD"/>
+                                            <action selector="PopViewCancelButtonUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XmK-xW-FZq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2Sf-Dp-CoA" secondAttribute="trailing" id="EyS-OL-4LH"/>
+                                    <constraint firstItem="8Ex-gV-5sz" firstAttribute="centerY" secondItem="kfU-ab-s00" secondAttribute="top" constant="30" id="WTi-4u-xwa"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Ex-gV-5sz" secondAttribute="centerX" constant="30" id="YjM-Ay-inz"/>
+                                    <constraint firstAttribute="height" constant="300" id="lVY-0C-rpX"/>
+                                    <constraint firstItem="2Sf-Dp-CoA" firstAttribute="leading" secondItem="kfU-ab-s00" secondAttribute="leading" id="t8P-Ot-n1d"/>
+                                    <constraint firstItem="2Sf-Dp-CoA" firstAttribute="top" secondItem="kfU-ab-s00" secondAttribute="top" id="vWw-5j-Dzr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.81176470588235294" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7Gh-xn-LVN" secondAttribute="bottom" id="3Ta-hy-wqC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kfU-ab-s00" secondAttribute="trailing" id="DXk-a3-Sx3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q39-9P-KW3" secondAttribute="trailing" id="Gs8-PW-2Kg"/>
+                            <constraint firstAttribute="bottom" secondItem="kfU-ab-s00" secondAttribute="bottom" constant="-300" id="Ih5-FJ-854"/>
+                            <constraint firstItem="kfU-ab-s00" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N1H-5N-Xip"/>
+                            <constraint firstItem="7Gh-xn-LVN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PQv-Sm-f2L"/>
+                            <constraint firstItem="q39-9P-KW3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PY1-9W-Hze"/>
+                            <constraint firstItem="Z2O-52-Diw" firstAttribute="top" secondItem="q39-9P-KW3" secondAttribute="bottom" constant="20" id="Q6j-Ob-z69"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OGN-Dr-Mpx" secondAttribute="trailing" constant="20" id="QPB-K4-X6h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OGN-Dr-Mpx" secondAttribute="bottom" constant="20" id="T40-RS-mcE"/>
+                            <constraint firstItem="w2b-Uc-z6N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="UBk-jZ-8N2"/>
+                            <constraint firstItem="q39-9P-KW3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YT1-vY-fej"/>
+                            <constraint firstItem="Z2O-52-Diw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lja-yI-3xE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z2O-52-Diw" secondAttribute="bottom" constant="20" id="py7-Us-3yG"/>
+                            <constraint firstAttribute="trailing" secondItem="7Gh-xn-LVN" secondAttribute="trailing" id="sS7-QH-6qD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="w2b-Uc-z6N" secondAttribute="bottom" constant="20" id="scB-Md-qkh"/>
+                            <constraint firstItem="7Gh-xn-LVN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="t5J-bV-P6o"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="DarkenView" destination="7Gh-xn-LVN" id="UAa-Qi-xSp"/>
+                        <outlet property="PopView" destination="kfU-ab-s00" id="3lB-F8-uYG"/>
+                        <outlet property="PopViewBottom" destination="Ih5-FJ-854" id="rft-wM-PFJ"/>
+                        <outlet property="TextBox" destination="uvW-6n-Sbi" id="aD8-sR-jpO"/>
+                        <outlet property="TextBoxBottom" destination="Q6j-Ob-z69" id="OJ4-7o-NEv"/>
+                        <outlet property="TextBoxEditBGView" destination="J9P-57-GeO" id="sbo-uu-iMG"/>
+                        <outlet property="TextBoxEditView" destination="DKf-pC-eyb" id="pgc-sv-8cm"/>
+                        <outlet property="TextBoxHeight" destination="Y7V-bb-iaF" id="H4G-7F-V8B"/>
+                        <outlet property="TextBoxLabel" destination="wJQ-u2-SuU" id="nzV-cM-GIP"/>
+                        <outlet property="TextBoxScrollView" destination="q39-9P-KW3" id="Lva-nS-bkt"/>
+                        <outlet property="TextBoxShadowView" destination="Dse-iy-ZoB" id="OCX-v2-wv2"/>
+                        <outlet property="TextBoxTop" destination="WYX-FN-hKO" id="D4u-N2-SVc"/>
+                        <outlet property="TextBoxWidth" destination="HKD-0i-bBm" id="L5s-GG-Cxm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NW4-KD-LwY">
+                    <connections>
+                        <action selector="TextBoxTapped:" destination="BYZ-38-t0r" id="Gtg-V3-DOb"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="QUj-7P-Usn">
+                    <connections>
+                        <action selector="TextBoxViewTapped:" destination="BYZ-38-t0r" id="Z0u-hT-Vaz"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Adjustment" width="30" height="30"/>
+        <image name="Export" width="90" height="90"/>
+        <image name="ModelIcon" width="90" height="90"/>
+        <image name="X" width="150" height="150"/>
+    </resources>
+</document>

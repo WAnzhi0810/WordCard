@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  TextBox
+
+  Created by OX CL on 2019/7/21.
+  Copyright © 2019 OX CL. All rights reserved.
+*/
+
+
+// MARK: Font
+
+"STSongti-SC-Regular" = "宋体-常规体";
+"STSongti-SC-Light" = "宋体-细体";
+"STSongti-SC-Bold" = "宋体-粗体";
+"STSongti-SC-Black" = "宋体-黑体";
+
+// MARK: KeyboardView
+
+"字体" = "字体";
+"字体大小" = "字体大小";
+

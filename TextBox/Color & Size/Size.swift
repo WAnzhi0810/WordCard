@@ -23,6 +23,8 @@ class Size {
     
     class PopView {
         static let Height: CGFloat = 300.0
+        static let CollectionViewLength: CGFloat = 100.0
+        static let CollectionViewGap: CGFloat = 15.0
     }
     
     class EditAccessoryView {

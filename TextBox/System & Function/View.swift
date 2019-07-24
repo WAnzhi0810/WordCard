@@ -27,4 +27,20 @@ extension UIView
     {
         self.animate(withDuration: duration, delay: delay, options: [.allowUserInteraction], animations: doing, completion: completion)
     }
+    
+    
+    func getCurrentVC() -> UIViewController?
+    {
+        var next = self.superview
+        while (next != nil)
+        {
+            let nextResponder = next?.next
+            if nextResponder is UIViewController
+            {
+                return nextResponder as? UIViewController
+            }
+            next = next?.superview
+        }
+        return nil
+    }
 }

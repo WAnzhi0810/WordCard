@@ -17,10 +17,16 @@ class PopView: UIView {
 
     func popUp(with: displayType, in controller: ViewController)
     {
+        switch with
+        {
+        case .Model:
+            controller.PopViewModelCollectionView.isHidden = false
+        case .Adjustment:
+            controller.PopViewModelCollectionView.isHidden = true
+        }
+        
         UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            //controller.ChangeStatusBarStyle(isChangeToBlack: false, duration: 0.5)
             controller.PopViewBottom.constant = 0
-            //controller.DarkenView.alpha = 0.6
             controller.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -28,9 +34,7 @@ class PopView: UIView {
     func popDown(in controller: ViewController)
     {
         UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            //controller.ChangeStatusBarStyle(isChangeToBlack: true, duration: 0.5)
             controller.PopViewBottom.constant = -Size.PopView.Height
-            //controller.DarkenView.alpha = 0
             controller.view.layoutIfNeeded()
         }, completion: nil)
     }

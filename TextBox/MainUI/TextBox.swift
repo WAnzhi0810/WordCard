@@ -21,6 +21,17 @@ class TextBox: UIView {
         controller.TextBoxEditView.inputAccessoryView = EditAccessoryView.GenerateView(in: controller)
     }
     
+    func StyleInit(in controller: ViewController)
+    {
+        Style.UpdateTextBox(in: controller)
+        Style.Adjustment.Update(in: controller)
+    }
+    
+    func StyleUpdate(in controller: ViewController)
+    {
+        Style.Adjustment.Update(in: controller)
+    }
+    
     
     // MARK: - Export
     func Export(in controller: ViewController)
@@ -99,21 +110,47 @@ class TextBox: UIView {
         self.moveBottom(to: Size.PopView.Height - 70.0, in: controller)
     }
     
-    func UpdateTopToCenter(in controller: ViewController)
+    static func UpdateTopToCenter(boxSize: CGSize, in controller: ViewController)
     {
-        UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - Size.TextBox.Width) / 2.0
-            controller.view.layoutIfNeeded()
-        }, completion: nil)
-        
+        if boxSize.height > controller.TextBoxScrollView.bounds.height - 30.0 * 2
+        {
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxTop.constant = 30.0
+                controller.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        else
+        {
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - boxSize.height) / 2.0
+                controller.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
     
+    func UpdateTopToCenter(in controller: ViewController)
+    {
+        if self.bounds.height > controller.TextBoxScrollView.bounds.height - 30.0 * 2
+        {
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxTop.constant = 30.0
+                controller.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        else
+        {
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - self.bounds.height) / 2.0
+                controller.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
     
     
     func TurnToEditMode(isOn: Bool,in controller: ViewController)
     {
         controller.TextBoxEditView.isHidden = !isOn
-        controller.TextBoxEditBGView.isHidden = !isOn
+        controller.TextBoxLabel.isHidden = isOn
         
         if isOn
         {
@@ -126,46 +163,7 @@ class TextBox: UIView {
         }
         else
         {
-            let wordHeight = controller.TextBoxLabel.attributedText?.height(width: controller.TextBoxLabel.bounds.width)
-            if wordHeight == nil
-            {
-                return
-            }
-            let boxHeight = wordHeight! + 20.0 * 2
-            
-            if boxHeight <= Size.TextBox.Width
-            {
-                UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                    controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - Size.TextBox.Width) / 2.0
-                    controller.TextBoxHeight.constant = Size.TextBox.Width
-                    controller.TextBoxWidth.constant = Size.TextBox.Width
-                    //controller.TextBoxWidth.isActive = true
-                    //controller.TextBoxHeight.isActive = true
-                    controller.view.layoutIfNeeded()
-                }, completion: nil)
-            }
-            else if boxHeight > controller.TextBoxScrollView.bounds.height - 20.0 * 2
-            {
-                UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                    controller.TextBoxTop.constant = 20.0
-                    controller.TextBoxHeight.constant = boxHeight
-                    controller.TextBoxWidth.constant = Size.TextBox.Width
-                    //controller.TextBoxWidth.isActive = true
-                    //controller.TextBoxHeight.isActive = true
-                    controller.view.layoutIfNeeded()
-                }, completion: nil)
-            }
-            else
-            {
-                UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                    controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - boxHeight) / 2.0
-                    controller.TextBoxHeight.constant = boxHeight
-                    controller.TextBoxWidth.constant = Size.TextBox.Width
-                    //controller.TextBoxWidth.isActive = true
-                    //controller.TextBoxHeight.isActive = true
-                    controller.view.layoutIfNeeded()
-                }, completion: nil)
-            }
+            Style.UpdateTextBox(in: controller)
         }
     }
 

@@ -45,7 +45,7 @@ class Font {
         let TypingAttr : [String : Any] =
             [
                 "NSFont" : set(fontName: fontName, size: size),
-                "NSColor" : Style.Adjustment.PreviewValue.FGColor[Style.Adjustment.current.FGColor]
+                "NSColor" : Style.Adjustment.PreviewValue.FGColor[Style.Adjustment.current[.FGColor]!]
         ]
         
         return TypingAttr
@@ -55,7 +55,7 @@ class Font {
     {
         return [NSAttributedString.Key.font : set(fontName: fontName, size: size),
                 NSAttributedString.Key.paragraphStyle : Font.alignment(alignment: alignment),
-                NSAttributedString.Key.foregroundColor : Style.Adjustment.PreviewValue.FGColor[Style.Adjustment.current.FGColor]]
+                NSAttributedString.Key.foregroundColor : Style.Adjustment.PreviewValue.FGColor[Style.Adjustment.current[.FGColor]!]]
     }
     
     static func alignment(alignment: NSTextAlignment) -> NSParagraphStyle

@@ -14,6 +14,11 @@ class PopView: UIView {
         case Model
         case Adjustment
     }
+    
+    func heightInit(in controller: ViewController)
+    {
+        controller.PopViewHeight.constant = Size.PopView.Height
+    }
 
     func popUp(with: displayType, in controller: ViewController)
     {
@@ -21,8 +26,10 @@ class PopView: UIView {
         {
         case .Model:
             controller.PopViewModelCollectionView.isHidden = false
+            controller.PopViewAdjustmentTableView.isHidden = true
         case .Adjustment:
             controller.PopViewModelCollectionView.isHidden = true
+            controller.PopViewAdjustmentTableView.isHidden = false
         }
         
         UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
@@ -34,7 +41,7 @@ class PopView: UIView {
     func popDown(in controller: ViewController)
     {
         UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            controller.PopViewBottom.constant = -Size.PopView.Height
+            controller.PopViewBottom.constant = -Size.PopView.Height-60.0
             controller.view.layoutIfNeeded()
         }, completion: nil)
     }

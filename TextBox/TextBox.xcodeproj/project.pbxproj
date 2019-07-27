@@ -28,6 +28,7 @@
 		618FD3B422DF13E400978D22 /* EditAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B322DF13E400978D22 /* EditAccessoryView.swift */; };
 		618FD3B822DF6F3A00978D22 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B722DF6F3900978D22 /* EditView.swift */; };
 		618FD3BA22DF72BB00978D22 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B922DF72BA00978D22 /* String.swift */; };
+		61FE036C22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		618FD3B622DF62CB00978D22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		618FD3B722DF6F3900978D22 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		618FD3B922DF72BA00978D22 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentSingleSelectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				618FD3B322DF13E400978D22 /* EditAccessoryView.swift */,
 				618FD3B722DF6F3900978D22 /* EditView.swift */,
 				6107A5EE22E699E1008620B7 /* AdjustmentSelectionTypeCell.swift */,
+				61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */,
 			);
 			path = MainUI;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				6107A5E022E400E8008620B7 /* Color.swift in Sources */,
 				618FD3AB22DE0B9E00978D22 /* PopView.swift in Sources */,
 				618FD3A222DDCC6900978D22 /* TextBox.swift in Sources */,
+				61FE036C22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift in Sources */,
 				618FD3A022DDC8EE00978D22 /* Font.swift in Sources */,
 				6107A5DE22E1806B008620B7 /* KeyboardView.swift in Sources */,
 			);
@@ -424,7 +428,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V8ETDGXR5B;
 				INFOPLIST_FILE = "$(SRCROOT)/TextBoxMain/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,7 +447,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V8ETDGXR5B;
 				INFOPLIST_FILE = "$(SRCROOT)/TextBoxMain/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

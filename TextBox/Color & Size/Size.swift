@@ -12,6 +12,7 @@ class Size {
     
     static let ScreenWidth = UIScreen.main.bounds.width
     static let ScreenHeight = UIScreen.main.bounds.height
+    
     static var KeyboardHeight = ScreenWidth * 0.688
     {
         didSet {
@@ -20,11 +21,13 @@ class Size {
     }
     
     static let StatusBarHeight = UIApplication.shared.statusBarFrame.height
+    static let BottomHeight: CGFloat = (UIApplication.shared.delegate?.window?!.safeAreaInsets.bottom)!
+    
     
     class PopView {
-        static let Height: CGFloat = 300.0
-        static let CollectionViewLength: CGFloat = 100.0
-        static let CollectionViewGap: CGFloat = 15.0
+        static let Height: CGFloat = ScreenHeight * 0.4
+        static let CollectionViewLength: CGFloat = ScreenWidth * 5.0 / 19.0
+        static let CollectionViewGap: CGFloat = ScreenWidth / 19.0
     }
     
     class EditAccessoryView {
@@ -37,6 +40,10 @@ class Size {
     
     class TextBox {
         static let Width: CGFloat = (Size.ScreenWidth < Size.ScreenHeight ? Size.ScreenWidth : Size.ScreenHeight) * 0.8
+    }
+    
+    class TextBoxScrollView {
+        static let HeightInit: CGFloat = ScreenHeight - StatusBarHeight - BottomHeight - 70.0
     }
 
 }

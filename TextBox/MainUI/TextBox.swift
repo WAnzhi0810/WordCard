@@ -85,17 +85,11 @@ class TextBox: UIView {
 
     func moveBottom(to bottom: CGFloat, in controller: ViewController)
     {
-        
         UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
             controller.TextBoxBottom.constant = bottom
             controller.view.layoutIfNeeded()
         }, completion: nil)
         
-    }
-    
-    func moveToCenter(mySize size: CGSize)
-    {
-        self.frame = CGRect(x: Size.ScreenWidth/2.0 - size.width/2.0, y: Size.ScreenHeight/2.0 - size.height/2.0, width: size.width, height: size.height )
     }
     
     // MARK: Move back
@@ -107,8 +101,19 @@ class TextBox: UIView {
     // MARK: - PopView poped position
     func MoveForPop(in controller: ViewController)
     {
-        self.moveBottom(to: Size.PopView.Height - 70.0, in: controller)
+        self.moveBottom(to: Size.PopView.Height - Size.BottomHeight - 50.0, in: controller)
     }
+    
+    /*func TopInit(in controller: ViewController) // fix bug for position movement of TextBox at the beginning of the opening
+    {
+        UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            controller.TextBoxTop.constant = (Size.TextBoxScrollView.HeightInit - self.bounds.height) / 2.0
+            print((Size.TextBoxScrollView.HeightInit - self.bounds.height) / 2.0)
+            print("boxHeight: \(self.bounds.height)")
+            print("ScrollViewHeight: \(Size.TextBoxScrollView.HeightInit)")
+            controller.view.layoutIfNeeded()
+        }, completion: nil)
+    }*/
     
     static func UpdateTopToCenter(boxSize: CGSize, in controller: ViewController)
     {
@@ -123,6 +128,7 @@ class TextBox: UIView {
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - boxSize.height) / 2.0
+                print((controller.TextBoxScrollView.bounds.height - boxSize.height) / 2.0)
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }

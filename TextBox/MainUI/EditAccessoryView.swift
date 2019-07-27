@@ -75,7 +75,8 @@ class EditAccessoryView {
     {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.frame = CGRect(x: Size.ScreenWidth - 75.0, y: 5, width: 70.0, height: Size.EditAccessoryView.Height-10.0)
-        button.setTitle("Done", for: UIControl.State.normal)
+        button.tintColor = Color.theme.current
+        button.setTitle("完成", for: UIControl.State.normal)
         button.addTarget(controller, action: #selector(controller.KeyboardComplishButton), for: UIControl.Event.touchUpInside)
         
         return button

@@ -35,7 +35,9 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     @IBOutlet weak var PopView: PopView!
     @IBOutlet weak var PopViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var PopViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var PopViewAdjustmentTableView: UITableView!
     @IBOutlet weak var PopViewModelCollectionView: UICollectionView!
     
     
@@ -50,9 +52,19 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         self.TextBox.StyleInit(in: self)
         self.TextBox.SizeInit(in: self)
         self.TextBox.InputAccessoryInit(in: self)
-        self.TextBox.UpdateTopToCenter(in: self)
+        
+        self.PopView.heightInit(in: self)
+        
+        //self.TextBox.TopInit(in: self)
+        //self.PopViewMoveDownOperation()
+        //self.TextBox.MoveTo0(in: self)
+        //self.TextBox.UpdateTopToCenter(in: self)
         
         self.TextBoxEditView.FontInit()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.PopViewMoveDownOperation()
     }
     
     @objc func keyboardChanged(_ notification: Notification)
@@ -66,7 +78,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         
         if notification.name == UIResponder.keyboardWillShowNotification
         {
-            self.TextBox.moveBottom(to: keyboardHeight - 70.0, in: self)
+            self.TextBox.moveBottom(to: keyboardHeight - Size.BottomHeight - 50.0, in: self)
             Size.KeyboardHeight = keyboardHeight
         }
         else
@@ -215,9 +227,9 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     
     // MARK: - UICollectionView
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Style.Name.allValues.count
-        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -238,6 +250,13 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Style.ChangeTo(item: indexPath.item, in: self)
+        AdjustmentCell.reloadData()
+        self.PopViewAdjustmentTableView.reloadData()
+        /*for currentType in Style.Adjustment.displayType[Style.current]!
+        {
+            let tableCell = self.PopViewAdjustmentTableView.cellForRow(at: IndexPath(row: 0, section: Style.Adjustment.displayTypeIndex(type: currentType, in: Style.current)!)) as! AdjustmentSelectionTypeCell
+            tableCell.SingleSelectionCollectionView.reloadData()
+        }*/
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
@@ -248,7 +267,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     // MARK: - UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Style.Adjustment.typeArray.count
+        return Style.Adjustment.displayType[Style.current]!.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -258,16 +277,18 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AdjustmentSelectionType")! as! AdjustmentSelectionTypeCell
         cell.tag = indexPath.section
+        cell.SingleSelectionCollectionView.reloadData()
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Style.Adjustment.SectionTitle[section]
+        return Style.Adjustment.SectionTitle[Style.Adjustment.displayType[Style.current]![section]]
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Style.Adjustment.CellSize[Style.Adjustment.typeArray[indexPath.item]]!.height + 30.0
+        return Style.Adjustment.TableCellHeight[Style.Adjustment.displayType[Style.current]![indexPath.section]]!
+        //return Style.Adjustment.CellSize[Style.Adjustment.typeArray[indexPath.item]]!.height * 2.0 + 45.0
     }
     
     

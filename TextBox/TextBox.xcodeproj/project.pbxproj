@@ -29,6 +29,7 @@
 		618FD3B822DF6F3A00978D22 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B722DF6F3900978D22 /* EditView.swift */; };
 		618FD3BA22DF72BB00978D22 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B922DF72BA00978D22 /* String.swift */; };
 		61FE036C22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */; };
+		61FE036E22EC994F00BE2E94 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE036D22EC994E00BE2E94 /* System.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		618FD3B722DF6F3900978D22 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		618FD3B922DF72BA00978D22 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentSingleSelectionCell.swift; sourceTree = "<group>"; };
+		61FE036D22EC994E00BE2E94 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				618FD3AD22DE18FD00978D22 /* View.swift */,
 				618FD3AF22DEF40B00978D22 /* Constant.swift */,
 				618FD3B922DF72BA00978D22 /* String.swift */,
+				61FE036D22EC994E00BE2E94 /* System.swift */,
 			);
 			path = "System & Function";
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			files = (
 				618FD3AE22DE18FD00978D22 /* View.swift in Sources */,
 				618FD3B422DF13E400978D22 /* EditAccessoryView.swift in Sources */,
+				61FE036E22EC994F00BE2E94 /* System.swift in Sources */,
 				618FD3B822DF6F3A00978D22 /* EditView.swift in Sources */,
 				618FD38D22DD69A100978D22 /* ViewController.swift in Sources */,
 				618FD3B022DEF40B00978D22 /* Constant.swift in Sources */,

@@ -14,6 +14,7 @@ class Constant: NSObject {
         static let Fast: TimeInterval = 0.3
         static let Middle: TimeInterval = 0.5
         static let Slow: TimeInterval = 0.7
+        static let StyleChange: TimeInterval = 2.0
     }
 
 }

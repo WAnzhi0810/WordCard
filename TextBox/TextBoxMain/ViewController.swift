@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     @IBOutlet weak var BackgroundView: UIView!
     @IBOutlet weak var BackgroundImageView: UIImageView!
+    @IBOutlet weak var BackgroundEffectView: UIVisualEffectView!
     
     
     @IBOutlet weak var TextBoxScrollView: UIScrollView!
@@ -27,18 +28,29 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var TextBoxLabelTop: NSLayoutConstraint!
     @IBOutlet weak var TextBoxLabelLeading: NSLayoutConstraint!
     @IBOutlet weak var TextBoxLabelBottom: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxEditViewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxEditViewTop: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxEditViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxEditViewBottom: NSLayoutConstraint!
     
     @IBOutlet weak var TextBoxImageView: UIImageView!
+    @IBOutlet weak var TextBoxImageFilterView: UIView!
     @IBOutlet weak var TextBoxDecorationView: UIView!
     @IBOutlet weak var TextBoxLabel: UILabel!
     @IBOutlet weak var TextBoxEditView: EditView!
     
     @IBOutlet weak var PopView: PopView!
+    @IBOutlet weak var PopBackgroundView: UIView!
     @IBOutlet weak var PopViewBottom: NSLayoutConstraint!
     @IBOutlet weak var PopViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var PopViewAdjustmentTableView: UITableView!
     @IBOutlet weak var PopViewModelCollectionView: UICollectionView!
+    
+    @IBOutlet weak var AdjustmentButton: UIButton!
+    @IBOutlet weak var ModelButton: UIButton!
+    @IBOutlet weak var ShareButton: UIButton!
+    @IBOutlet weak var CloseButton: UIButton!
     
     
     // MARK: - Function
@@ -49,9 +61,10 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        //self.TextBoxShadowView.add(Shadow: UIView.Shadow(radius: 10, opacity: 0.15, Yoffset: 5))
+        self.TextBox.InputAccessoryInit(in: self)
         self.TextBox.StyleInit(in: self)
         self.TextBox.SizeInit(in: self)
-        self.TextBox.InputAccessoryInit(in: self)
         
         self.PopView.heightInit(in: self)
         
@@ -106,6 +119,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     }
     
     @IBAction func ModelButtonUpInside(_ sender: UIButton) {
+        System.FeedbackGenerator(style: .light)
         self.TextBoxEditView.resignFirstResponder()
         self.PopView.popUp(with: .Model,  in: self)
         self.TextBox.MoveForPop(in: self)
@@ -113,6 +127,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     }
     
     @IBAction func AdjustmentButtonUpInside(_ sender: UIButton) {
+        System.FeedbackGenerator(style: .light)
         self.TextBoxEditView.resignFirstResponder()
         self.PopView.popUp(with: .Adjustment, in: self)
         self.TextBox.MoveForPop(in: self)
@@ -120,6 +135,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     }
     
     @IBAction func ExportButtonUpInside(_ sender: UIButton) {
+        System.FeedbackGenerator(style: .light)
         self.TextBox.Export(in: self)
     }
     
@@ -141,6 +157,11 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     }
     
     @IBAction func TextBoxTapped(_ sender: UITapGestureRecognizer) {
+        if self.TextBoxEditView.isFirstResponder
+        {
+            return
+        }
+        System.FeedbackGenerator(style: .light)
         self.TextBoxTurnToEdit(toEdit: true)
     }
     
@@ -154,6 +175,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     @objc func KeyboardButton(_ sender: UIButton)
     {
+        System.FeedbackGenerator(style: .light)
         switch sender.tag
         {
         case EditAccessoryView.buttonID.Font.rawValue, EditAccessoryView.buttonID.Fontsize.rawValue://Font & Font size
@@ -194,12 +216,14 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     // FontView Button UpInside
     @objc func KeyboardFontViewButton(_ sender: UIButton)
     {
+        System.FeedbackGenerator(style: .light)
         KeyboardView.FontOperation(tag: sender.tag, in: self)
     }
     
     // FontSizeView Button UpInside
     @objc func KeyboardFontSizeViewButton(_ sender: UIButton)
     {
+        System.FeedbackGenerator(style: .light)
         KeyboardView.FontSizeOperation(tag: sender.tag, in: self)
     }
     

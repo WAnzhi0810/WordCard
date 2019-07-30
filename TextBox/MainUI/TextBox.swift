@@ -25,6 +25,7 @@ class TextBox: UIView {
     {
         Style.UpdateTextBox(in: controller)
         Style.Adjustment.Update(in: controller)
+        Style.UpdateBackgroundAndDark(in: controller)
     }
     
     func StyleUpdate(in controller: ViewController)
@@ -155,6 +156,8 @@ class TextBox: UIView {
     
     func TurnToEditMode(isOn: Bool,in controller: ViewController)
     {
+        controller.TextBoxEditView.inputView = nil
+        EditAccessoryView.AllButtonUnselected()
         controller.TextBoxEditView.isHidden = !isOn
         controller.TextBoxLabel.isHidden = isOn
         

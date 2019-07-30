@@ -27,6 +27,13 @@ class EditAccessoryView {
         static var LeftAlign: UIButton!
         static var CenterAlign: UIButton!
         static var RightAlign: UIButton!
+        static var Done: UIButton!
+    }
+    
+    static func AllButtonUnselected()
+    {
+        self.button.Font.isSelected = false
+        self.button.Fontsize.isSelected = false
     }
     
     static func ButtonSelectOperation(sender: UIButton)
@@ -73,13 +80,14 @@ class EditAccessoryView {
     
     private static func ComplishButton(in controller: ViewController) -> UIButton
     {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.frame = CGRect(x: Size.ScreenWidth - 75.0, y: 5, width: 70.0, height: Size.EditAccessoryView.Height-10.0)
-        button.tintColor = Color.theme.current
-        button.setTitle("完成", for: UIControl.State.normal)
-        button.addTarget(controller, action: #selector(controller.KeyboardComplishButton), for: UIControl.Event.touchUpInside)
+        button.Done = UIButton(type: UIButton.ButtonType.system)
+        button.Done.frame = CGRect(x: Size.ScreenWidth - 75.0, y: 5, width: 70.0, height: Size.EditAccessoryView.Height-10.0)
+        button.Done.tintColor = Color.theme.current
+        button.Done.titleLabel?.font = Font.set(systemFontSize: 17, weight: UIFont.Weight.medium)
+        button.Done.setTitle("完成", for: UIControl.State.normal)
+        button.Done.addTarget(controller, action: #selector(controller.KeyboardComplishButton), for: UIControl.Event.touchUpInside)
         
-        return button
+        return button.Done
     }
     
     private static func ScrollView(in controller: ViewController) -> UIScrollView
@@ -100,9 +108,10 @@ class EditAccessoryView {
     
     private static func FontButton(in controller: ViewController) -> UIButton
     {
-        button.Font = UIButton(type: UIButton.ButtonType.system)
+        button.Font = UIButton(type: UIButton.ButtonType.custom)
         button.Font.frame = CGRect(x: 5, y: 5, width: 40.0, height: Size.EditAccessoryView.Height-10.0)
-        button.Font.setTitle("F", for: UIControl.State.normal)
+        button.Font.setImage(UIImage(named: Style.isDark ? "Font_w" : "Font_b"), for: .normal)
+        button.Font.setImage(UIImage(named: Style.isDark ? "Font_sw" : "Font_sb"), for: .selected)
         button.Font.tag = buttonID.Font.rawValue
         button.Font.addTarget(controller, action: #selector(controller.KeyboardButton(_:)), for: UIControl.Event.touchUpInside)
         
@@ -111,9 +120,10 @@ class EditAccessoryView {
     
     private static func FontSizeButton(in controller: ViewController) -> UIButton
     {
-        button.Fontsize = UIButton(type: UIButton.ButtonType.system)
+        button.Fontsize = UIButton(type: UIButton.ButtonType.custom)
         button.Fontsize.frame = CGRect(x: 50.0 * 1 + 5, y: 5, width: 40.0, height: Size.EditAccessoryView.Height-10.0)
-        button.Fontsize.setTitle("Si", for: UIControl.State.normal)
+        button.Fontsize.setImage(UIImage(named: Style.isDark ? "Fontsize_w" : "Fontsize_b"), for: .normal)
+        button.Fontsize.setImage(UIImage(named: Style.isDark ? "Fontsize_sw" : "Fontsize_sb"), for: .selected)
         button.Fontsize.tag = buttonID.Fontsize.rawValue
         button.Fontsize.addTarget(controller, action: #selector(controller.KeyboardButton(_:)), for: UIControl.Event.touchUpInside)
         
@@ -122,9 +132,10 @@ class EditAccessoryView {
     
     private static func LeftAlignButton(in controller: ViewController) -> UIButton
     {
-        button.LeftAlign = UIButton(type: UIButton.ButtonType.system)
+        button.LeftAlign = UIButton(type: UIButton.ButtonType.custom)
         button.LeftAlign.frame = CGRect(x: 50.0 * 2 + 5, y: 5, width: 40.0, height: Size.EditAccessoryView.Height-10.0)
-        button.LeftAlign.setTitle("L", for: UIControl.State.normal)
+        button.LeftAlign.setImage(UIImage(named: Style.isDark ? "Left_w" : "Left_b"), for: .normal)
+        button.LeftAlign.setImage(UIImage(named: Style.isDark ? "Left_sw" : "Left_sb"), for: .selected)
         button.LeftAlign.tag = buttonID.LeftAlign.rawValue
         button.LeftAlign.addTarget(controller, action: #selector(controller.KeyboardButton(_:)), for: UIControl.Event.touchUpInside)
         
@@ -133,9 +144,10 @@ class EditAccessoryView {
     
     private static func CenterAlignButton(in controller: ViewController) -> UIButton
     {
-        button.CenterAlign = UIButton(type: UIButton.ButtonType.system)
+        button.CenterAlign = UIButton(type: UIButton.ButtonType.custom)
         button.CenterAlign.frame = CGRect(x: 50.0 * 3 + 5, y: 5, width: 40.0, height: Size.EditAccessoryView.Height-10.0)
-        button.CenterAlign.setTitle("M", for: UIControl.State.normal)
+        button.CenterAlign.setImage(UIImage(named: Style.isDark ? "Center_w" : "Center_b"), for: .normal)
+        button.CenterAlign.setImage(UIImage(named: Style.isDark ? "Center_sw" : "Center_sb"), for: .selected)
         button.CenterAlign.tag = buttonID.CenterAlign.rawValue
         button.CenterAlign.addTarget(controller, action: #selector(controller.KeyboardButton(_:)), for: UIControl.Event.touchUpInside)
         
@@ -144,13 +156,29 @@ class EditAccessoryView {
     
     private static func RightAlignButton(in controller: ViewController) -> UIButton
     {
-        button.RightAlign = UIButton(type: UIButton.ButtonType.system)
+        button.RightAlign = UIButton(type: UIButton.ButtonType.custom)
         button.RightAlign.frame = CGRect(x: 50.0 * 4 + 5, y: 5, width: 40.0, height: Size.EditAccessoryView.Height-10.0)
-        button.RightAlign.setTitle("R", for: UIControl.State.normal)
+        button.RightAlign.setImage(UIImage(named: Style.isDark ? "Right_w" : "Right_b"), for: .normal)
+        button.RightAlign.setImage(UIImage(named: Style.isDark ? "Right_sw" : "Right_sb"), for: .selected)
         button.RightAlign.tag = buttonID.RightAlign.rawValue
         button.RightAlign.addTarget(controller, action: #selector(controller.KeyboardButton(_:)), for: UIControl.Event.touchUpInside)
         
         return button.RightAlign
+    }
+    
+    static func UpdateDark()
+    {
+        button.Done.tintColor = Color.theme.current
+        button.Font.setImage(UIImage(named: Style.isDark ? "Font_w" : "Font_b"), for: .normal)
+        button.Font.setImage(UIImage(named: Style.isDark ? "Font_sw" : "Font_sb"), for: .selected)
+        button.Fontsize.setImage(UIImage(named: Style.isDark ? "Fontsize_w" : "Fontsize_b"), for: .normal)
+        button.Fontsize.setImage(UIImage(named: Style.isDark ? "Fontsize_sw" : "Fontsize_sb"), for: .selected)
+        button.LeftAlign.setImage(UIImage(named: Style.isDark ? "Left_w" : "Left_b"), for: .normal)
+        button.LeftAlign.setImage(UIImage(named: Style.isDark ? "Left_sw" : "Left_sb"), for: .selected)
+        button.CenterAlign.setImage(UIImage(named: Style.isDark ? "Center_w" : "Center_b"), for: .normal)
+        button.CenterAlign.setImage(UIImage(named: Style.isDark ? "Center_sw" : "Center_sb"), for: .selected)
+        button.RightAlign.setImage(UIImage(named: Style.isDark ? "Right_w" : "Right_b"), for: .normal)
+        button.RightAlign.setImage(UIImage(named: Style.isDark ? "Right_sw" : "Right_sb"), for: .selected)
     }
     
 }

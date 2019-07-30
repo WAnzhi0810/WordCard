@@ -13,6 +13,26 @@ import UIKit
 
 extension UIView
 {
+    class Shadow
+    {
+        let radius: CGFloat
+        let opacity: Float
+        let Yoffset: CGFloat
+        
+        init(radius: CGFloat, opacity: Float, Yoffset: CGFloat) {
+            self.radius = radius
+            self.opacity = opacity
+            self.Yoffset = Yoffset
+        }
+    }
+    
+    func add(Shadow: Shadow)
+    {
+        self.layer.shadowRadius = Shadow.radius
+        self.layer.shadowOpacity = Shadow.opacity
+        self.layer.shadowOffset = CGSize(width: 0, height: Shadow.Yoffset)
+    }
+    
     static func pop(duration: TimeInterval, delay: TimeInterval, doing: @escaping () -> Void, completion: ((Bool) -> Void)?)
     {
         self.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: [.allowUserInteraction], animations: doing, completion: completion)

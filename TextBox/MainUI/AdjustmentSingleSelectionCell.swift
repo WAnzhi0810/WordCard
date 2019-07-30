@@ -10,6 +10,7 @@ import UIKit
 
 class AdjustmentSingleSelectionCell: UICollectionViewCell {
     
+    @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
     
     override init(frame: CGRect) {

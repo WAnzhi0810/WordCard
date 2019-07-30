@@ -11,10 +11,21 @@ import UIKit
 
 class AdjustmentCell
 {
-    static var CollectionCell = [[UICollectionViewCell]](repeating: [UICollectionViewCell](repeating: UICollectionViewCell(), count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
+    static var CollectionCell = [[AdjustmentSingleSelectionCell]](repeating: [AdjustmentSingleSelectionCell](repeating: AdjustmentSingleSelectionCell(), count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
+    static var isLoaded = [[Bool]](repeating: [Bool](repeating: false, count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
     static func reloadData()
     {
-        CollectionCell = [[UICollectionViewCell]](repeating: [UICollectionViewCell](repeating: UICollectionViewCell(), count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
+        CollectionCell = [[AdjustmentSingleSelectionCell]](repeating: [AdjustmentSingleSelectionCell](repeating: AdjustmentSingleSelectionCell(), count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
+        isLoaded = [[Bool]](repeating: [Bool](repeating: false, count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
+    }
+}
+
+class ModelCell
+{
+    static var CollectionCell = [UICollectionViewCell](repeating: UICollectionViewCell(), count: Style.Name.allValues.count)
+    static func reloadData()
+    {
+        CollectionCell = [UICollectionViewCell](repeating: UICollectionViewCell(), count: Style.Name.allValues.count)
     }
 }
 
@@ -63,6 +74,7 @@ class AdjustmentSelectionTypeCell: UITableViewCell, UICollectionViewDelegate, UI
         Style.Adjustment.cellInit(cell: cell, typeItem: self.tag, selectionItem: indexPath.item)
         
         AdjustmentCell.CollectionCell[self.tag][indexPath.item] = cell
+        AdjustmentCell.isLoaded[self.tag][indexPath.item] = true
         
         return cell
     }

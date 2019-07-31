@@ -20,6 +20,20 @@ class Style {
     
     static var isDark = false
     
+    static let BoxStyleImage =
+    { () -> [UIImage] in
+        if isDark
+        {
+            return [UIImage(named: "Style1_b")!,
+                    UIImage(named: "Style2_b")!]
+        }
+        else
+        {
+            return [UIImage(named: "Style1_w")!,
+                    UIImage(named: "Style2_w")!]
+        }
+    }
+    
     class Adjustment
     {
         enum type
@@ -53,11 +67,11 @@ class Style {
                                                        .ImageFilter : PreviewValue.ImageFilter,
                                                        .Image : PreviewValue.Image]
         
-        static let SectionTitle: [type : String] = [.BGColor : "背景颜色",
-                                                    .FGColor : "文字颜色",
-                                                    .TextMargin : "文字边距",
-                                                    .ImageFilter : "背景图片亮度",
-                                                    .Image : "当前图片"]
+        static let SectionTitle: [type : String] = [.BGColor : "背景颜色".localize(),
+                                                    .FGColor : "文字颜色".localize(),
+                                                    .TextMargin : "文字边距".localize(),
+                                                    .ImageFilter : "背景图片亮度".localize(),
+                                                    .Image : "当前图片".localize()]
         
         static let CellSize: [type : CGSize] = [.BGColor : CGSize(width: 40.0, height: 40.0),
                                                 .FGColor : CGSize(width: 40.0, height: 40.0),
@@ -198,7 +212,7 @@ class Style {
                 cell.layer.borderWidth = selectionItem == self.current[.ImageFilter]! ? 5.0 : 0.0
             case type.Image:
                 cell.image.image = PreviewValue.Image[selectionItem]
-                cell.layer.cornerRadius = 0
+                cell.layer.cornerRadius = 20.0
                 cell.layer.borderWidth = selectionItem == self.current[.Image]! ? 5.0 : 0.0
             }
         }
@@ -349,9 +363,10 @@ class Style {
     
     static func GeneratePreviewCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxStyle", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxStyle", for: indexPath) as! BoxStyle
         cell.backgroundColor = UIColor.white
         
+        cell.image.image = self.BoxStyleImage()[indexPath.item]
         cell.layer.borderColor = Color.selected.cgColor
         cell.layer.borderWidth = indexPath.item == self.current.rawValue ? 5.0 : 0.0
         
@@ -367,12 +382,17 @@ class Style {
         {
             cell.layer.borderWidth = n == item ? 5.0 : 0.0
         }
+        
+        self.UpdateStyle(in: controller)
         self.UpdateTextBox(in: controller)
         self.UpdateBackgroundAndDark(in: controller)
-        
-        switch item
+    }
+    
+    static func UpdateStyle(in controller: ViewController)
+    {
+        switch self.current
         {
-        case Name.Blank.rawValue:
+        case Name.Blank:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = 0
                 controller.BackgroundImageView.alpha = 0
@@ -380,15 +400,12 @@ class Style {
                 controller.TextBoxImageFilterView.alpha = 0
             }, completion: nil)
             
-        case Name.Picture.rawValue:
+        case Name.Picture:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = 1
                 controller.BackgroundImageView.alpha = 1
                 controller.TextBoxImageFilterView.alpha = 1
             }, completion: nil)
-            
-        default:
-            break
         }
     }
     
@@ -510,6 +527,7 @@ class Style {
             controller.TextBoxEditView.keyboardAppearance = .light
         }
         
+        controller.PopViewModelCollectionView.reloadData()
         self.Adjustment.UpdateDarkCell()
         EditAccessoryView.UpdateDark()
     }

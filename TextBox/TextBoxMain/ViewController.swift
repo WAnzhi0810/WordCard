@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource/* , UIImagePickerControllerDelegate , UINavigationControllerDelegate*/ {
     
     @IBOutlet weak var BackgroundView: UIView!
     @IBOutlet weak var BackgroundImageView: UIImageView!
@@ -52,11 +52,17 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var ShareButton: UIButton!
     @IBOutlet weak var CloseButton: UIButton!
     
+    //let photoPickerViewController: UIImagePickerController = UIImagePickerController()
+    
     
     // MARK: - Function
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //photoPickerViewController.sourceType = .photoLibrary
+        //photoPickerViewController.delegate = self
+        self.BackgroundEffectView.effect = nil
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -74,6 +80,8 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         //self.TextBox.UpdateTopToCenter(in: self)
         
         self.TextBoxEditView.FontInit()
+        
+        self.TextBoxLabel.text = "轻触此处，编辑文字".localize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -143,6 +151,13 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         PopViewMoveDownOperation()
     }
     
+    // MARK: - Function
+    
+    /*func PhotoSelect()
+    {
+        self.present(self.photoPickerViewController, animated: true, completion: nil)
+    }*/
+    
     // MARK: - TextBox & TextBoxView
     
     @IBAction func TextBoxViewTapped(_ sender: UITapGestureRecognizer) {
@@ -202,8 +217,11 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         }
         else
         {
+            if self.TextBoxEditView.isFirstResponder
+            {
+                self.TextBoxLabel.attributedText = self.TextBoxEditView.attributedText
+            }
             self.TextBoxEditView.resignFirstResponder()
-            self.TextBoxLabel.attributedText = self.TextBoxEditView.attributedText
             self.TextBox.TurnToEditMode(isOn: false, in: self)
         }
     }

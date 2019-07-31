@@ -23,6 +23,7 @@ class TextBox: UIView {
     
     func StyleInit(in controller: ViewController)
     {
+        Style.UpdateStyle(in: controller)
         Style.UpdateTextBox(in: controller)
         Style.Adjustment.Update(in: controller)
         Style.UpdateBackgroundAndDark(in: controller)

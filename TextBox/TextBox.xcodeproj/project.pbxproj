@@ -28,6 +28,8 @@
 		618FD3B422DF13E400978D22 /* EditAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B322DF13E400978D22 /* EditAccessoryView.swift */; };
 		618FD3B822DF6F3A00978D22 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B722DF6F3900978D22 /* EditView.swift */; };
 		618FD3BA22DF72BB00978D22 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD3B922DF72BA00978D22 /* String.swift */; };
+		6198419022F130E3007DFDEB /* BoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6198418F22F130E2007DFDEB /* BoxStyle.swift */; };
+		6198419222F167A2007DFDEB /* WelcomeUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6198419122F167A2007DFDEB /* WelcomeUI.swift */; };
 		61FE036C22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */; };
 		61FE036E22EC994F00BE2E94 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE036D22EC994E00BE2E94 /* System.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		618FD3B622DF62CB00978D22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		618FD3B722DF6F3900978D22 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		618FD3B922DF72BA00978D22 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		6198418F22F130E2007DFDEB /* BoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxStyle.swift; sourceTree = "<group>"; };
+		6198419122F167A2007DFDEB /* WelcomeUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUI.swift; sourceTree = "<group>"; };
 		61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentSingleSelectionCell.swift; sourceTree = "<group>"; };
 		61FE036D22EC994E00BE2E94 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +118,7 @@
 				618FD39322DD69A800978D22 /* LaunchScreen.storyboard */,
 				618FD39622DD69A800978D22 /* Info.plist */,
 				6107A5EC22E43486008620B7 /* InfoPlist.strings */,
+				6198419122F167A2007DFDEB /* WelcomeUI.swift */,
 			);
 			path = TextBoxMain;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 				618FD3B722DF6F3900978D22 /* EditView.swift */,
 				6107A5EE22E699E1008620B7 /* AdjustmentSelectionTypeCell.swift */,
 				61FE036B22EB5F2300BE2E94 /* AdjustmentSingleSelectionCell.swift */,
+				6198418F22F130E2007DFDEB /* BoxStyle.swift */,
 			);
 			path = MainUI;
 			sourceTree = "<group>";
@@ -252,8 +258,10 @@
 				618FD38D22DD69A100978D22 /* ViewController.swift in Sources */,
 				618FD3B022DEF40B00978D22 /* Constant.swift in Sources */,
 				618FD3A822DDD3D000978D22 /* Style.swift in Sources */,
+				6198419022F130E3007DFDEB /* BoxStyle.swift in Sources */,
 				6107A5EF22E699E2008620B7 /* AdjustmentSelectionTypeCell.swift in Sources */,
 				618FD3BA22DF72BB00978D22 /* String.swift in Sources */,
+				6198419222F167A2007DFDEB /* WelcomeUI.swift in Sources */,
 				618FD3A522DDCE1D00978D22 /* Size.swift in Sources */,
 				618FD38B22DD69A100978D22 /* AppDelegate.swift in Sources */,
 				6107A5E022E400E8008620B7 /* Color.swift in Sources */,

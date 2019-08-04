@@ -197,26 +197,26 @@ class KeyboardView {
         switch tag
         {
         case FontSizeView.ID.SmallSize.rawValue:
-            EditView.current.size = 12
-            FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
-            controller.TextBoxEditView.updateFont()
-            
-        case FontSizeView.ID.MediumSize.rawValue:
-            EditView.current.size = 17
-            FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
-            controller.TextBoxEditView.updateFont()
-            
-        case FontSizeView.ID.LargeSize.rawValue:
             EditView.current.size = 24
             FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
             controller.TextBoxEditView.updateFont()
             
+        case FontSizeView.ID.MediumSize.rawValue:
+            EditView.current.size = 30
+            FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
+            controller.TextBoxEditView.updateFont()
+            
+        case FontSizeView.ID.LargeSize.rawValue:
+            EditView.current.size = 40
+            FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
+            controller.TextBoxEditView.updateFont()
+            
         case FontSizeView.ID.LButton.rawValue:
-            if EditView.current.size <= 9
+            if EditView.current.size <= 10
             {
                 return
             }
-            EditView.current.size -= 1.0
+            EditView.current.size -= 2.0
             FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
             controller.TextBoxEditView.updateFont()
             
@@ -225,7 +225,7 @@ class KeyboardView {
             {
                 return
             }
-            EditView.current.size += 1.0
+            EditView.current.size += 2.0
             FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
             controller.TextBoxEditView.updateFont()
             

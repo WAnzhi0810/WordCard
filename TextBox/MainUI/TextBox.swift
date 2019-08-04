@@ -61,13 +61,13 @@ class TextBox: UIView {
     func captureInView(view: UIView) -> UIImage?
     {
         var image: UIImage? = nil
-        UIGraphicsBeginImageContext(view.bounds.size)
+        UIGraphicsBeginImageContext(CGSize(width: view.bounds.width * Size.TextBox.scaleRatio, height: view.bounds.height * Size.TextBox.scaleRatio))
         do
         {
             let savedFrame = view.frame
             view.frame = CGRect(origin: .zero, size: view.bounds.size)
             
-            UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: view.bounds.width * Size.TextBox.scaleRatio, height: view.bounds.height * Size.TextBox.scaleRatio), false, 0)
             
             view.layer.render(in: UIGraphicsGetCurrentContext()!)
             image = UIGraphicsGetImageFromCurrentImageContext()
@@ -106,6 +106,12 @@ class TextBox: UIView {
         self.moveBottom(to: Size.PopView.Height - Size.BottomHeight - 50.0, in: controller)
     }
     
+    func adaptiveScaling()
+    {
+        //self.layer.anchorPoint = CGPoint(x: 1, y: 1)
+        self.transform = CGAffineTransform(scaleX: Size.TextBox.scaleRatio, y: Size.TextBox.scaleRatio)
+    }
+    
     /*func TopInit(in controller: ViewController) // fix bug for position movement of TextBox at the beginning of the opening
     {
         UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
@@ -117,12 +123,12 @@ class TextBox: UIView {
         }, completion: nil)
     }*/
     
-    static func UpdateTopToCenter(boxSize: CGSize, in controller: ViewController)
+    static func UpdateToCenter(boxSize: CGSize, in controller: ViewController)
     {
-        if boxSize.height > controller.TextBoxScrollView.bounds.height - 30.0 * 2
+        if boxSize.height * Size.TextBox.scaleRatio > controller.TextBoxScrollView.bounds.height - 30.0 * 2
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxTop.constant = 30.0
+                controller.TextBoxTop.constant = -100
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
@@ -134,24 +140,29 @@ class TextBox: UIView {
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
-    }
-    
-    func UpdateTopToCenter(in controller: ViewController)
-    {
-        if self.bounds.height > controller.TextBoxScrollView.bounds.height - 30.0 * 2
+        
+        if boxSize.width * Size.TextBox.scaleRatio > controller.TextBoxScrollView.bounds.width - 30.0 * 2
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxTop.constant = 30.0
+                controller.TextBoxLeading.constant = 30.0
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
         else
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxTop.constant = (controller.TextBoxScrollView.bounds.height - self.bounds.height) / 2.0
+                controller.TextBoxLeading.constant = (controller.TextBoxScrollView.bounds.width - boxSize.width) / 2.0
+                print((controller.TextBoxScrollView.bounds.width - boxSize.width) / 2.0)
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
+        
+        controller.TextBoxScrollView.contentSize = CGSize(width: boxSize.width * Size.TextBox.scaleRatio + 30.0 * 2, height: boxSize.height * Size.TextBox.scaleRatio + 30.0 * 2)
+    }
+    
+    func UpdateToCenter(in controller: ViewController)
+    {
+        TextBox.UpdateToCenter(boxSize: self.bounds.size, in: controller)
     }
     
     

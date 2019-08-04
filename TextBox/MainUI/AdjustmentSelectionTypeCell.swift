@@ -68,7 +68,6 @@ class AdjustmentSelectionTypeCell: UITableViewCell, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AdjustmentSingleSelection", for: indexPath) as! AdjustmentSingleSelectionCell
         cell.tag = indexPath.item
         Style.Adjustment.cellInit(cell: cell, typeItem: self.tag, selectionItem: indexPath.item)
@@ -96,10 +95,47 @@ class AdjustmentSelectionTypeCell: UITableViewCell, UICollectionViewDelegate, UI
         let controller = controllerOption! as! ViewController
         print("section: \(self.tag), item: \(indexPath.item)")
         
+        collectionView.cellForItem(at: indexPath)?.layer.borderWidth = 5.0
         Style.Adjustment.cellOperation(typeItem: self.tag, selectionItem: indexPath.item, in: controller)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell != nil
+        {
+            cell!.layer.borderWidth = 0.0
+        }
+        else
+        {
+            print("deselected cell is nil")
+            collectionView.reloadItems(at: [indexPath])
+            //collectionView.deselectItem(at: indexPath, animated: false)
+        }
+        //collectionView.cellForItem(at: indexPath)?.layer.borderWidth = 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }, completion: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        /*let selectedItems = collectionView.indexPathsForSelectedItems
+        if selectedItems != nil
+        {
+            for oneIndex in selectedItems!
+            {
+                collectionView.deselectItem(at: oneIndex, animated: false)
+            }
+        }*/
+        
         return true
     }
 

@@ -17,17 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeUI")
-        self.window!.rootViewController = welcomeVC
+        //let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeUI")
+        //self.window!.rootViewController = welcomeVC
         
-        /*let isEverLaunched = UserDefaults.standard.bool(forKey: "everLaunched")
+        let isEverLaunched = UserDefaults.standard.bool(forKey: "everLaunched")
         
         if !isEverLaunched
         {
             UserDefaults.standard.set(true, forKey: "everLaunched")
-            let welcomeVC = UIStoryboard(name: "WelcomeUI", bundle: nil).instantiateInitialViewController()
-            self.window!.rootViewController = welcomeVC!
-        }*/
+            let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeUI")
+            self.window!.rootViewController = welcomeVC
+        }
         
         return true
     }

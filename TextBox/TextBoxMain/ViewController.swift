@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource/* , UIImagePickerControllerDelegate , UINavigationControllerDelegate*/ {
+class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    
+    var isFirstAppear = true
     
     @IBOutlet weak var BackgroundView: UIView!
     @IBOutlet weak var BackgroundImageView: UIImageView!
@@ -17,12 +19,14 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     @IBOutlet weak var TextBoxScrollView: UIScrollView!
     
-    @IBOutlet weak var TextBoxShadowView: UIView!
     @IBOutlet weak var TextBox: TextBox!
+    @IBOutlet weak var TextBoxShadowView: UIView!
+    @IBOutlet weak var TextBoxContent: UIView!
     @IBOutlet weak var TextBoxWidth: NSLayoutConstraint!
     @IBOutlet weak var TextBoxHeight: NSLayoutConstraint!
     @IBOutlet weak var TextBoxBottom: NSLayoutConstraint!
     @IBOutlet weak var TextBoxTop: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxLeading: NSLayoutConstraint!
     
     @IBOutlet weak var TextBoxLabelTrailing: NSLayoutConstraint!
     @IBOutlet weak var TextBoxLabelTop: NSLayoutConstraint!
@@ -52,7 +56,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var ShareButton: UIButton!
     @IBOutlet weak var CloseButton: UIButton!
     
-    //let photoPickerViewController: UIImagePickerController = UIImagePickerController()
+    let photoPickerViewController: UIImagePickerController = UIImagePickerController()
     
     
     // MARK: - Function
@@ -60,8 +64,9 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //photoPickerViewController.sourceType = .photoLibrary
-        //photoPickerViewController.delegate = self
+        photoPickerViewController.sourceType = .photoLibrary
+        photoPickerViewController.delegate = self
+        
         self.BackgroundEffectView.effect = nil
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -71,6 +76,8 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         self.TextBox.InputAccessoryInit(in: self)
         self.TextBox.StyleInit(in: self)
         self.TextBox.SizeInit(in: self)
+        
+        self.TextBox.adaptiveScaling()
         
         self.PopView.heightInit(in: self)
         
@@ -82,10 +89,15 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         self.TextBoxEditView.FontInit()
         
         self.TextBoxLabel.text = "轻触此处，编辑文字".localize()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.PopViewMoveDownOperation()
+        if self.isFirstAppear
+        {
+            self.isFirstAppear = false
+            self.PopViewMoveDownOperation()
+        }
     }
     
     @objc func keyboardChanged(_ notification: Notification)
@@ -106,7 +118,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         {
             self.TextBox.MoveTo0(in: self)
         }
-        self.TextBox.UpdateTopToCenter(in: self)
+        self.TextBox.UpdateToCenter(in: self)
         
     }
     
@@ -131,7 +143,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         self.TextBoxEditView.resignFirstResponder()
         self.PopView.popUp(with: .Model,  in: self)
         self.TextBox.MoveForPop(in: self)
-        self.TextBox.UpdateTopToCenter(in: self)
+        self.TextBox.UpdateToCenter(in: self)
     }
     
     @IBAction func AdjustmentButtonUpInside(_ sender: UIButton) {
@@ -139,7 +151,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         self.TextBoxEditView.resignFirstResponder()
         self.PopView.popUp(with: .Adjustment, in: self)
         self.TextBox.MoveForPop(in: self)
-        self.TextBox.UpdateTopToCenter(in: self)
+        self.TextBox.UpdateToCenter(in: self)
     }
     
     @IBAction func ExportButtonUpInside(_ sender: UIButton) {
@@ -153,10 +165,38 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     // MARK: - Function
     
-    /*func PhotoSelect()
+    func PhotoSelect()
     {
         self.present(self.photoPickerViewController, animated: true, completion: nil)
-    }*/
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // Local variable inserted by Swift 4.2 migrator.
+        
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        
+        guard let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage else {
+            print("data error!")
+            return
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(selectedImage.size, false, 0.0)
+        selectedImage.draw(in: CGRect(origin: CGPoint.zero, size: selectedImage.size))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        Style.Adjustment.customImage = newImage
+        Style.Adjustment.Update(in: self)
+        Style.UpdateBackgroundAndDark(in: self)
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    // Helper function inserted by Swift 4.2 migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    }
+    
     
     // MARK: - TextBox & TextBoxView
     
@@ -320,6 +360,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "AdjustmentSelectionType")! as! AdjustmentSelectionTypeCell
         cell.tag = indexPath.section
         cell.SingleSelectionCollectionView.reloadData()
+        cell.SingleSelectionCollectionView.selectItem(at: IndexPath(item: Style.Adjustment.current[Style.Adjustment.displayType[Style.current]![indexPath.section]]!, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
         
         return cell
     }
@@ -332,6 +373,20 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         return Style.Adjustment.TableCellHeight[Style.Adjustment.displayType[Style.current]![indexPath.section]]!
         //return Style.Adjustment.CellSize[Style.Adjustment.typeArray[indexPath.item]]!.height * 2.0 + 45.0
     }
+    
+    
+    /*
+    
+    // MARK: - ScrollView
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.TextBox
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        self.TextBox.UpdateTopToCenter(in: self)
+        self.TextBox.UpdateLeadingToCenter(in: self)
+    }*/
     
     
     // MARK: - StatusBar

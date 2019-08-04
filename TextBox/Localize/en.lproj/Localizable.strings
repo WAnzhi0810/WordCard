@@ -34,3 +34,11 @@
 "文字边距" = "Text Margin";
 "背景图片亮度" = "Picture Brightness";
 "当前图片" = "Picture";
+
+// MARK: WelcomeUI
+
+"欢迎使用\n文字卡片" = "Welcome to\nText Card";
+"立即体验" = "Get Start";
+"文字卡片\n为你打造" = "Text Card\nIt's for you";
+"在这里\n您可以组合不同的卡片样式与文字\n创造出属于你的独特卡片" = "Here\nyou can combine different cards with text\ncreated belongs to your unique card";
+"您还可以将它们\n保存下来，\n分享给别人" = "You can also save them，\nand share them";

@@ -24,9 +24,14 @@ class WelcomeUI: UIViewController {
         super.viewDidLoad()
 
         self.TitleLabel.alpha = 0
-        self.TitleLabel.text = "欢迎使用\n文字卡片"
+        self.TitleLabel.text = "欢迎使用\n文字卡片".localize()
+        self.ToMainUIButton.setTitle("立即体验".localize(), for: .normal)
         self.TextBox.backgroundColor = UIColor.white
         self.TextBox.alpha = 0
+        self.TextBoxLabel1.text = "文字卡片\n为你打造".localize()
+        self.TextBoxLabel2.text = "在这里\n您可以组合不同的卡片样式与文字\n创造出属于你的独特卡片".localize()
+        self.TextBoxLabel3.text = "您还可以将它们\n保存下来，\n分享给别人".localize()
+        
         self.TextBoxLabel1.textColor = UIColor.black
         self.TextBoxLabel2.textColor = UIColor.black
         self.TextBoxLabel3.textColor = UIColor.black

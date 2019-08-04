@@ -13,7 +13,7 @@ class EditView: UITextView {
     class current
     {
         static var font = Font.FontName.SongtiR
-        static var size: CGFloat = 17
+        static var size: CGFloat = 30
         static var alignment = NSTextAlignment.center
     }
     

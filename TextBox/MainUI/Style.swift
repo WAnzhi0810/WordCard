@@ -27,14 +27,19 @@ class Style {
         {
             return [UIImage(named: "Style1_b")!,
                     UIImage(named: "Style2_b")!,
-                    UIImage(named: "Style2_b")!]
+                    UIImage(named: "Style3_b")!]
         }
         else
         {
             return [UIImage(named: "Style1_w")!,
                     UIImage(named: "Style2_w")!,
-                    UIImage(named: "Style2_w")!]
+                    UIImage(named: "Style3_w")!]
         }
+    }
+    
+    class temp
+    {
+        static var currentBlurImage: UIImage?
     }
     
     class Adjustment
@@ -88,7 +93,7 @@ class Style {
                                                        .ImageMargin : PreviewValue.ImageMargin,
                                                        .ImageFilter : PreviewValue.ImageFilter,
                                                        .Image : PreviewValue.Image,
-                                                       .ImageShape : PreviewValue.ImageShape,
+                                                       .ImageShape : PreviewValue.ImageShape(),
                                                        .ImagePosition : PreviewValue.ImagePosition,
                                                        .ImageContentMode : PreviewValue.ImageContentMode]
         
@@ -215,8 +220,18 @@ class Style {
             static let Image: [UIImage] = [UIImage(named: "Image_add")!,
                                            UIImage(named: "image1")!,
                                            UIImage(named: "image2")!]
-            static let ImageShape: [UIImage] = [UIImage(named: "image1")!,
-                                                UIImage(named: "image2")!]
+            static let ImageShape = { () -> [UIImage] in
+                if Style.isDark
+                {
+                    return [UIImage(named: "ImageShape1_b")!,
+                            UIImage(named: "ImageShape2_b")!]
+                }
+                else
+                {
+                    return [UIImage(named: "ImageShape1_w")!,
+                            UIImage(named: "ImageShape2_w")!]
+                }
+            }
             static let ImagePosition: [String] = ["上".localize(),
                                                   "下".localize()]
             static let ImageContentMode: [UIView.ContentMode] = [.scaleToFill, .scaleAspectFit, .scaleAspectFill, .topLeft, .left, .bottomLeft, .top, .center, .bottom, .topRight, .right, .bottomRight]
@@ -314,7 +329,7 @@ class Style {
                 //cell.isSelected = selectionItem == self.current[.Image]! ? true : false
                 cell.layer.borderWidth = selectionItem == self.current[.Image]! ? 5.0 : 0.0
             case type.ImageShape:
-                cell.image.image = PreviewValue.ImageShape[selectionItem]
+                cell.image.image = PreviewValue.ImageShape()[selectionItem]
                 cell.layer.cornerRadius = 20.0
                 //cell.isSelected = selectionItem == self.current[.Image]! ? true : false
                 cell.layer.borderWidth = selectionItem == self.current[.ImageShape]! ? 5.0 : 0.0
@@ -377,7 +392,7 @@ class Style {
         static func UpdateDarkCell(in controller: ViewController)
         {
             
-            let darkableType: [Style.Adjustment.type] = [.BGStyle, .BoxSize, .TextMargin, .ImageMargin, .ImageFilter, .ImagePosition, .ImageContentMode]
+            let darkableType: [Style.Adjustment.type] = [.BGStyle, .BoxSize, .TextMargin, .ImageMargin, .ImageFilter, .ImageShape, .ImagePosition, .ImageContentMode]
             
             for onetype in darkableType
             {
@@ -528,7 +543,6 @@ class Style {
                 controller.TextBoxImageFilterView.alpha = 0
                 controller.BackgroundImageView.alpha = 0
                 controller.BackgroundEffectView.effect = nil
-                controller.TextBoxBackgroundEffectView.effect = nil
                 controller.TextBoxBackgroundImageView.alpha = 0
             }, completion: nil)
             
@@ -703,13 +717,15 @@ class Style {
                 controller.BackgroundEffectView.effect = UIBlurEffect(style: isDark ? .dark : .light)
                 if self.Adjustment.current[.BGStyle]! == 0
                 {
-                    controller.TextBoxBackgroundEffectView.effect = nil
                     controller.TextBoxBackgroundImageView.alpha = 0
                 }
                 else if self.Adjustment.current[.BGStyle]! == 1
                 {
-                    controller.TextBoxBackgroundEffectView.effect = UIBlurEffect(style: isDark ? .dark : .light)
-                    controller.TextBoxBackgroundImageView.image = controller.TextBoxImageView.image
+                    if controller.TextBoxBackgroundImageView.alpha == 0 || temp.currentBlurImage != controller.TextBoxImageView.image
+                    {
+                        temp.currentBlurImage = controller.TextBoxImageView.image
+                        controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getGaussianBlur(blurRadius: 30))
+                    }
                     controller.TextBoxBackgroundImageView.alpha = 1
                 }
             }, completion: nil)

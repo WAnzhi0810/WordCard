@@ -64,3 +64,20 @@ extension UIView
         return nil
     }
 }
+
+extension UIImage
+{
+    func getGaussianBlur(blurRadius: CGFloat) -> CGImage
+    {
+        let thisImage = CIImage(image: self)
+        let filter = CIFilter(name: "CIGaussianBlur")!
+        
+        filter.setValue(thisImage, forKey: kCIInputImageKey)
+        filter.setValue(blurRadius, forKey: kCIInputRadiusKey)
+        
+        let outputCIImage = filter.outputImage!
+        let rect = CGRect(origin: CGPoint.zero, size: self.size)
+        
+        return CIContext(options: nil).createCGImage(outputCIImage, from: rect)!
+    }
+}

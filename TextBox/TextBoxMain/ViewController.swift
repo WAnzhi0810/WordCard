@@ -332,13 +332,26 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Style.ChangeTo(item: indexPath.item, in: self)
-        AdjustmentCell.reloadData()
+        //AdjustmentCell.reloadData()
+        //self.PopViewModelCollectionView.reloadData()
         self.PopViewAdjustmentTableView.reloadData()
         /*for currentType in Style.Adjustment.displayType[Style.current]!
         {
             let tableCell = self.PopViewAdjustmentTableView.cellForRow(at: IndexPath(row: 0, section: Style.Adjustment.displayTypeIndex(type: currentType, in: Style.current)!)) as! AdjustmentSelectionTypeCell
             tableCell.SingleSelectionCollectionView.reloadData()
         }*/
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }, completion: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

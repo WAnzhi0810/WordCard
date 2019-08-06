@@ -40,8 +40,9 @@ class Size {
     
     class TextBox {
         static let Width: CGFloat = 600
+        static var size: CGFloat = 600
         static let displayWidth: CGFloat = (Size.ScreenWidth < Size.ScreenHeight ? Size.ScreenWidth : Size.ScreenHeight) * 0.8
-        static let scaleRatio = displayWidth / Width
+        static var scaleRatio = displayWidth / Width
     }
     
     class TextBoxScrollView {

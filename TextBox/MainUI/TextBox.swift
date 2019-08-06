@@ -109,7 +109,10 @@ class TextBox: UIView {
     func adaptiveScaling()
     {
         //self.layer.anchorPoint = CGPoint(x: 1, y: 1)
-        self.transform = CGAffineTransform(scaleX: Size.TextBox.scaleRatio, y: Size.TextBox.scaleRatio)
+        UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+            self.transform = CGAffineTransform(scaleX: Size.TextBox.scaleRatio, y: Size.TextBox.scaleRatio)
+        }, completion: nil)
+        
     }
     
     /*func TopInit(in controller: ViewController) // fix bug for position movement of TextBox at the beginning of the opening
@@ -128,7 +131,7 @@ class TextBox: UIView {
         if boxSize.height * Size.TextBox.scaleRatio > controller.TextBoxScrollView.bounds.height - 30.0 * 2
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxTop.constant = -100
+                controller.TextBoxTop.constant = (boxSize.height * (Size.TextBox.scaleRatio - 1)) / 2.0 + 30.0
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
@@ -144,7 +147,7 @@ class TextBox: UIView {
         if boxSize.width * Size.TextBox.scaleRatio > controller.TextBoxScrollView.bounds.width - 30.0 * 2
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxLeading.constant = 30.0
+                controller.TextBoxLeading.constant = (boxSize.width * (Size.TextBox.scaleRatio - 1)) / 2.0 + 30.0
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }
@@ -177,8 +180,8 @@ class TextBox: UIView {
         {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 
-                controller.TextBoxHeight.constant = Size.TextBox.Width
-                controller.TextBoxWidth.constant = Size.TextBox.Width
+                controller.TextBoxHeight.constant = Size.TextBox.size
+                controller.TextBoxWidth.constant = Size.TextBox.size
                 controller.view.layoutIfNeeded()
             }, completion: nil)
         }

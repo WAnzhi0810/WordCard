@@ -9,7 +9,7 @@
 import UIKit
 
 
-class AdjustmentCell
+/*class AdjustmentCell
 {
     static var CollectionCell = [[AdjustmentSingleSelectionCell]](repeating: [AdjustmentSingleSelectionCell](repeating: AdjustmentSingleSelectionCell(), count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
     static var isLoaded = [[Bool]](repeating: [Bool](repeating: false, count: Style.Adjustment.PreviewValue.maxNum), count: Style.Adjustment.typeArray.count)
@@ -27,7 +27,7 @@ class ModelCell
     {
         CollectionCell = [UICollectionViewCell](repeating: UICollectionViewCell(), count: Style.Name.allValues.count)
     }
-}
+}*/
 
 
 class AdjustmentSelectionTypeCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -72,8 +72,8 @@ class AdjustmentSelectionTypeCell: UITableViewCell, UICollectionViewDelegate, UI
         cell.tag = indexPath.item
         Style.Adjustment.cellInit(cell: cell, typeItem: self.tag, selectionItem: indexPath.item)
         
-        AdjustmentCell.CollectionCell[self.tag][indexPath.item] = cell
-        AdjustmentCell.isLoaded[self.tag][indexPath.item] = true
+        //AdjustmentCell.CollectionCell[self.tag][indexPath.item] = cell
+        //AdjustmentCell.isLoaded[self.tag][indexPath.item] = true
         
         return cell
     }

@@ -40,17 +40,18 @@ class Style {
         {
             case BGColor
             case FGColor
+            case BoxSize
             case TextMargin
             case ImageFilter
             case Image
             case ImageContentMode
         }
         
-        static let typeArray: [type] = [.BGColor, .FGColor, .TextMargin, .ImageFilter, .Image, .ImageContentMode]
+        static let typeArray: [type] = [.BoxSize, .BGColor, .FGColor, .TextMargin, .ImageFilter, .Image, .ImageContentMode]
         
         static let displayType: [Style.Name : [Style.Adjustment.type]] =
-                [.Blank : [.BGColor, .FGColor, .TextMargin],
-                 .Picture : [.Image, .ImageFilter, .ImageContentMode, .FGColor, .TextMargin]]
+                [.Blank : [.BGColor, .FGColor, .BoxSize, .TextMargin],
+                 .Picture : [.Image, .ImageFilter, .ImageContentMode, .BoxSize, .FGColor, .BGColor, .TextMargin]]
         
         static func displayTypeIndex(type: type, in name: Style.Name) -> Int?
         {
@@ -59,6 +60,7 @@ class Style {
         
         static var current: [type : Int] = [.BGColor : 0,
                                             .FGColor : 0,
+                                            .BoxSize : 1,
                                             .TextMargin : 2,
                                             .ImageFilter : 6,
                                             .Image : 1,
@@ -68,6 +70,7 @@ class Style {
         
         static let PreviewValueDict: [type : [Any]] = [.BGColor : PreviewValue.BGColor,
                                                        .FGColor : PreviewValue.FGColor,
+                                                       .BoxSize : PreviewValue.BoxSize,
                                                        .TextMargin : PreviewValue.TextMargin,
                                                        .ImageFilter : PreviewValue.ImageFilter,
                                                        .Image : PreviewValue.Image,
@@ -75,6 +78,7 @@ class Style {
         
         static let SectionTitle: [type : String] = [.BGColor : "背景颜色".localize(),
                                                     .FGColor : "文字颜色".localize(),
+                                                    .BoxSize : "卡片大小".localize(),
                                                     .TextMargin : "文字边距".localize(),
                                                     .ImageFilter : "背景图片亮度".localize(),
                                                     .Image : "当前图片".localize(),
@@ -95,18 +99,21 @@ class Style {
         
         static let CellSize: [type : CGSize] = [.BGColor : CGSize(width: 40.0, height: 40.0),
                                                 .FGColor : CGSize(width: 40.0, height: 40.0),
+                                                .BoxSize : CGSize(width: 80.0, height: 50.0),
                                                 .TextMargin : CGSize(width: 70.0, height: 50.0),
                                                 .ImageFilter : CGSize(width: 70.0, height: 50.0),
                                                 .Image : CGSize(width: 100.0, height: 100.0),
                                                 .ImageContentMode : CGSize(width: 80.0, height: 50.0)]
         static let CellEdgeInset: [type : UIEdgeInsets] = [.BGColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .FGColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .BoxSize : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .TextMargin : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageFilter : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .Image : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageContentMode : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)]
         static let TableCellHeight: [type : CGFloat] = [.BGColor : 40.0 * 2 + 30,
                                                         .FGColor : 40.0 * 2 + 30,
+                                                        .BoxSize : 50.0 + 20,
                                                         .TextMargin : 50.0 * 2 + 30,
                                                         .ImageFilter : 50.0 + 20,
                                                         .Image : 100.0 + 20,
@@ -167,9 +174,10 @@ class Style {
                                   UIColor(hue: 10.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
                                   UIColor(hue: 11.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
                                   UIColor.white]
+            static let BoxSize: [CGFloat] = [400, 600, 1200]
             static let TextMargin: [CGFloat] = [10, 20, 40, 60, 80, 100, 120, 140, 160]
             static let ImageFilter: [Int] = [-6, -4, -2, 0, 2, 4, 6]
-            static let Image: [UIImage] = [UIImage(named: "ImagePlaceholder")!,
+            static let Image: [UIImage] = [UIImage(named: "Image_add")!,
                                            UIImage(named: "image1")!,
                                            UIImage(named: "image2")!]
             static let ImageContentMode: [UIView.ContentMode] = [.scaleToFill, .scaleAspectFit, .scaleAspectFill, .topLeft, .left, .bottomLeft, .top, .center, .bottom, .topRight, .right, .bottomRight]
@@ -210,6 +218,7 @@ class Style {
             let currentType = self.displayType[Style.current]![typeItem]
             cell.label.text = ""
             cell.label.font = Font.set(systemFontSize: 24.0, weight: UIFont.Weight.medium)
+            cell.image.contentMode = .scaleToFill
             cell.image.image = nil
             
             switch currentType
@@ -226,6 +235,12 @@ class Style {
                 //cell.isSelected = selectionItem == self.current[.FGColor]! ? true : false
                 cell.layer.borderWidth = selectionItem == self.current[.FGColor]! ? 5.0 : 0.0
                 //cell.layer.cornerRadius = CellSize[.FGColor]!.height / 2.0
+            case type.BoxSize:
+                cell.label.text = String(Int(PreviewValue.BoxSize[selectionItem]))
+                cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
+                cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
+                cell.layer.cornerRadius = 10.0
+                cell.layer.borderWidth = selectionItem == self.current[.BoxSize]! ? 5.0 : 0.0
             case type.TextMargin:
                 cell.label.text = String(Int(PreviewValue.TextMargin[selectionItem]))
                 cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
@@ -266,6 +281,8 @@ class Style {
                 self.current[.BGColor] = selectionItem
             case type.FGColor:
                 self.current[.FGColor] = selectionItem
+            case type.BoxSize:
+                self.current[.BoxSize] = selectionItem
             case type.TextMargin:
                 self.current[.TextMargin] = selectionItem
             case type.ImageFilter:
@@ -284,66 +301,62 @@ class Style {
             Style.UpdateBackgroundAndDark(in: controller)
         }
         
-        static func UpdateDarkCell()
+        static func UpdateDarkCell(in controller: ViewController)
         {
-            let currentStyleTextMarginIndex = self.displayTypeIndex(type: Style.Adjustment.type.TextMargin, in: Style.current)
-            let currentStyleImageFilterIndex = self.displayTypeIndex(type: Style.Adjustment.type.ImageFilter, in: Style.current)
-            let currentStyleImageContentModeIndex = self.displayTypeIndex(type: Style.Adjustment.type.ImageContentMode, in: Style.current)
             
-            if currentStyleTextMarginIndex != nil
+            let darkableType: [Style.Adjustment.type] = [.BoxSize, .TextMargin, .ImageFilter, .ImageContentMode]
+            
+            for onetype in darkableType
             {
-                for oneSelectionItem in 0...self.PreviewValueDict[.TextMargin]!.count - 1
+                if let section = Style.Adjustment.displayTypeIndex(type: onetype, in: Style.current)
                 {
-                    // 防止此 CollectionViewCell 因未查看整个 CollectionView 使其 Cell 全部加载而导致的无法找到该未加载的 CollectionViewCell 引起的程序崩溃
-                    if !AdjustmentCell.isLoaded[currentStyleTextMarginIndex!][oneSelectionItem]
-                    {
-                        continue
-                    }
-                    AdjustmentCell.CollectionCell[currentStyleTextMarginIndex!][oneSelectionItem].label.textColor = Style.isDark ? UIColor.white : UIColor.black
-                    AdjustmentCell.CollectionCell[currentStyleTextMarginIndex!][oneSelectionItem].backgroundColor = Style.isDark ? UIColor.black : UIColor.white
-                    /*if !AdjustmentCell.isLoaded[currentStyleTextMarginIndex!][oneSelectionItem]
-                    {
-                        continue
-                    }
-                    self.cellInit(cell: AdjustmentCell.CollectionCell[currentStyleTextMarginIndex!][oneSelectionItem], typeItem: currentStyleTextMarginIndex!, selectionItem: oneSelectionItem)*/
+                    let cell = controller.PopViewAdjustmentTableView.cellForRow(at: IndexPath(row: 0, section: section)) as? AdjustmentSelectionTypeCell
+                    cell?.SingleSelectionCollectionView.reloadData()
+                    //indexs.append(IndexPath(row: 0, section: section))
                 }
             }
-            if currentStyleImageFilterIndex != nil
+            
+            /*let darkableTypes: [type] = [.BoxSize, .TextMargin, .ImageFilter, .ImageContentMode]
+            
+            for oneType in darkableTypes
             {
-                for oneSelectionItem in 0...self.PreviewValueDict[.ImageFilter]!.count - 1
+                let currentIndex = self.displayTypeIndex(type: oneType, in: Style.current)
+                
+                if currentIndex != nil
                 {
-                    // 防止此 CollectionViewCell 因未查看整个 CollectionView 使其 Cell 全部加载而导致的无法找到该未加载的 CollectionViewCell 引起的程序崩溃
-                    if !AdjustmentCell.isLoaded[currentStyleImageFilterIndex!][oneSelectionItem]
+                    for oneSelectionItem in 0...self.PreviewValueDict[oneType]!.count - 1
                     {
-                        continue
+                        // 防止此 CollectionViewCell 因未查看整个 CollectionView 使其 Cell 全部加载而导致的无法找到该未加载的 CollectionViewCell 引起的程序崩溃
+                        if !AdjustmentCell.isLoaded[currentIndex!][oneSelectionItem]
+                        {
+                            print("index: \(currentIndex!), item: \(oneSelectionItem) is not loaded")
+                            continue
+                        }
+                        print("index: \(currentIndex!), item: \(oneSelectionItem) has changed")
+                        AdjustmentCell.CollectionCell[currentIndex!][oneSelectionItem].label.textColor = Style.isDark ? UIColor.white : UIColor.black
+                        AdjustmentCell.CollectionCell[currentIndex!][oneSelectionItem].backgroundColor = Style.isDark ? UIColor.black : UIColor.white
+                        /*if !AdjustmentCell.isLoaded[currentStyleTextMarginIndex!][oneSelectionItem]
+                         {
+                         continue
+                         }
+                         self.cellInit(cell: AdjustmentCell.CollectionCell[currentStyleTextMarginIndex!][oneSelectionItem], typeItem: currentStyleTextMarginIndex!, selectionItem: oneSelectionItem)*/
                     }
-                    AdjustmentCell.CollectionCell[currentStyleImageFilterIndex!][oneSelectionItem].label.textColor = Style.isDark ? UIColor.white : UIColor.black
-                    AdjustmentCell.CollectionCell[currentStyleImageFilterIndex!][oneSelectionItem].backgroundColor = Style.isDark ? UIColor.black : UIColor.white
                 }
-            }
-            if currentStyleImageFilterIndex != nil
-            {
-                for oneSelectionItem in 0...self.PreviewValueDict[.ImageContentMode]!.count - 1
-                {
-                    // 防止此 CollectionViewCell 因未查看整个 CollectionView 使其 Cell 全部加载而导致的无法找到该未加载的 CollectionViewCell 引起的程序崩溃
-                    if !AdjustmentCell.isLoaded[currentStyleImageContentModeIndex!][oneSelectionItem]
-                    {
-                        continue
-                    }
-                    AdjustmentCell.CollectionCell[currentStyleImageContentModeIndex!][oneSelectionItem].label.textColor = Style.isDark ? UIColor.white : UIColor.black
-                    AdjustmentCell.CollectionCell[currentStyleImageContentModeIndex!][oneSelectionItem].backgroundColor = Style.isDark ? UIColor.black : UIColor.white
-                }
-            }
+            }*/
+            
             
         }
         
         static func Update(in controller: ViewController)
         {
+            Size.TextBox.size = PreviewValue.BoxSize[current[.BoxSize]!]
+            
             switch Style.current
             {
             case .Blank:
-                break
+                Size.TextBox.scaleRatio = Size.TextBox.displayWidth / Size.TextBox.size
             case .Picture:
+                Size.TextBox.scaleRatio = Size.TextBox.displayWidth / Size.TextBox.size
                 UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                     controller.TextBoxImageFilterView.backgroundColor = UIColor(white: PreviewValue.ImageFilter[current[.ImageFilter]!] >= 0 ? 1 : 0, alpha: CGFloat(abs(PreviewValue.ImageFilter[current[.ImageFilter]!])) / 10.0)
                     controller.TextBoxImageView.image = current[.Image] == 0 ? customImage ?? UIImage(named: "ImagePlaceholder") : PreviewValue.Image[current[.Image]!]
@@ -357,7 +370,7 @@ class Style {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 
                 controller.TextBoxShadowView.backgroundColor = PreviewValue.BGColor[current[.BGColor]!]
-                controller.TextBox.backgroundColor = PreviewValue.BGColor[current[.BGColor]!]
+                controller.TextBoxContent.backgroundColor = PreviewValue.BGColor[current[.BGColor]!]
                 controller.TextBoxLabel.textColor = PreviewValue.FGColor[current[.FGColor]!]
                 controller.TextBoxEditView.textColor = PreviewValue.FGColor[current[.FGColor]!]
                 
@@ -370,9 +383,11 @@ class Style {
                 controller.TextBoxEditViewBottom.constant = PreviewValue.TextMargin[current[.TextMargin]!]
                 controller.TextBoxEditViewTrailing.constant = PreviewValue.TextMargin[current[.TextMargin]!]
                 
+                controller.view.layoutIfNeeded()
+                
+                controller.TextBox.adaptiveScaling()
                 Style.UpdateTextBox(in: controller)
                 
-                controller.view.layoutIfNeeded()
             }) { (true) in
                 
             }
@@ -398,7 +413,7 @@ class Style {
         cell.layer.borderColor = Color.selected.cgColor
         cell.layer.borderWidth = indexPath.item == self.current.rawValue ? 5.0 : 0.0
         
-        ModelCell.CollectionCell[indexPath.item] = cell
+        //ModelCell.CollectionCell[indexPath.item] = cell
         
         return cell
     }
@@ -406,10 +421,10 @@ class Style {
     {
         self.current = self.NameArray[item]
         
-        for (n, cell) in ModelCell.CollectionCell.enumerated()
+        /*for (n, cell) in ModelCell.CollectionCell.enumerated()
         {
             cell.layer.borderWidth = n == item ? 5.0 : 0.0
-        }
+        }*/
         
         self.UpdateStyle(in: controller)
         self.UpdateTextBox(in: controller)
@@ -447,21 +462,21 @@ class Style {
             {
                 return
             }
-            let boxHeight = wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant <= Size.TextBox.Width ? Size.TextBox.Width : wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant + 1
+            let boxHeight = wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant <= Size.TextBox.size ? Size.TextBox.size : wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant + 1
             
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxHeight.constant = boxHeight
-                controller.TextBoxWidth.constant = Size.TextBox.Width
+                controller.TextBoxWidth.constant = Size.TextBox.size
                 controller.view.layoutIfNeeded()
             }, completion: nil)
             
             if self.current == .Picture
             {
-                controller.TextBoxImageView.frame = CGRect(x: -1, y: -1, width: Size.TextBox.Width+2, height: boxHeight+2)
-                controller.TextBoxImageFilterView.frame = CGRect(x: -1, y: -1, width: Size.TextBox.Width+2, height: boxHeight+2)
+                controller.TextBoxImageView.frame = CGRect(x: -1, y: -1, width: Size.TextBox.size+2, height: boxHeight+2)
+                controller.TextBoxImageFilterView.frame = CGRect(x: -1, y: -1, width: Size.TextBox.size+2, height: boxHeight+2)
             }
             
-            TextBox.UpdateToCenter(boxSize: CGSize(width: Size.TextBox.Width, height: boxHeight), in: controller)
+            TextBox.UpdateToCenter(boxSize: CGSize(width: Size.TextBox.size, height: boxHeight), in: controller)
         }
     }
     
@@ -558,14 +573,17 @@ class Style {
         controller.PopViewModelCollectionView.reloadData()
         EditAccessoryView.UpdateDark()
         
-        /*var indexs = [IndexPath]()
-        let darkableType: [Style.Adjustment.type] = [.ImageFilter, .TextMargin]
+        /*
+        //var indexs = [IndexPath]()
+        let darkableType: [Style.Adjustment.type] = [.BoxSize, .TextMargin, .ImageFilter, .ImageContentMode]
         
         for onetype in darkableType
         {
             if let section = self.Adjustment.displayTypeIndex(type: onetype, in: self.current)
             {
-                indexs.append(IndexPath(row: 0, section: section))
+                let cell = controller.PopViewAdjustmentTableView.cellForRow(at: IndexPath(row: 0, section: section)) as? AdjustmentSelectionTypeCell
+                cell?.SingleSelectionCollectionView.reloadData()
+                //indexs.append(IndexPath(row: 0, section: section))
             }
         }
         
@@ -574,7 +592,7 @@ class Style {
             controller.PopViewAdjustmentTableView.reloadRows(at: indexs, with: UITableView.RowAnimation.none)
         }*/
         
-        self.Adjustment.UpdateDarkCell()
+        self.Adjustment.UpdateDarkCell(in: controller)
         
     }
     

@@ -221,7 +221,7 @@ class KeyboardView {
             controller.TextBoxEditView.updateFont()
             
         case FontSizeView.ID.RButton.rawValue:
-            if EditView.current.size >= 60
+            if EditView.current.size >= 90
             {
                 return
             }

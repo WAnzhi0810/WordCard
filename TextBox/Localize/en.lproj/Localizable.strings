@@ -29,11 +29,39 @@
 
 // MARK: Adjustment
 
-"背景颜色" = "Background";
+"背景颜色" = "Background Color";
 "文字颜色" = "Text Color";
+"背景样式" = "Background Style";
+"卡片大小" = "Card Size";
 "文字边距" = "Text Margin";
-"背景图片亮度" = "Picture Brightness";
+"图片边距" = "Picture Margin";
+"图片亮度" = "Picture Brightness";
 "当前图片" = "Picture";
+"图片形状" = "Picture Shape";
+"图片位置" = "Picture Position";
+"图片契合度" = "Picture Compatibility";
+
+// MARK: ContentMode
+"拉伸" = "Scale";
+"适应" = "Fit";
+"填充" = "Fill";
+"左" = "Left";
+"左上" = "TL";
+"左下" = "BL";
+"上" = "Top";
+"中心" = "Center";
+"下" = "Bottom";
+"右上" = "TR";
+"右下" = "BR";
+"右" = "Right";
+
+// MARK: BGStyle
+"纯色" = "Pure";
+"模糊" = "Blur";
+
+// MARK: ImagePosition
+"上" = "Top";
+"下" = "Bottom";
 
 // MARK: WelcomeUI
 

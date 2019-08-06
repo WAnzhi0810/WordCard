@@ -24,7 +24,6 @@ class TextBox: UIView {
     func StyleInit(in controller: ViewController)
     {
         Style.UpdateStyle(in: controller)
-        Style.UpdateTextBox(in: controller)
         Style.Adjustment.Update(in: controller)
         Style.UpdateBackgroundAndDark(in: controller)
     }
@@ -178,12 +177,7 @@ class TextBox: UIView {
         
         if isOn
         {
-            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                
-                controller.TextBoxHeight.constant = Size.TextBox.size
-                controller.TextBoxWidth.constant = Size.TextBox.size
-                controller.view.layoutIfNeeded()
-            }, completion: nil)
+            Style.ToEdit(in: controller)
         }
         else
         {

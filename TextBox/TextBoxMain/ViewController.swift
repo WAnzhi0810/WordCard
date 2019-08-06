@@ -36,7 +36,13 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var TextBoxEditViewTop: NSLayoutConstraint!
     @IBOutlet weak var TextBoxEditViewLeading: NSLayoutConstraint!
     @IBOutlet weak var TextBoxEditViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxImageViewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxImageViewTop: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxImageViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var TextBoxImageViewBottom: NSLayoutConstraint!
     
+    @IBOutlet weak var TextBoxBackgroundImageView: UIImageView!
+    @IBOutlet weak var TextBoxBackgroundEffectView: UIVisualEffectView!
     @IBOutlet weak var TextBoxImageView: UIImageView!
     @IBOutlet weak var TextBoxImageFilterView: UIView!
     @IBOutlet weak var TextBoxDecorationView: UIView!

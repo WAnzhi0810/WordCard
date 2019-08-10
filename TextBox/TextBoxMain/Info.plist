@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansHans-Regular.otf</string>
+		<string>NotoSansHans-DemiLight.otf</string>
+		<string>NotoSansHans-Light.otf</string>
+		<string>NotoSansHans-Thin-Windows.otf</string>
+		<string>NotoSansHans-Medium.otf</string>
+		<string>NotoSansHans-Bold.otf</string>
+		<string>NotoSansHans-Black.otf</string>
+		<string>SourceHanSerifSC-Regular.otf</string>
+		<string>SourceHanSerifSC-Light.otf</string>
+		<string>SourceHanSerifSC-Medium.otf</string>
+		<string>SourceHanSerifSC-SemiBold.otf</string>
+		<string>SourceHanSerifSC-Bold.otf</string>
+		<string>SourceHanSerifSC-Heavy.otf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

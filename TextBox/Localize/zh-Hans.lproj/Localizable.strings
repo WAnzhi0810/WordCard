@@ -13,6 +13,25 @@
 "STSongti-SC-Light" = "宋体-细体";
 "STSongti-SC-Bold" = "宋体-粗体";
 "STSongti-SC-Black" = "宋体-黑体";
+"System-Regular" = "系统字体-常规体";
+"System-Light" = "系统字体-细体";
+"System-UltraLight" = "系统字体-极细体";
+"System-Bold" = "系统字体-中粗体";
+"System-Heavy" = "系统字体-粗体";
+"System-Black" = "系统字体-黑体";
+"NotoSansHans-Regular" = "思源黑体-常规体";
+"NotoSansHans-DemiLight" = "思源黑体-中细";
+"NotoSansHans-Light" = "思源黑体-细体";
+"NotoSansHans-Thin" = "思源黑体-极细体";
+"NotoSansHans-Medium" = "思源黑体-中粗体";
+"NotoSansHans-Bold" = "思源黑体-粗体";
+"NotoSansHans-Black" = "思源黑体-黑体";
+"SourceHanSerifSC-Regular" = "思源宋体-常规体";
+"SourceHanSerifSC-Light" = "思源宋体-细体";
+"SourceHanSerifSC-Medium" = "思源宋体-中体";
+"SourceHanSerifSC-SemiBold" = "思源宋体-中粗体";
+"SourceHanSerifSC-Bold" = "思源宋体-粗体";
+"SourceHanSerifSC-Heavy" = "思源宋体-黑体";
 
 // MARK: KeyboardView
 
@@ -37,6 +56,8 @@
 "图片边距" = "图片边距";
 "图片亮度" = "图片亮度";
 "当前图片" = "当前图片";
+"图片不透明度" = "图片不透明度";
+"背景图片不透明度" = "背景图片不透明度";
 "图片形状" = "图片形状";
 "图片位置" = "图片位置";
 "图片契合度" = "图片契合度";

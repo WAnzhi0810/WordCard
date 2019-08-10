@@ -23,6 +23,25 @@ class Font {
         case SongtiL = "STSongti-SC-Light"
         case SongtiB = "STSongti-SC-Bold"
         case SongtiBl = "STSongti-SC-Black"
+        case SystemR = "System-Regular"
+        case SystemL = "System-Light"
+        case SystemUL = "System-UltraLight"
+        case SystemB = "System-Bold"
+        case SystemH = "System-Heavy"
+        case SystemBl = "System-Black"
+        case NotoSansHansR = "NotoSansHans-Regular"
+        case NotoSansHansDL = "NotoSansHans-DemiLight"
+        case NotoSansHansL = "NotoSansHans-Light"
+        case NotoSansHansT = "NotoSansHans-Thin"
+        case NotoSansHansM = "NotoSansHans-Medium"
+        case NotoSansHansB = "NotoSansHans-Bold"
+        case NotoSansHansBl = "NotoSansHans-Black"
+        case SourceHanSerifR = "SourceHanSerifSC-Regular"
+        case SourceHanSerifL = "SourceHanSerifSC-Light"
+        case SourceHanSerifM = "SourceHanSerifSC-Medium"
+        case SourceHanSerifSB = "SourceHanSerifSC-SemiBold"
+        case SourceHanSerifB = "SourceHanSerifSC-Bold"
+        case SourceHanSerifH = "SourceHanSerifSC-Heavy"
     }
     
     static func set(systemFontSize size: CGFloat, weight: UIFont.Weight) -> UIFont
@@ -32,6 +51,23 @@ class Font {
     
     static func set(fontName: FontName, size: CGFloat) -> UIFont
     {
+        switch fontName
+        {
+        case .SystemR:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.regular)
+        case .SystemL:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.light)
+        case .SystemUL:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.ultraLight)
+        case .SystemB:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.bold)
+        case .SystemH:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.heavy)
+        case .SystemBl:
+            return self.set(systemFontSize: size, weight: UIFont.Weight.black)
+        default:
+            break
+        }
         return UIFont(name: fontName.rawValue, size: size)!
     }
     
@@ -72,6 +108,6 @@ extension Font.FontName: EnumeratableEnumType
 {
     static var allValues: [Font.FontName]
     {
-        return [.SongtiR, .SongtiL, .SongtiB, .SongtiBl]
+        return [.SongtiR, .SongtiL, .SongtiB, .SongtiBl, .SystemR, .SystemL, .SystemUL, .SystemB, .SystemH, .SystemBl, .NotoSansHansR, .NotoSansHansDL, .NotoSansHansL, .NotoSansHansT, .NotoSansHansM, .NotoSansHansB, .NotoSansHansBl, .SourceHanSerifR, .SourceHanSerifL, .SourceHanSerifM, .SourceHanSerifSB, .SourceHanSerifB, .SourceHanSerifH]
     }
 }

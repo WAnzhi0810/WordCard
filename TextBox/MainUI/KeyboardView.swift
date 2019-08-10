@@ -13,6 +13,9 @@ import UIKit
 class KeyboardView {
     
     class FontView {
+        static var fontView : UIView?
+        static var fontSizeView : UIView?
+        static var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
         static var buttons = [UIButton]()
         static var TitleLabel: UILabel!
     }
@@ -41,10 +44,20 @@ class KeyboardView {
         switch tag
         {
         case EditAccessoryView.buttonID.Font.rawValue:
-            view.addSubview(GenerateFontView(in: controller))
+            if FontView.fontView == nil
+            {
+                FontView.fontView = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
+                FontView.fontView!.addSubview(GenerateFontView(in: controller))
+            }
             FontOperation(tag: Font.FontName.allValues.firstIndex(of: EditView.current.font) ?? 0, in: controller)
+            view.addSubview(FontView.fontView!)
         case EditAccessoryView.buttonID.Fontsize.rawValue:
-            view.addSubview(GenerateFontsizeView(in: controller))
+            if FontView.fontSizeView == nil
+            {
+                FontView.fontSizeView = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
+                FontView.fontSizeView!.addSubview(GenerateFontsizeView(in: controller))
+            }
+            view.addSubview(FontView.fontSizeView!)
         default:
             break
         }
@@ -68,7 +81,7 @@ class KeyboardView {
     {
         FontView.buttons.removeAll()
         
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
+        FontView.scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
         var currentY: CGFloat = 70.0
         
         for (tag, oneName) in Font.FontName.allValues.enumerated()
@@ -91,7 +104,7 @@ class KeyboardView {
             oneButton.addTarget(controller, action: #selector(controller.KeyboardFontViewButton(_:)), for: UIControl.Event.touchUpInside)
             
             FontView.buttons.append(oneButton)
-            scrollView.addSubview(oneButton)
+            FontView.scrollView.addSubview(oneButton)
             
             currentY += 80.0
         }
@@ -101,12 +114,12 @@ class KeyboardView {
         FontView.TitleLabel.textColor = Color.theme.current
         FontView.TitleLabel.textAlignment = .center
         FontView.TitleLabel.font = Font.set(systemFontSize: 20, weight: UIFont.Weight.heavy)
-        scrollView.addSubview(FontView.TitleLabel)
+        FontView.scrollView.addSubview(FontView.TitleLabel)
         
-        scrollView.bounces = true
-        scrollView.contentSize = CGSize(width: 0, height: currentY)
+        FontView.scrollView.bounces = true
+        FontView.scrollView.contentSize = CGSize(width: 0, height: currentY)
         
-        return scrollView
+        return FontView.scrollView
     }
     
     private static func GenerateFontsizeView(in controller: ViewController) -> UIView
@@ -187,6 +200,18 @@ class KeyboardView {
         }
         FontView.buttons[tag].isSelected = true
         FontView.buttons[tag].backgroundColor = Style.isDark ? Color.button.black.SelectBG : Color.button.white.SelectBG
+        
+        /*let currentFrame = FontView.scrollView.convert(FontView.buttons[tag].frame, to: controller.PopView)
+        print(currentFrame)
+        if currentFrame.minY < 20 || currentFrame.maxY > Size.PopView.Height - 20
+        {
+            var offsetY = FontView.buttons[tag].frame.midY + Size.PopView.Height / 2.0
+            offsetY = offsetY < 0 ? 0 : (offsetY > FontView.scrollView.contentOffset.y ? FontView.scrollView.contentOffset.y : offsetY)
+            
+            FontView.scrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+        }*/
+        //FontView.scrollView.scrollRectToVisible(FontView.buttons[tag].frame, animated: true)
+        //FontView.scrollView.setContentOffset(CGPoint(x: 0, y: FontView.buttons[tag].frame.origin.y), animated: true)
         
         EditView.current.font = Font.FontName.allValues[tag]
         controller.TextBoxEditView.updateFont()

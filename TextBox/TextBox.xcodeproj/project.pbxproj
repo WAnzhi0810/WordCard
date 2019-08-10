@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61075F1122FD4DCF00CE2739 /* NotoSansHans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0A22FD4DB400CE2739 /* NotoSansHans-Light.otf */; };
+		61075F1222FD4DCF00CE2739 /* NotoSansHans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0B22FD4DB900CE2739 /* NotoSansHans-Bold.otf */; };
+		61075F1322FD4DCF00CE2739 /* NotoSansHans-DemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0C22FD4DBF00CE2739 /* NotoSansHans-DemiLight.otf */; };
+		61075F1422FD4DCF00CE2739 /* NotoSansHans-Thin-Windows.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0D22FD4DC400CE2739 /* NotoSansHans-Thin-Windows.otf */; };
+		61075F1522FD4DCF00CE2739 /* NotoSansHans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0E22FD4DC700CE2739 /* NotoSansHans-Regular.otf */; };
+		61075F1622FD4DCF00CE2739 /* NotoSansHans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F0F22FD4DCA00CE2739 /* NotoSansHans-Medium.otf */; };
+		61075F1722FD4DCF00CE2739 /* NotoSansHans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1022FD4DCC00CE2739 /* NotoSansHans-Black.otf */; };
+		61075F1F22FD534F00CE2739 /* SourceHanSerifSC-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */; };
+		61075F2022FD534F00CE2739 /* SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */; };
+		61075F2122FD534F00CE2739 /* SourceHanSerifSC-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */; };
+		61075F2222FD534F00CE2739 /* SourceHanSerifSC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */; };
+		61075F2322FD534F00CE2739 /* SourceHanSerifSC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */; };
+		61075F2422FD534F00CE2739 /* SourceHanSerifSC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */; };
 		6107A5DE22E1806B008620B7 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107A5DD22E1806B008620B7 /* KeyboardView.swift */; };
 		6107A5E022E400E8008620B7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107A5DF22E400E7008620B7 /* Color.swift */; };
 		6107A5E422E4332B008620B7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6107A5E622E4332B008620B7 /* Localizable.strings */; };
@@ -35,6 +48,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61075F0A22FD4DB400CE2739 /* NotoSansHans-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Light.otf"; sourceTree = "<group>"; };
+		61075F0B22FD4DB900CE2739 /* NotoSansHans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Bold.otf"; sourceTree = "<group>"; };
+		61075F0C22FD4DBF00CE2739 /* NotoSansHans-DemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-DemiLight.otf"; sourceTree = "<group>"; };
+		61075F0D22FD4DC400CE2739 /* NotoSansHans-Thin-Windows.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Thin-Windows.otf"; sourceTree = "<group>"; };
+		61075F0E22FD4DC700CE2739 /* NotoSansHans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Regular.otf"; sourceTree = "<group>"; };
+		61075F0F22FD4DCA00CE2739 /* NotoSansHans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Medium.otf"; sourceTree = "<group>"; };
+		61075F1022FD4DCC00CE2739 /* NotoSansHans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansHans-Black.otf"; sourceTree = "<group>"; };
+		61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Heavy.otf"; sourceTree = "<group>"; };
+		61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
+		61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-SemiBold.otf"; sourceTree = "<group>"; };
+		61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Bold.otf"; sourceTree = "<group>"; };
+		61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Light.otf"; sourceTree = "<group>"; };
+		61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Medium.otf"; sourceTree = "<group>"; };
 		6107A5DD22E1806B008620B7 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		6107A5DF22E400E7008620B7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6107A5E522E4332B008620B7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -79,6 +105,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61075F0922FD4D9100CE2739 /* NotoSansHans */ = {
+			isa = PBXGroup;
+			children = (
+				61075F1022FD4DCC00CE2739 /* NotoSansHans-Black.otf */,
+				61075F0B22FD4DB900CE2739 /* NotoSansHans-Bold.otf */,
+				61075F0C22FD4DBF00CE2739 /* NotoSansHans-DemiLight.otf */,
+				61075F0A22FD4DB400CE2739 /* NotoSansHans-Light.otf */,
+				61075F0F22FD4DCA00CE2739 /* NotoSansHans-Medium.otf */,
+				61075F0E22FD4DC700CE2739 /* NotoSansHans-Regular.otf */,
+				61075F0D22FD4DC400CE2739 /* NotoSansHans-Thin-Windows.otf */,
+			);
+			path = NotoSansHans;
+			sourceTree = "<group>";
+		};
+		61075F1822FD531600CE2739 /* SourceHanSerif */ = {
+			isa = PBXGroup;
+			children = (
+				61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */,
+				61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */,
+				61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */,
+				61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */,
+				61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */,
+				61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */,
+			);
+			path = SourceHanSerif;
+			sourceTree = "<group>";
+		};
 		6107A5E122E432AC008620B7 /* Localize */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +179,8 @@
 		618FD39C22DDC84500978D22 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				61075F1822FD531600CE2739 /* SourceHanSerif */,
+				61075F0922FD4D9100CE2739 /* NotoSansHans */,
 				618FD39D22DDC8AA00978D22 /* Songti */,
 				618FD39F22DDC8EE00978D22 /* Font.swift */,
 			);
@@ -236,11 +291,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				6107A5E422E4332B008620B7 /* Localizable.strings in Resources */,
+				61075F1222FD4DCF00CE2739 /* NotoSansHans-Bold.otf in Resources */,
+				61075F2022FD534F00CE2739 /* SourceHanSerifSC-Regular.otf in Resources */,
 				6107A5EA22E43486008620B7 /* InfoPlist.strings in Resources */,
+				61075F1622FD4DCF00CE2739 /* NotoSansHans-Medium.otf in Resources */,
+				61075F1122FD4DCF00CE2739 /* NotoSansHans-Light.otf in Resources */,
+				61075F2422FD534F00CE2739 /* SourceHanSerifSC-Medium.otf in Resources */,
 				618FD39522DD69A800978D22 /* LaunchScreen.storyboard in Resources */,
+				61075F2122FD534F00CE2739 /* SourceHanSerifSC-SemiBold.otf in Resources */,
+				61075F1F22FD534F00CE2739 /* SourceHanSerifSC-Heavy.otf in Resources */,
 				618FD39222DD69A800978D22 /* Assets.xcassets in Resources */,
+				61075F1322FD4DCF00CE2739 /* NotoSansHans-DemiLight.otf in Resources */,
+				61075F2222FD534F00CE2739 /* SourceHanSerifSC-Bold.otf in Resources */,
 				618FD39022DD69A100978D22 /* Main.storyboard in Resources */,
+				61075F1722FD4DCF00CE2739 /* NotoSansHans-Black.otf in Resources */,
 				618FD3A922DE04DF00978D22 /* Songti.ttc in Resources */,
+				61075F2322FD534F00CE2739 /* SourceHanSerifSC-Light.otf in Resources */,
+				61075F1422FD4DCF00CE2739 /* NotoSansHans-Thin-Windows.otf in Resources */,
+				61075F1522FD4DCF00CE2739 /* NotoSansHans-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

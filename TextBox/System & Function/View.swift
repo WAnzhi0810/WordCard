@@ -80,4 +80,16 @@ extension UIImage
         
         return CIContext(options: nil).createCGImage(outputCIImage, from: rect)!
     }
+    
+    func getMosaic(value: CGFloat) -> CGImage
+    {
+        let filter = CIFilter(name: "CIPixellate")!
+        let inputImage = CIImage(image: self)
+        
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        filter.setValue(value, forKey: kCIInputScaleKey)
+        
+        let outputCIImage = filter.outputImage!
+        return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!
+    }
 }

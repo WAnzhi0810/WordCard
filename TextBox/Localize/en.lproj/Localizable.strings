@@ -13,6 +13,25 @@
 "STSongti-SC-Light" = "Songti-Light";
 "STSongti-SC-Bold" = "Songti-Bold";
 "STSongti-SC-Black" = "Songti-Black";
+"System-Regular" = "System-Regular";
+"System-Light" = "System-Light";
+"System-UltraLight" = "System-UltraLight";
+"System-Bold" = "System-Bold";
+"System-Heavy" = "System-Heavy";
+"System-Black" = "System-Black";
+"NotoSansHans-Regular" = "NotoSansHans-Regular";
+"NotoSansHans-DemiLight" = "NotoSansHans-DemiLight";
+"NotoSansHans-Light" = "NotoSansHans-Light";
+"NotoSansHans-Thin" = "NotoSansHans-Thin";
+"NotoSansHans-Medium" = "NotoSansHans-Medium";
+"NotoSansHans-Bold" = "NotoSansHans-Bold";
+"NotoSansHans-Black" = "NotoSansHans-Black";
+"SourceHanSerifSC-Regular" = "SourceHanSerif-Regular";
+"SourceHanSerifSC-Light" = "SourceHanSerif-Light";
+"SourceHanSerifSC-Medium" = "SourceHanSerif-Medium";
+"SourceHanSerifSC-SemiBold" = "SourceHanSerif-SemiBold";
+"SourceHanSerifSC-Bold" = "SourceHanSerif-Bold";
+"SourceHanSerifSC-Heavy" = "SourceHanSerif-Heavy";
 
 // MARK: KeyboardView
 
@@ -37,6 +56,8 @@
 "图片边距" = "Picture Margin";
 "图片亮度" = "Picture Brightness";
 "当前图片" = "Picture";
+"图片不透明度" = "Picture Opacity";
+"背景图片不透明度" = "Background Picture Opacity";
 "图片形状" = "Picture Shape";
 "图片位置" = "Picture Position";
 "图片契合度" = "Picture Compatibility";

@@ -1,0 +1,21 @@
+
+/* Class = "UIViewController"; title = "MainUI"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "MainUI";
+
+/* Class = "UILabel"; text = "欢迎使用\n文字卡片"; ObjectID = "UT0-Gx-dCs"; */
+"UT0-Gx-dCs.text" = "欢迎使用\n文字卡片";
+
+/* Class = "UILabel"; text = "在这里\n您可以组合不同的卡片样式与文字\n创造出属于你的独特卡片"; ObjectID = "cfZ-lM-bMj"; */
+"cfZ-lM-bMj.text" = "在这里\n您可以组合不同的卡片样式与文字\n创造出属于你的独特卡片";
+
+/* Class = "UILabel"; text = "文字卡片\n为你打造"; ObjectID = "jQO-Fu-ikO"; */
+"jQO-Fu-ikO.text" = "文字卡片\n为你打造";
+
+/* Class = "UIButton"; normalTitle = "立即体验"; ObjectID = "m1e-Zm-Vdk"; */
+"m1e-Zm-Vdk.normalTitle" = "立即体验";
+
+/* Class = "UIViewController"; title = "WelcomeUI"; ObjectID = "m3V-aE-9cP"; */
+"m3V-aE-9cP.title" = "WelcomeUI";
+
+/* Class = "UILabel"; text = "您还可以将它们\n保存下来，\n分享给别人"; ObjectID = "u8k-sh-aj2"; */
+"u8k-sh-aj2.text" = "您还可以将它们\n保存下来，\n分享给别人";

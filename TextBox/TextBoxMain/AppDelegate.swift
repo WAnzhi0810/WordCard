@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let isEverLaunched = UserDefaults.standard.bool(forKey: "everLaunched")
         
-        if !isEverLaunched
+        if true //!isEverLaunched
         {
             UserDefaults.standard.set(true, forKey: "everLaunched")
             let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeUI")

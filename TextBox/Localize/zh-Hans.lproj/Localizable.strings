@@ -19,13 +19,6 @@
 "System-Bold" = "系统字体-中粗体";
 "System-Heavy" = "系统字体-粗体";
 "System-Black" = "系统字体-黑体";
-"NotoSansHans-Regular" = "思源黑体-常规体";
-"NotoSansHans-DemiLight" = "思源黑体-中细";
-"NotoSansHans-Light" = "思源黑体-细体";
-"NotoSansHans-Thin" = "思源黑体-极细体";
-"NotoSansHans-Medium" = "思源黑体-中粗体";
-"NotoSansHans-Bold" = "思源黑体-粗体";
-"NotoSansHans-Black" = "思源黑体-黑体";
 "SourceHanSerifSC-Regular" = "思源宋体-常规体";
 "SourceHanSerifSC-Light" = "思源宋体-细体";
 "SourceHanSerifSC-Medium" = "思源宋体-中体";
@@ -78,7 +71,12 @@
 
 // MARK: BGStyle
 "纯色" = "纯色";
+"图片" = "图片";
 "模糊" = "模糊";
+"像素化" = "像素化";
+"点状化" = "点状化";
+"边缘化" = "边缘化";
+"六边形" = "六边形";
 
 // MARK: ImagePosition
 "上" = "上";

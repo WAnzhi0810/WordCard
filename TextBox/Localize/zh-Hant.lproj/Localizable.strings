@@ -1,0 +1,92 @@
+/* 
+  Localizable.strings
+  TextBox
+
+  Created by OX CL on 2019/7/21.
+  Copyright © 2019 OX CL. All rights reserved.
+*/
+
+
+// MARK: Font
+
+"STSongti-SC-Regular" = "宋體-常規體";
+"STSongti-SC-Light" = "宋體-細體";
+"STSongti-SC-Bold" = "宋體-粗體";
+"STSongti-SC-Black" = "宋體-黑體";
+"System-Regular" = "系統字體-常規體";
+"System-Light" = "系統字體-細體";
+"System-UltraLight" = "系統字體-極細體";
+"System-Bold" = "系統字體-中粗體";
+"System-Heavy" = "系統字體-粗體";
+"System-Black" = "系統字體-黑體";
+"SourceHanSerifSC-Regular" = "思源宋體-常規體";
+"SourceHanSerifSC-Light" = "思源宋體-細體";
+"SourceHanSerifSC-Medium" = "思源宋體-中體";
+"SourceHanSerifSC-SemiBold" = "思源宋體-中粗體";
+"SourceHanSerifSC-Bold" = "思源宋體-粗體";
+"SourceHanSerifSC-Heavy" = "思源宋體-黑體";
+
+// MARK: KeyboardView
+
+"字体" = "字體";
+"字体大小" = "字體大小";
+
+// MARK: TextBox
+
+"轻触此处，编辑文字" = "輕觸此處，編輯文字";
+
+// MARK: AccessoryView
+
+"完成" = "完成";
+
+// MARK: Adjustment
+
+"背景颜色" = "背景顏色";
+"文字颜色" = "文字顏色";
+"背景样式" = "背景樣式";
+"卡片大小" = "卡片大小";
+"文字边距" = "文字邊距";
+"图片边距" = "圖片邊距";
+"图片亮度" = "圖片亮度";
+"当前图片" = "當前圖片";
+"图片不透明度" = "圖片不透明度";
+"背景图片不透明度" = "背景圖片不透明度";
+"图片形状" = "圖片形狀";
+"图片位置" = "圖片位置";
+"图片契合度" = "圖片契合度";
+
+// MARK: ContentMode
+"拉伸" = "拉伸";
+"适应" = "適應";
+"填充" = "填充";
+"左" = "左";
+"左上" = "左上";
+"左下" = "左下";
+"上" = "上";
+"中心" = "中心";
+"下" = "下";
+"右上" = "右上";
+"右下" = "右下";
+"右" = "右";
+
+// MARK: BGStyle
+"纯色" = "純色";
+"图片" = "圖片";
+"模糊" = "模糊";
+"像素化" = "像素化";
+"点状化" = "點狀化";
+"边缘化" = "邊緣化";
+"六边形" = "六邊形";
+
+// MARK: ImagePosition
+"上" = "上";
+"下" = "下";
+
+// MARK: WelcomeUI
+
+"欢迎使用\n文字卡片" = "歡迎使用\n文字卡片";
+"立即体验" = "立即體驗";
+"文字卡片\n为你打造" = "文字卡片\n為你打造";
+"在这里\n您可以组合不同的卡片样式与文字\n创造出属于你的独特卡片" = "在這裡\n您可以組合不同的卡片樣式與文字\n創造出屬於你的獨特卡片";
+"您还可以将它们\n保存下来，\n分享给别人" = "您還可以將它們\n保存下來，\n分享給別人";
+

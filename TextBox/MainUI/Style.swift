@@ -37,10 +37,10 @@ class Style {
         }
     }
     
-    class temp
+    class currentFilterImage
     {
-        static var currentBlurImage: UIImage?
-        static var currentMosaicImage: UIImage?
+        static var image: UIImage?
+        static var filter: Adjustment.PreviewValue.Filter = Adjustment.PreviewValue.BGStyle[Adjustment.current[.BGStyle]!].filter
     }
     
     class Adjustment
@@ -66,8 +66,8 @@ class Style {
         
         static let displayType: [Style.Name : [Style.Adjustment.type]] =
                 [.Blank : [.BGColor, .FGColor, .BoxSize, .TextMargin],
-                 .Picture : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor, .ImageShape, .ImageMargin, .TextMargin],
-                 .Postcard : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .ImagePosition, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor, .ImageShape, .ImageMargin, .TextMargin]]
+                 .Picture : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .ImageShape, .ImageMargin, .TextMargin, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor],
+                 .Postcard : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .ImageShape, .ImageMargin, .TextMargin, .ImagePosition, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor]]
         
         static func displayTypeIndex(type: type, in name: Style.Name) -> Int?
         {
@@ -76,7 +76,7 @@ class Style {
         
         static var current: [type : Int] = [.BGColor : 0,
                                             .FGColor : 0,
-                                            .BGStyle : 2,
+                                            .BGStyle : 0,
                                             .BoxSize : 1,
                                             .TextMargin : 2,
                                             .ImageMargin : 2,
@@ -133,7 +133,7 @@ class Style {
         
         static let CellSize: [type : CGSize] = [.BGColor : CGSize(width: 40.0, height: 40.0),
                                                 .FGColor : CGSize(width: 40.0, height: 40.0),
-                                                .BGStyle : CGSize(width: 80.0, height: 50.0),
+                                                .BGStyle : CGSize(width: 120.0, height: 50.0),
                                                 .BoxSize : CGSize(width: 80.0, height: 50.0),
                                                 .TextMargin : CGSize(width: 70.0, height: 50.0),
                                                 .ImageMargin : CGSize(width: 70.0, height: 50.0),
@@ -159,7 +159,7 @@ class Style {
                                                            .ImageContentMode : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)]
         static let TableCellHeight: [type : CGFloat] = [.BGColor : 40.0 * 2 + 30,
                                                         .FGColor : 40.0 * 2 + 30,
-                                                        .BGStyle : 50.0 + 20,
+                                                        .BGStyle : 50.0 * 2 + 30,
                                                         .BoxSize : 50.0 + 20,
                                                         .TextMargin : 50.0 * 2 + 30,
                                                         .ImageMargin : 50.0 * 2 + 30,
@@ -241,10 +241,23 @@ class Style {
                                   UIColor(white: 3.0/9.0, alpha: 1),
                                   UIColor(white: 2.0/9.0, alpha: 1),
                                   UIColor(white: 1.0/9.0, alpha: 1)]
-            static let BGStyle: [String] = ["纯色".localize(),
-                                            "图片".localize(),
-                                            "模糊".localize(),
-                                            "马赛克".localize()]
+            enum Filter
+            {
+                case pure
+                case picture
+                case blur
+                case pixellate
+                case pointillize
+                case edge
+                case hexagon
+            }
+            static let BGStyle: [(filter: Filter, discribe: String)] = [(.pure, "纯色".localize()),
+                                                                        (.picture, "图片".localize()),
+                                                                        (.blur, "模糊".localize()),
+                                                                        (.pixellate, "像素化".localize()),
+                                                                        (.pointillize, "点状化".localize()),
+                                                                        (.edge, "边缘化".localize()),
+                                                                        (.hexagon, "六边形".localize())]
             static let BoxSize: [CGFloat] = [400, 600, 1200]
             static let TextMargin: [CGFloat] = [10, 20, 40, 60, 80, 100, 120, 140, 160]
             static let ImageMargin: [CGFloat] = [0, 20, 40, 60, 80, 100, 120]
@@ -325,7 +338,7 @@ class Style {
                 //cell.layer.cornerRadius = CellSize[.FGColor]!.height / 2.0
             case type.BGStyle:
                 cell.label.font = Font.set(systemFontSize: 20.0, weight: UIFont.Weight.medium)
-                cell.label.text = PreviewValue.BGStyle[selectionItem]
+                cell.label.text = PreviewValue.BGStyle[selectionItem].discribe
                 cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
                 cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
                 cell.layer.cornerRadius = 10.0
@@ -767,34 +780,56 @@ class Style {
         case .Picture, .Postcard:
             UIView.linear(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.BackgroundEffectView.effect = UIBlurEffect(style: isDark ? .dark : .light)
-                if self.Adjustment.current[.BGStyle]! == 0
+                let currentFilter = self.Adjustment.PreviewValue.BGStyle[self.Adjustment.current[.BGStyle]!].filter
+                switch currentFilter
                 {
+                case .pure:
+                    currentFilterImage.image = controller.TextBoxImageView.image
+                    currentFilterImage.filter = .picture
                     controller.TextBoxBackgroundImageView.alpha = 0
-                }
-                else if self.Adjustment.current[.BGStyle]! == 1
-                {
-                    temp.currentBlurImage = nil
-                    temp.currentMosaicImage = nil
+                case .picture:
+                    currentFilterImage.image = controller.TextBoxImageView.image
+                    currentFilterImage.filter = currentFilter
                     controller.TextBoxBackgroundImageView.image = controller.TextBoxImageView.image
                     controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
-                }
-                else if self.Adjustment.current[.BGStyle]! == 2
-                {
-                    temp.currentMosaicImage = nil
-                    if controller.TextBoxBackgroundImageView.alpha == 0 || temp.currentBlurImage != controller.TextBoxImageView.image
+                case .blur:
+                    if currentFilterImage.image != controller.TextBoxImageView.image || currentFilterImage.filter != currentFilter
                     {
-                        temp.currentBlurImage = controller.TextBoxImageView.image
+                        currentFilterImage.image = controller.TextBoxImageView.image
+                        currentFilterImage.filter = currentFilter
                         controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getGaussianBlur(blurRadius: 30))
                     }
                     controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
-                }
-                else if self.Adjustment.current[.BGStyle]! == 3
-                {
-                    temp.currentBlurImage = nil
-                    if controller.TextBoxBackgroundImageView.alpha == 0 || temp.currentMosaicImage != controller.TextBoxImageView.image
+                case .pixellate:
+                    if currentFilterImage.image != controller.TextBoxImageView.image || currentFilterImage.filter != currentFilter
                     {
-                        temp.currentMosaicImage = controller.TextBoxImageView.image
+                        currentFilterImage.image = controller.TextBoxImageView.image
+                        currentFilterImage.filter = currentFilter
                         controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getMosaic(value: 30))
+                    }
+                    controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
+                case .pointillize:
+                    if currentFilterImage.image != controller.TextBoxImageView.image || currentFilterImage.filter != currentFilter
+                    {
+                        currentFilterImage.image = controller.TextBoxImageView.image
+                        currentFilterImage.filter = currentFilter
+                        controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getPointillize(radius: 30))
+                    }
+                    controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
+                case .edge:
+                    if currentFilterImage.image != controller.TextBoxImageView.image || currentFilterImage.filter != currentFilter
+                    {
+                        currentFilterImage.image = controller.TextBoxImageView.image
+                        currentFilterImage.filter = currentFilter
+                        controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getEdge(intensity: 100))
+                    }
+                    controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
+                case .hexagon:
+                    if currentFilterImage.image != controller.TextBoxImageView.image || currentFilterImage.filter != currentFilter
+                    {
+                        currentFilterImage.image = controller.TextBoxImageView.image
+                        currentFilterImage.filter = currentFilter
+                        controller.TextBoxBackgroundImageView.image = UIImage(cgImage: controller.TextBoxImageView.image!.getHexagon(scale: 30))
                     }
                     controller.TextBoxBackgroundImageView.alpha = Style.Adjustment.PreviewValue.BGImageAlpha[Style.Adjustment.current[.BGImageAlpha]!]
                 }

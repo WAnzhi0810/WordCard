@@ -67,7 +67,8 @@ extension UIView
 
 extension UIImage
 {
-    func getGaussianBlur(blurRadius: CGFloat) -> CGImage
+    
+    func getGaussianBlur(blurRadius: CGFloat?) -> CGImage
     {
         let thisImage = CIImage(image: self)
         let filter = CIFilter(name: "CIGaussianBlur")!
@@ -81,13 +82,61 @@ extension UIImage
         return CIContext(options: nil).createCGImage(outputCIImage, from: rect)!
     }
     
-    func getMosaic(value: CGFloat) -> CGImage
+    func getMosaic(value: CGFloat?) -> CGImage
     {
         let filter = CIFilter(name: "CIPixellate")!
         let inputImage = CIImage(image: self)
         
         filter.setValue(inputImage, forKey: kCIInputImageKey)
         filter.setValue(value, forKey: kCIInputScaleKey)
+        
+        let outputCIImage = filter.outputImage!
+        return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!
+    }
+    
+    func getPointillize(radius: CGFloat?) -> CGImage
+    {
+        let filter = CIFilter(name: "CIPointillize")!
+        let inputImage = CIImage(image: self)
+        
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        if radius != nil
+        {
+            filter.setValue(radius, forKey: kCIInputRadiusKey)
+        }
+        
+        let outputCIImage = filter.outputImage!
+        return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!
+    }
+    func getEdge(intensity: CGFloat?) -> CGImage
+    {
+        let filter = CIFilter(name: "CIEdges")!
+        let inputImage = CIImage(image: self)
+        
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        filter.setValue(intensity, forKey: kCIInputIntensityKey)
+        
+        let outputCIImage = filter.outputImage!
+        return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!
+    }
+    func getEdgeWork(radius: CGFloat?) -> CGImage
+    {
+        let filter = CIFilter(name: "CIEdgeWork")!
+        let inputImage = CIImage(image: self)
+        
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        filter.setValue(radius, forKey: kCIInputRadiusKey)
+        
+        let outputCIImage = filter.outputImage!
+        return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!
+    }
+    func getHexagon(scale: CGFloat?) -> CGImage
+    {
+        let filter = CIFilter(name: "CIHexagonalPixellate")!
+        let inputImage = CIImage(image: self)
+        
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        filter.setValue(scale, forKey: kCIInputScaleKey)
         
         let outputCIImage = filter.outputImage!
         return CIContext(options: nil).createCGImage(outputCIImage, from: outputCIImage.extent)!

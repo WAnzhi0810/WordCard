@@ -29,13 +29,6 @@ class Font {
         case SystemB = "System-Bold"
         case SystemH = "System-Heavy"
         case SystemBl = "System-Black"
-        case NotoSansHansR = "NotoSansHans-Regular"
-        case NotoSansHansDL = "NotoSansHans-DemiLight"
-        case NotoSansHansL = "NotoSansHans-Light"
-        case NotoSansHansT = "NotoSansHans-Thin"
-        case NotoSansHansM = "NotoSansHans-Medium"
-        case NotoSansHansB = "NotoSansHans-Bold"
-        case NotoSansHansBl = "NotoSansHans-Black"
         case SourceHanSerifR = "SourceHanSerifSC-Regular"
         case SourceHanSerifL = "SourceHanSerifSC-Light"
         case SourceHanSerifM = "SourceHanSerifSC-Medium"
@@ -108,6 +101,6 @@ extension Font.FontName: EnumeratableEnumType
 {
     static var allValues: [Font.FontName]
     {
-        return [.SongtiR, .SongtiL, .SongtiB, .SongtiBl, .SystemR, .SystemL, .SystemUL, .SystemB, .SystemH, .SystemBl, .NotoSansHansR, .NotoSansHansDL, .NotoSansHansL, .NotoSansHansT, .NotoSansHansM, .NotoSansHansB, .NotoSansHansBl, .SourceHanSerifR, .SourceHanSerifL, .SourceHanSerifM, .SourceHanSerifSB, .SourceHanSerifB, .SourceHanSerifH]
+        return [.SongtiR, .SongtiL, .SongtiB, .SongtiBl, .SystemR, .SystemL, .SystemUL, .SystemB, .SystemH, .SystemBl, .SourceHanSerifR, .SourceHanSerifL, .SourceHanSerifM, .SourceHanSerifSB, .SourceHanSerifB, .SourceHanSerifH]
     }
 }

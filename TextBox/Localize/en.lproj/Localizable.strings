@@ -19,13 +19,6 @@
 "System-Bold" = "System-Bold";
 "System-Heavy" = "System-Heavy";
 "System-Black" = "System-Black";
-"NotoSansHans-Regular" = "NotoSansHans-Regular";
-"NotoSansHans-DemiLight" = "NotoSansHans-DemiLight";
-"NotoSansHans-Light" = "NotoSansHans-Light";
-"NotoSansHans-Thin" = "NotoSansHans-Thin";
-"NotoSansHans-Medium" = "NotoSansHans-Medium";
-"NotoSansHans-Bold" = "NotoSansHans-Bold";
-"NotoSansHans-Black" = "NotoSansHans-Black";
 "SourceHanSerifSC-Regular" = "SourceHanSerif-Regular";
 "SourceHanSerifSC-Light" = "SourceHanSerif-Light";
 "SourceHanSerifSC-Medium" = "SourceHanSerif-Medium";
@@ -78,7 +71,12 @@
 
 // MARK: BGStyle
 "纯色" = "Pure";
+"图片" = "Picture";
 "模糊" = "Blur";
+"像素化" = "Pixellate";
+"点状化" = "Pointillize";
+"边缘化" = "Edge";
+"六边形" = "Hexagon";
 
 // MARK: ImagePosition
 "上" = "Top";

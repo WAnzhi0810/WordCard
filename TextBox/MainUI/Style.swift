@@ -15,8 +15,9 @@ class Style {
         case Blank = 0
         case Picture = 1
         case Postcard = 2
+        case HorizontalPostcard = 3
     }
-    static let NameArray: [Name] = [.Blank, .Picture, .Postcard]
+    static let NameArray: [Name] = [.Blank, .Picture, .Postcard, .HorizontalPostcard]
     static var current = Name.Blank
     
     static var isDark = false
@@ -27,12 +28,14 @@ class Style {
         {
             return [UIImage(named: "Style1_b")!,
                     UIImage(named: "Style2_b")!,
+                    UIImage(named: "Style3_b")!,
                     UIImage(named: "Style3_b")!]
         }
         else
         {
             return [UIImage(named: "Style1_w")!,
                     UIImage(named: "Style2_w")!,
+                    UIImage(named: "Style3_w")!,
                     UIImage(named: "Style3_w")!]
         }
     }
@@ -53,21 +56,27 @@ class Style {
             case BoxSize
             case TextMargin
             case ImageMargin
+            case TextBorderColor
+            case TextBorderWidth
+            case ImageBorderColor
+            case ImageBorderWidth
             case ImageFilter
             case Image
             case ImageAlpha
             case BGImageAlpha
             case ImageShape
-            case ImagePosition
+            case ImagePositionTB
+            case ImagePositionLT
             case ImageContentMode
         }
         
-        static let typeArray: [type] = [.BoxSize, .BGColor, .FGColor, .BGStyle, .TextMargin, .ImageMargin, .ImageFilter, .Image, .ImageAlpha, .BGImageAlpha, .ImageShape, .ImagePosition, .ImageContentMode]
+        static let typeArray: [type] = [.BoxSize, .BGColor, .FGColor, .BGStyle, .TextMargin, .ImageMargin, .TextBorderColor, .TextBorderWidth, .ImageBorderColor, .ImageBorderWidth, .ImageFilter, .Image, .ImageAlpha, .BGImageAlpha, .ImageShape, .ImagePositionTB, .ImagePositionLT, .ImageContentMode]
         
         static let displayType: [Style.Name : [Style.Adjustment.type]] =
-                [.Blank : [.BGColor, .FGColor, .BoxSize, .TextMargin],
-                 .Picture : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .ImageShape, .ImageMargin, .TextMargin, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor],
-                 .Postcard : [.Image, .ImageFilter, .ImageAlpha, .ImageContentMode, .ImageShape, .ImageMargin, .TextMargin, .ImagePosition, .BoxSize, .BGStyle, .BGImageAlpha, .BGColor, .FGColor]]
+                [.Blank : [.BGColor, .FGColor, .BoxSize, .TextMargin, .TextBorderColor, .TextBorderWidth],
+                 .Picture : [.Image, .ImageFilter, .BoxSize, .ImageAlpha, .ImageContentMode, .ImageShape, .ImageMargin, .ImageBorderColor, .ImageBorderWidth, .TextMargin, .TextBorderColor, .TextBorderWidth, .FGColor, .BGStyle, .BGImageAlpha, .BGColor],
+                 .Postcard : [.Image, .ImageFilter, .BoxSize, .ImageAlpha, .ImageContentMode, .ImageShape, .ImagePositionTB, .ImageMargin, .ImageBorderColor, .ImageBorderWidth, .TextMargin, .FGColor, .BGStyle, .BGImageAlpha, .BGColor],
+                 .HorizontalPostcard : [.Image, .ImageFilter, .BoxSize, .ImageAlpha, .ImageContentMode, .ImageShape, .ImagePositionLT, .ImageMargin, .ImageBorderColor, .ImageBorderWidth, .TextMargin, .FGColor, .BGStyle, .BGImageAlpha, .BGColor]]
         
         static func displayTypeIndex(type: type, in name: Style.Name) -> Int?
         {
@@ -80,12 +89,17 @@ class Style {
                                             .BoxSize : 1,
                                             .TextMargin : 2,
                                             .ImageMargin : 2,
+                                            .TextBorderColor : 0,
+                                            .TextBorderWidth : 0,
+                                            .ImageBorderColor : 0,
+                                            .ImageBorderWidth : 0,
                                             .ImageFilter : 6,
                                             .Image : 1,
                                             .ImageAlpha : 5,
                                             .BGImageAlpha : 1,
                                             .ImageShape: 0,
-                                            .ImagePosition : 0,
+                                            .ImagePositionTB : 0,
+                                            .ImagePositionLT : 0,
                                             .ImageContentMode : 2]
         
         static var customImage = UIImage(named: "ImagePlaceholder")
@@ -96,12 +110,17 @@ class Style {
                                                        .BoxSize : PreviewValue.BoxSize,
                                                        .TextMargin : PreviewValue.TextMargin,
                                                        .ImageMargin : PreviewValue.ImageMargin,
+                                                       .TextBorderColor : PreviewValue.TextBorderColor,
+                                                       .TextBorderWidth : PreviewValue.TextBorderWidth,
+                                                       .ImageBorderColor : PreviewValue.ImageBorderColor,
+                                                       .ImageBorderWidth : PreviewValue.ImageBorderWidth,
                                                        .ImageFilter : PreviewValue.ImageFilter,
                                                        .Image : PreviewValue.Image,
                                                        .ImageAlpha : PreviewValue.ImageAlpha,
                                                        .BGImageAlpha : PreviewValue.BGImageAlpha,
                                                        .ImageShape : PreviewValue.ImageShape(),
-                                                       .ImagePosition : PreviewValue.ImagePosition,
+                                                       .ImagePositionTB : PreviewValue.ImagePositionTB,
+                                                       .ImagePositionLT : PreviewValue.ImagePositionLT,
                                                        .ImageContentMode : PreviewValue.ImageContentMode]
         
         static let SectionTitle: [type : String] = [.BGColor : "背景颜色".localize(),
@@ -110,12 +129,17 @@ class Style {
                                                     .BoxSize : "卡片大小".localize(),
                                                     .TextMargin : "文字边距".localize(),
                                                     .ImageMargin : "图片边距".localize(),
+                                                    .TextBorderColor : "文字装饰框颜色".localize(),
+                                                    .TextBorderWidth : "文字装饰框粗细度".localize(),
+                                                    .ImageBorderColor : "图片装饰框颜色".localize(),
+                                                    .ImageBorderWidth : "图片装饰框粗细度".localize(),
                                                     .ImageFilter : "图片亮度".localize(),
                                                     .Image : "当前图片".localize(),
                                                     .ImageAlpha : "图片不透明度".localize(),
                                                     .BGImageAlpha : "背景图片不透明度".localize(),
                                                     .ImageShape : "图片形状".localize(),
-                                                    .ImagePosition : "图片位置".localize(),
+                                                    .ImagePositionTB : "图片位置".localize(),
+                                                    .ImagePositionLT : "图片位置".localize(),
                                                     .ImageContentMode : "图片契合度".localize()]
         
         static let ImageContentModeString: [UIView.ContentMode : String] = [.scaleToFill : "拉伸".localize(),
@@ -137,12 +161,17 @@ class Style {
                                                 .BoxSize : CGSize(width: 80.0, height: 50.0),
                                                 .TextMargin : CGSize(width: 70.0, height: 50.0),
                                                 .ImageMargin : CGSize(width: 70.0, height: 50.0),
+                                                .TextBorderColor : CGSize(width: 40.0, height: 40.0),
+                                                .TextBorderWidth : CGSize(width: 70.0, height: 50.0),
+                                                .ImageBorderColor : CGSize(width: 40.0, height: 40.0),
+                                                .ImageBorderWidth : CGSize(width: 70.0, height: 50.0),
                                                 .ImageFilter : CGSize(width: 70.0, height: 50.0),
                                                 .Image : CGSize(width: 100.0, height: 100.0),
                                                 .ImageAlpha : CGSize(width: 70.0, height: 50.0),
                                                 .BGImageAlpha : CGSize(width: 70.0, height: 50.0),
                                                 .ImageShape : CGSize(width: 100.0, height: 100.0),
-                                                .ImagePosition : CGSize(width: 70.0, height: 50.0),
+                                                .ImagePositionTB : CGSize(width: 70.0, height: 50.0),
+                                                .ImagePositionLT : CGSize(width: 70.0, height: 50.0),
                                                 .ImageContentMode : CGSize(width: 80.0, height: 50.0)]
         static let CellEdgeInset: [type : UIEdgeInsets] = [.BGColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .FGColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
@@ -150,12 +179,17 @@ class Style {
                                                            .BoxSize : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .TextMargin : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageMargin : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .TextBorderColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .TextBorderWidth : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .ImageBorderColor : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .ImageBorderWidth : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageFilter : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .Image : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageAlpha : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .BGImageAlpha : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageShape : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                                                           .ImagePosition : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .ImagePositionTB : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                                                           .ImagePositionLT : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
                                                            .ImageContentMode : UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)]
         static let TableCellHeight: [type : CGFloat] = [.BGColor : 40.0 * 2 + 30,
                                                         .FGColor : 40.0 * 2 + 30,
@@ -163,84 +197,23 @@ class Style {
                                                         .BoxSize : 50.0 + 20,
                                                         .TextMargin : 50.0 * 2 + 30,
                                                         .ImageMargin : 50.0 * 2 + 30,
+                                                        .TextBorderColor : 40.0 * 2 + 30,
+                                                        .TextBorderWidth : 50.0 * 2 + 30,
+                                                        .ImageBorderColor : 40.0 * 2 + 30,
+                                                        .ImageBorderWidth : 50.0 * 2 + 30,
                                                         .ImageFilter : 50.0 + 20,
                                                         .Image : 100.0 + 20,
                                                         .ImageAlpha : 50.0 + 20,
                                                         .BGImageAlpha : 50.0 + 20,
                                                         .ImageShape : 100.0 + 20,
-                                                        .ImagePosition : 50.0 + 20,
+                                                        .ImagePositionTB : 50.0 + 20,
+                                                        .ImagePositionLT : 50.0 + 20,
                                                         .ImageContentMode : 50.0 * 3 + 40]
         
         class PreviewValue
         {
-            static let BGColor = [UIColor.white,
-                                  UIColor(hue: 0.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 1.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 2.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 3.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 4.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 5.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 6.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 7.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 8.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 9.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 10.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 11.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 0.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 1.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 2.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 3.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 4.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 5.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 6.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 7.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 8.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 9.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 10.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 11.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor.black,
-                                  UIColor(white: 8.0/9.0, alpha: 1),
-                                  UIColor(white: 7.0/9.0, alpha: 1),
-                                  UIColor(white: 6.0/9.0, alpha: 1),
-                                  UIColor(white: 5.0/9.0, alpha: 1),
-                                  UIColor(white: 4.0/9.0, alpha: 1),
-                                  UIColor(white: 3.0/9.0, alpha: 1),
-                                  UIColor(white: 2.0/9.0, alpha: 1),
-                                  UIColor(white: 1.0/9.0, alpha: 1)]
-            static let FGColor = [UIColor.black,
-                                  UIColor(hue: 0.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 1.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 2.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 3.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 4.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 5.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 6.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 7.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 8.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 9.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 10.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 11.0/12.0, saturation: 1, brightness: 0.3, alpha: 1),
-                                  UIColor(hue: 0.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 1.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 2.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 3.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 4.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 5.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 6.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 7.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 8.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 9.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 10.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor(hue: 11.0/12.0, saturation: 0.3, brightness: 1, alpha: 1),
-                                  UIColor.white,
-                                  UIColor(white: 8.0/9.0, alpha: 1),
-                                  UIColor(white: 7.0/9.0, alpha: 1),
-                                  UIColor(white: 6.0/9.0, alpha: 1),
-                                  UIColor(white: 5.0/9.0, alpha: 1),
-                                  UIColor(white: 4.0/9.0, alpha: 1),
-                                  UIColor(white: 3.0/9.0, alpha: 1),
-                                  UIColor(white: 2.0/9.0, alpha: 1),
-                                  UIColor(white: 1.0/9.0, alpha: 1)]
+            static let BGColor = Color.Background
+            static let FGColor = Color.Foreground
             enum Filter
             {
                 case pure
@@ -261,6 +234,10 @@ class Style {
             static let BoxSize: [CGFloat] = [400, 600, 1200]
             static let TextMargin: [CGFloat] = [10, 20, 40, 60, 80, 100, 120, 140, 160]
             static let ImageMargin: [CGFloat] = [0, 20, 40, 60, 80, 100, 120]
+            static let TextBorderColor = Color.Foreground
+            static let TextBorderWidth: [CGFloat] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            static let ImageBorderColor = Color.Foreground
+            static let ImageBorderWidth: [CGFloat] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             static let ImageFilter: [Int] = [-6, -4, -2, 0, 2, 4, 6]
             static let Image: [UIImage] = [UIImage(named: "Image_add")!,
                                            UIImage(named: "image1")!,
@@ -279,36 +256,13 @@ class Style {
                             UIImage(named: "ImageShape2_w")!]
                 }
             }
-            static let ImagePosition: [String] = ["上".localize(),
+            static let ImagePositionTB: [String] = ["上".localize(),
                                                   "下".localize()]
+            static let ImagePositionLT: [String] = ["左".localize(),
+                                                    "右".localize()]
             static let ImageContentMode: [UIView.ContentMode] = [.scaleToFill, .scaleAspectFit, .scaleAspectFill, .topLeft, .left, .bottomLeft, .top, .center, .bottom, .topRight, .right, .bottomRight]
             
-            static let BackgroundViewColor = [UIColor.white,
-                                              UIColor(hue: 0.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 1.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 2.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 3.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 4.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 5.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 6.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 7.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 8.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 9.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 10.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 11.0/12.0, saturation: 0.1, brightness: 0.9, alpha: 1),
-                                              UIColor(hue: 0.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 1.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 2.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 3.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 4.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 5.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 6.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 7.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 8.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 9.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 10.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor(hue: 11.0/12.0, saturation: 0.2, brightness: 0.35, alpha: 1),
-                                              UIColor.black]
+            static let BackgroundViewColor = Color.BackgroundView
         }
         
         
@@ -363,6 +317,26 @@ class Style {
                 cell.layer.cornerRadius = 10.0
                 //cell.isSelected = selectionItem == self.current[.TextMargin]! ? true : false
                 cell.layer.borderWidth = selectionItem == self.current[.ImageMargin]! ? 5.0 : 0.0
+            case type.TextBorderColor:
+                cell.backgroundColor = PreviewValue.TextBorderColor[selectionItem]
+                cell.layer.cornerRadius = 20.0
+                cell.layer.borderWidth = selectionItem == self.current[.TextBorderColor]! ? 5.0 : 0.0
+            case type.TextBorderWidth:
+                cell.label.text = String(Int(PreviewValue.TextBorderWidth[selectionItem]))
+                cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
+                cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
+                cell.layer.cornerRadius = 10.0
+                cell.layer.borderWidth = selectionItem == self.current[.TextBorderWidth]! ? 5.0 : 0.0
+            case type.ImageBorderColor:
+                cell.backgroundColor = PreviewValue.ImageBorderColor[selectionItem]
+                cell.layer.cornerRadius = 20.0
+                cell.layer.borderWidth = selectionItem == self.current[.ImageBorderColor]! ? 5.0 : 0.0
+            case type.ImageBorderWidth:
+                cell.label.text = String(Int(PreviewValue.ImageBorderWidth[selectionItem]))
+                cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
+                cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
+                cell.layer.cornerRadius = 10.0
+                cell.layer.borderWidth = selectionItem == self.current[.ImageBorderWidth]! ? 5.0 : 0.0
             case type.ImageFilter:
                 cell.label.text = String(PreviewValue.ImageFilter[selectionItem])
                 cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
@@ -392,13 +366,20 @@ class Style {
                 cell.layer.cornerRadius = 20.0
                 //cell.isSelected = selectionItem == self.current[.Image]! ? true : false
                 cell.layer.borderWidth = selectionItem == self.current[.ImageShape]! ? 5.0 : 0.0
-            case type.ImagePosition:
+            case type.ImagePositionTB:
                 cell.label.font = Font.set(systemFontSize: 20.0, weight: UIFont.Weight.medium)
-                cell.label.text = PreviewValue.ImagePosition[selectionItem]
+                cell.label.text = PreviewValue.ImagePositionTB[selectionItem]
                 cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
                 cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
                 cell.layer.cornerRadius = 10.0
-                cell.layer.borderWidth = selectionItem == self.current[.ImagePosition]! ? 5.0 : 0.0
+                cell.layer.borderWidth = selectionItem == self.current[.ImagePositionTB]! ? 5.0 : 0.0
+            case type.ImagePositionLT:
+                cell.label.font = Font.set(systemFontSize: 20.0, weight: UIFont.Weight.medium)
+                cell.label.text = PreviewValue.ImagePositionLT[selectionItem]
+                cell.label.textColor = Style.isDark ? UIColor.white : UIColor.black
+                cell.backgroundColor = Style.isDark ? UIColor.black : UIColor.white
+                cell.layer.cornerRadius = 10.0
+                cell.layer.borderWidth = selectionItem == self.current[.ImagePositionLT]! ? 5.0 : 0.0
             case type.ImageContentMode:
                 cell.image.contentMode = PreviewValue.ImageContentMode[selectionItem]
                 cell.label.font = Font.set(systemFontSize: 20.0, weight: UIFont.Weight.medium)
@@ -428,6 +409,14 @@ class Style {
                 self.current[.TextMargin] = selectionItem
             case type.ImageMargin:
                 self.current[.ImageMargin] = selectionItem
+            case type.TextBorderColor:
+                self.current[.TextBorderColor] = selectionItem
+            case type.TextBorderWidth:
+                self.current[.TextBorderWidth] = selectionItem
+            case type.ImageBorderColor:
+                self.current[.ImageBorderColor] = selectionItem
+            case type.ImageBorderWidth:
+                self.current[.ImageBorderWidth] = selectionItem
             case type.ImageFilter:
                 self.current[.ImageFilter] = selectionItem
             case type.Image:
@@ -442,8 +431,10 @@ class Style {
                 self.current[.BGImageAlpha] = selectionItem
             case type.ImageShape:
                 self.current[.ImageShape] = selectionItem
-            case type.ImagePosition:
-                self.current[.ImagePosition] = selectionItem
+            case type.ImagePositionTB:
+                self.current[.ImagePositionTB] = selectionItem
+            case type.ImagePositionLT:
+                self.current[.ImagePositionLT] = selectionItem
             case type.ImageContentMode:
                 self.current[.ImageContentMode] = selectionItem
             }
@@ -455,7 +446,7 @@ class Style {
         static func UpdateDarkCell(in controller: ViewController)
         {
             
-            let darkableType: [Style.Adjustment.type] = [.BGStyle, .BoxSize, .TextMargin, .ImageAlpha, .BGImageAlpha, .ImageMargin, .ImageFilter, .ImageShape, .ImagePosition, .ImageContentMode]
+            let darkableType: [Style.Adjustment.type] = [.BGStyle, .BoxSize, .TextMargin, .TextBorderWidth, .ImageBorderWidth, .ImageAlpha, .BGImageAlpha, .ImageMargin, .ImageFilter, .ImageShape, .ImagePositionTB, .ImagePositionLT, .ImageContentMode]
             
             for onetype in darkableType
             {
@@ -504,7 +495,7 @@ class Style {
             
             switch Style.current
             {
-            case .Blank, .Picture, .Postcard:
+            case .Blank, .Picture, .Postcard, .HorizontalPostcard:
                 Size.TextBox.scaleRatio = Size.TextBox.displayWidth / Size.TextBox.size
                 UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                     
@@ -517,6 +508,7 @@ class Style {
                     controller.TextBoxEditViewBottom.constant = PreviewValue.TextMargin[current[.TextMargin]!]
                     controller.TextBoxEditViewTrailing.constant = PreviewValue.TextMargin[current[.TextMargin]!]
                     
+                    
                     controller.view.layoutIfNeeded()
                     
                 }, completion: nil)
@@ -524,9 +516,19 @@ class Style {
             
             switch Style.current
             {
+            case .Blank, .Picture:
+                controller.TextBoxLabel.layer.borderColor = PreviewValue.TextBorderColor[current[.TextBorderColor]!].cgColor
+                controller.TextBoxLabel.layer.borderWidth = PreviewValue.TextBorderWidth[current[.TextBorderWidth]!]
+                
+            case .Postcard, .HorizontalPostcard:
+                controller.TextBoxLabel.layer.borderWidth = 0
+            }
+            
+            switch Style.current
+            {
             case .Blank:
                 break
-            case .Picture, .Postcard:
+            case .Picture, .Postcard, .HorizontalPostcard:
                 UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                     controller.TextBoxImageView.alpha = PreviewValue.ImageAlpha[current[.ImageAlpha]!]
                     controller.TextBoxImageFilterView.alpha = PreviewValue.ImageAlpha[current[.ImageAlpha]!]
@@ -537,6 +539,9 @@ class Style {
                     controller.TextBoxImageViewLeading.constant = PreviewValue.ImageMargin[current[.ImageMargin]!]
                     controller.TextBoxImageViewBottom.constant = PreviewValue.ImageMargin[current[.ImageMargin]!]
                     controller.TextBoxImageViewTrailing.constant = PreviewValue.ImageMargin[current[.ImageMargin]!]
+                    
+                    controller.TextBoxImageFilterView.layer.borderColor = PreviewValue.ImageBorderColor[current[.ImageBorderColor]!].cgColor
+                    controller.TextBoxImageFilterView.layer.borderWidth = PreviewValue.ImageBorderWidth[current[.ImageBorderWidth]!]
                     
                     controller.view.layoutIfNeeded()
                 }, completion: nil)
@@ -602,7 +607,7 @@ class Style {
     {
         switch self.current
         {
-        case Name.Blank:
+        case .Blank:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = 0
                 controller.TextBoxImageFilterView.alpha = 0
@@ -611,14 +616,7 @@ class Style {
                 controller.TextBoxBackgroundImageView.alpha = 0
             }, completion: nil)
             
-        case Name.Picture:
-            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-                controller.TextBoxImageView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
-                controller.TextBoxImageFilterView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
-                controller.BackgroundImageView.alpha = 1
-            }, completion: nil)
-            
-        case Name.Postcard:
+        case .Picture, .Postcard, .HorizontalPostcard:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
                 controller.TextBoxImageFilterView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
@@ -682,14 +680,14 @@ class Style {
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
                 controller.TextBoxImageFilterView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
-                if self.Adjustment.current[.ImagePosition] == 0
+                if self.Adjustment.current[.ImagePositionTB] == 0
                 {
                     controller.TextBoxImageViewTop.constant = currentImageMargin
                     controller.TextBoxLabelBottom.constant = currentTextMargin
                     controller.TextBoxImageViewBottom.constant = wordPart
                     controller.TextBoxLabelTop.constant = picPart + currentTextMargin
                 }
-                else if self.Adjustment.current[.ImagePosition] == 1
+                else if self.Adjustment.current[.ImagePositionTB] == 1
                 {
                     controller.TextBoxImageViewBottom.constant = currentImageMargin
                     controller.TextBoxLabelTop.constant = currentTextMargin
@@ -717,6 +715,59 @@ class Style {
             }, completion: nil)
             
             TextBox.UpdateToCenter(boxSize: CGSize(width: Size.TextBox.size, height: boxHeight), in: controller)
+            
+        case .HorizontalPostcard:
+            let currentTextMargin = self.Adjustment.PreviewValue.TextMargin[self.Adjustment.current[.TextMargin]!]
+            let currentImageMargin = self.Adjustment.PreviewValue.ImageMargin[self.Adjustment.current[.ImageMargin]!]
+            let currentImageShape = self.Adjustment.current[.ImageShape]!
+            
+            let wordWidth = controller.TextBoxLabel.attributedText?.width(height: Size.TextBox.size - (controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant))
+            if wordWidth == nil
+            {
+                return
+            }
+            let wordPart = wordWidth! + currentTextMargin * 2 <= Size.TextBox.size / 2.0 ? Size.TextBox.size / 2.0 : wordWidth! + currentTextMargin * 2
+            let picPart = Size.TextBox.size - currentImageMargin
+            let boxWidth = wordPart + picPart + 1
+            
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxImageView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
+                controller.TextBoxImageFilterView.alpha = Style.Adjustment.PreviewValue.ImageAlpha[Style.Adjustment.current[.ImageAlpha]!]
+                if self.Adjustment.current[.ImagePositionLT] == 0
+                {
+                    controller.TextBoxImageViewLeading.constant = currentImageMargin
+                    controller.TextBoxLabelTrailing.constant = currentTextMargin
+                    controller.TextBoxImageViewTrailing.constant = wordPart
+                    controller.TextBoxLabelLeading.constant = picPart + currentTextMargin
+                }
+                else if self.Adjustment.current[.ImagePositionLT] == 1
+                {
+                    controller.TextBoxImageViewTrailing.constant = currentImageMargin
+                    controller.TextBoxLabelLeading.constant = currentTextMargin
+                    controller.TextBoxImageViewLeading.constant = wordPart
+                    controller.TextBoxLabelTrailing.constant = picPart + currentTextMargin
+                }
+                controller.TextBoxWidth.constant = boxWidth
+                controller.TextBoxHeight.constant = Size.TextBox.size
+                controller.view.layoutIfNeeded()
+            }, completion: nil)
+            
+            UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                switch currentImageShape
+                {
+                case 0:
+                    controller.TextBoxImageView.layer.cornerRadius = 0
+                    controller.TextBoxImageFilterView.layer.cornerRadius = 0
+                case 1:
+                    controller.TextBoxImageView.layer.cornerRadius = (Size.TextBox.size - currentImageMargin * 2.0) / 2.0
+                    controller.TextBoxImageFilterView.layer.cornerRadius = (Size.TextBox.size - currentImageMargin * 2.0) / 2.0
+                default:
+                    break
+                }
+                
+            }, completion: nil)
+            
+            TextBox.UpdateToCenter(boxSize: CGSize(width: boxWidth, height: Size.TextBox.size), in: controller)
         }
     }
     
@@ -760,7 +811,7 @@ class Style {
             
             self.UpdateDark(isDark: bgc<13 ? false : ((bgc>=26 && bgc<=29) ? false : true), in: controller)
             
-        case .Picture, .Postcard:
+        case .Picture, .Postcard, .HorizontalPostcard:
             controller.BackgroundImageView.image = controller.TextBoxImageView.image
             self.UpdateDark(isDark: self.Adjustment.PreviewValue.ImageFilter[self.Adjustment.current[.ImageFilter]!] >= 0 ? false : true, in: controller)
         }
@@ -777,7 +828,7 @@ class Style {
         {
         case .Blank:
             break
-        case .Picture, .Postcard:
+        case .Picture, .Postcard, .HorizontalPostcard:
             UIView.linear(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.BackgroundEffectView.effect = UIBlurEffect(style: isDark ? .dark : .light)
                 let currentFilter = self.Adjustment.PreviewValue.BGStyle[self.Adjustment.current[.BGStyle]!].filter
@@ -901,7 +952,7 @@ class Style {
                 controller.TextBoxWidth.constant = Size.TextBox.size
                 controller.view.layoutIfNeeded()
             }, completion: nil)
-        case .Postcard:
+        case .Postcard, .HorizontalPostcard:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
                 controller.TextBoxImageView.alpha = 0
                 controller.TextBoxImageFilterView.alpha = 0
@@ -913,12 +964,4 @@ class Style {
     }
     
 
-}
-
-extension Style.Name: EnumeratableEnumType
-{
-    static var allValues: [Style.Name]
-    {
-        return [.Blank, .Picture, .Postcard]
-    }
 }

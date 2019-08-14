@@ -13,6 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var interfaceOrientations: UIInterfaceOrientationMask = [.portrait]
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return interfaceOrientations
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let isEverLaunched = UserDefaults.standard.bool(forKey: "everLaunched")
         
-        if true //!isEverLaunched
+        if !isEverLaunched
         {
             UserDefaults.standard.set(true, forKey: "everLaunched")
             let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeUI")

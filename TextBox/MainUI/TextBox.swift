@@ -87,7 +87,15 @@ class TextBox: UIView {
     func moveBottom(to bottom: CGFloat, in controller: ViewController)
     {
         UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            controller.TextBoxBottom.constant = bottom
+            if System.isDeviceLandscape()
+            {
+                controller.TextBoxTrailing.constant = bottom
+            }
+            else
+            {
+                controller.TextBoxBottom.constant = bottom
+            }
+            
             controller.view.layoutIfNeeded()
         }, completion: nil)
         
@@ -96,13 +104,24 @@ class TextBox: UIView {
     // MARK: Move back
     func MoveTo0(in controller: ViewController)
     {
+        if System.isDeviceLandscape()
+        {
+            self.moveBottom(to: 0, in: controller)
+        }
         self.moveBottom(to: 20, in: controller)
     }
     
     // MARK: - PopView poped position
     func MoveForPop(in controller: ViewController)
     {
-        self.moveBottom(to: Size.PopView.Height - Size.BottomHeight - 50.0, in: controller)
+        if System.isDeviceLandscape()
+        {
+            self.moveBottom(to: Size.PopView.Height - Size.BottomHeight() - 50.0, in: controller)
+        }
+        else
+        {
+            self.moveBottom(to: Size.PopView.Height - Size.BottomHeight() - 50.0, in: controller)
+        }
     }
     
     func adaptiveScaling()

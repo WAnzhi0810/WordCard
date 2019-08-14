@@ -12,6 +12,8 @@ import UIKit
 
 class EditAccessoryView {
     
+    static var currentOrientation = UIDevice.current.orientation
+    
     enum buttonID: Int
     {
         case Font = 1
@@ -65,7 +67,7 @@ class EditAccessoryView {
     
     static func GenerateView(in controller: ViewController) -> UIView
     {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.EditAccessoryView.Height))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenShortWidth, height: Size.EditAccessoryView.Height))
         
         view.addSubview(ComplishButton(in: controller))
         view.addSubview(ScrollView(in: controller))
@@ -81,7 +83,7 @@ class EditAccessoryView {
     private static func ComplishButton(in controller: ViewController) -> UIButton
     {
         button.Done = UIButton(type: UIButton.ButtonType.system)
-        button.Done.frame = CGRect(x: Size.ScreenWidth - 75.0, y: 5, width: 70.0, height: Size.EditAccessoryView.Height-10.0)
+        button.Done.frame = CGRect(x: Size.ScreenShortWidth - 75.0, y: 5, width: 70.0, height: Size.EditAccessoryView.Height-10.0)
         button.Done.tintColor = Color.theme.current
         button.Done.titleLabel?.font = Font.set(systemFontSize: 17, weight: UIFont.Weight.medium)
         button.Done.setTitle("完成".localize(), for: UIControl.State.normal)
@@ -92,7 +94,7 @@ class EditAccessoryView {
     
     private static func ScrollView(in controller: ViewController) -> UIScrollView
     {
-        let view = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth - 75.0, height: Size.EditAccessoryView.Height))
+        let view = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenShortWidth - 75.0, height: Size.EditAccessoryView.Height))
         view.bounces = true
         
         view.addSubview(FontButton(in: controller))

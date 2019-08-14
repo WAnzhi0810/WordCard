@@ -17,7 +17,14 @@ class PopView: UIView {
     
     func heightInit(in controller: ViewController)
     {
-        controller.PopViewHeight.constant = Size.PopView.Height
+        if System.isDeviceLandscape()
+        {
+            controller.PopViewWidth.constant = Size.PopView.Height
+        }
+        else
+        {
+            controller.PopViewHeight.constant = Size.PopView.Height
+        }
     }
 
     func popUp(with: displayType, in controller: ViewController)
@@ -33,7 +40,15 @@ class PopView: UIView {
         }
         
         UIView.pop(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            controller.PopViewBottom.constant = 0
+            if System.isDeviceLandscape()
+            {
+                controller.PopViewTrailing.constant = 0
+            }
+            else
+            {
+                controller.PopViewBottom.constant = 0
+            }
+            
             controller.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -41,7 +56,15 @@ class PopView: UIView {
     func popDown(in controller: ViewController)
     {
         UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
-            controller.PopViewBottom.constant = -Size.PopView.Height-60.0
+            if System.isDeviceLandscape()
+            {
+                controller.PopViewTrailing.constant = -Size.PopView.Height-300.0
+            }
+            else
+            {
+                controller.PopViewBottom.constant = -Size.PopView.Height-300.0
+            }
+            
             controller.view.layoutIfNeeded()
         }, completion: nil)
     }

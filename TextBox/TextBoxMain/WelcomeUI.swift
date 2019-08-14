@@ -22,6 +22,9 @@ class WelcomeUI: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        (UIApplication.shared.delegate as! AppDelegate).interfaceOrientations = [.portrait]
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
 
         self.TitleLabel.alpha = 0
         self.TitleLabel.text = "欢迎使用\n文字卡片".localize()
@@ -40,6 +43,10 @@ class WelcomeUI: UIViewController {
         
         self.StartAnimation()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        (UIApplication.shared.delegate as! AppDelegate).interfaceOrientations = [.portrait, .landscapeLeft, .landscapeRight]
     }
     
     @IBAction func ToMainUI(_ sender: UIButton) {

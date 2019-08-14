@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var TextBoxContent: UIView!
     @IBOutlet weak var TextBoxWidth: NSLayoutConstraint!
     @IBOutlet weak var TextBoxHeight: NSLayoutConstraint!
-    @IBOutlet weak var TextBoxBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var TextBoxTop: NSLayoutConstraint!
     @IBOutlet weak var TextBoxLeading: NSLayoutConstraint!
     
@@ -50,8 +50,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     @IBOutlet weak var PopView: PopView!
     @IBOutlet weak var PopBackgroundView: UIView!
-    @IBOutlet weak var PopViewBottom: NSLayoutConstraint!
-    @IBOutlet weak var PopViewHeight: NSLayoutConstraint!
+    
     
     @IBOutlet weak var PopViewAdjustmentTableView: UITableView!
     @IBOutlet weak var PopViewModelCollectionView: UICollectionView!
@@ -61,6 +60,18 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var ShareButton: UIButton!
     @IBOutlet weak var CloseButton: UIButton!
     
+    
+    
+    // Portrait
+    @IBOutlet weak var TextBoxBottom: NSLayoutConstraint!
+    @IBOutlet weak var PopViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var PopViewHeight: NSLayoutConstraint!
+    
+    // Landscape
+    @IBOutlet weak var TextBoxTrailing: NSLayoutConstraint!
+    @IBOutlet weak var PopViewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var PopViewWidth: NSLayoutConstraint!
+    
     let photoPickerViewController: UIImagePickerController = UIImagePickerController()
     
     
@@ -68,6 +79,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        (UIApplication.shared.delegate as! AppDelegate).interfaceOrientations = [.portrait, .landscapeLeft, .landscapeRight]
         
         photoPickerViewController.sourceType = .photoLibrary
         photoPickerViewController.delegate = self
@@ -76,6 +88,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         //self.TextBoxShadowView.add(Shadow: UIView.Shadow(radius: 10, opacity: 0.15, Yoffset: 5))
         self.TextBox.InputAccessoryInit(in: self)
@@ -116,7 +129,15 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         
         if notification.name == UIResponder.keyboardWillShowNotification
         {
-            self.TextBox.moveBottom(to: keyboardHeight - Size.BottomHeight - 50.0, in: self)
+            if System.isDeviceLandscape()
+            {
+                self.TextBox.moveBottom(to: 20, in: self)
+            }
+            else
+            {
+                self.TextBox.moveBottom(to: keyboardHeight - Size.BottomHeight() - 50.0, in: self)
+            }
+            
             Size.KeyboardHeight = keyboardHeight
         }
         else
@@ -127,6 +148,28 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         
     }
     
+    
+    @objc func orientationChanged(_ notification: Notification)
+    {
+        let orient = UIDevice.current.orientation
+        if orient != .landscapeLeft && orient != .landscapeRight && orient != .portrait
+        {
+            return
+        }
+        if System.currentOrientation != orient
+        {
+            System.currentOrientation = orient
+            //self.TextBox.InputAccessoryInit(in: self)
+            self.PopView.heightInit(in: self)
+            self.PopViewMoveDownOperation()
+            self.PopViewModelCollectionView.reloadData()
+            Size.reload()
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.PopViewMoveDownOperation()
+    }
 
     
     // MARK: - Button Operation
@@ -222,6 +265,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
             return
         }
         System.FeedbackGenerator(style: .light)
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         self.TextBoxTurnToEdit(toEdit: true)
     }
     
@@ -316,7 +360,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     // MARK: - UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Style.Name.allValues.count
+        return Style.NameArray.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -328,11 +372,12 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Size.PopView.CollectionViewLength, height: Size.PopView.CollectionViewLength)
+        //return CGSize(width: (collectionView.contentSize.width - Size.PopView.CollectionViewGap * 4.0) / 3.0, height: (collectionView.contentSize.width - Size.PopView.CollectionViewGap * 4.0) / 3.0)
+        return CGSize(width: Size.PopView.CollectionViewLength(), height: Size.PopView.CollectionViewLength())
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: Size.PopView.CollectionViewGap, left: Size.PopView.CollectionViewGap, bottom: Size.PopView.CollectionViewGap, right: Size.PopView.CollectionViewGap)
+        return UIEdgeInsets(top: Size.PopView.CollectionViewGap(), left: Size.PopView.CollectionViewGap(), bottom: Size.PopView.CollectionViewGap(), right: Size.PopView.CollectionViewGap())
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

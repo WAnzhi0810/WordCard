@@ -68,5 +68,10 @@ extension NSAttributedString
     {
         return self.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).height
     }
+    
+    func width(height: CGFloat) -> CGFloat
+    {
+        return self.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).width
+    }
 }
 

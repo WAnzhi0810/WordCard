@@ -82,6 +82,7 @@ class KeyboardView {
         FontView.buttons.removeAll()
         
         FontView.scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
+        
         var currentY: CGFloat = 70.0
         
         for (tag, oneName) in Font.FontName.allValues.enumerated()
@@ -109,6 +110,7 @@ class KeyboardView {
             currentY += 80.0
         }
         
+        
         FontView.TitleLabel = UILabel(frame: CGRect(x: Size.ScreenWidth / 2.0 - 50.0, y: 20.0, width: 100.0, height: 20.0))
         FontView.TitleLabel.text = "字体".localize()
         FontView.TitleLabel.textColor = Color.theme.current
@@ -133,41 +135,43 @@ class KeyboardView {
         FontSizeView.TitleLabel.font = Font.set(systemFontSize: 20, weight: UIFont.Weight.heavy)
         
         FontSizeView.SmallSize = UIButton(type: UIButton.ButtonType.custom)
+        FontSizeView.MediumSize = UIButton(type: UIButton.ButtonType.custom)
+        FontSizeView.LargeSize = UIButton(type: UIButton.ButtonType.custom)
+        FontSizeView.LButton = UIButton(type: UIButton.ButtonType.custom)
+        FontSizeView.RButton = UIButton(type: UIButton.ButtonType.custom)
+        
         FontSizeView.SmallSize.frame = CGRect(x: Size.ScreenWidth / 2.0 - 100.0, y: Size.KeyboardView.Height / 2.0 - 70.0, width: 50.0, height: 50.0)
+        FontSizeView.MediumSize.frame = CGRect(x: Size.ScreenWidth / 2.0 - 25.0, y: Size.KeyboardView.Height / 2.0 - 70.0, width: 50.0, height: 50.0)
+        FontSizeView.LargeSize.frame = CGRect(x: Size.ScreenWidth / 2.0 + 50.0, y: Size.KeyboardView.Height / 2.0 - 70.0, width: 50.0, height: 50.0)
+        FontSizeView.SizeNumberLabel = UILabel(frame: CGRect(x: Size.ScreenWidth / 2.0 - 50.0, y: Size.KeyboardView.Height / 2.0, width: 100.0, height: 60.0))
+        FontSizeView.LButton.frame = CGRect(x: Size.ScreenWidth / 2.0 - 80.0, y: Size.KeyboardView.Height / 2.0 + 15.0, width: 30.0, height: 30.0)
+        FontSizeView.RButton.frame = CGRect(x: Size.ScreenWidth / 2.0 + 50.0, y: Size.KeyboardView.Height / 2.0 + 15.0, width: 30.0, height: 30.0)
+        
         FontSizeView.SmallSize.tag = FontSizeView.ID.SmallSize.rawValue
         FontSizeView.SmallSize.setImage(UIImage(named: Style.isDark ? "FontsizeS_w" : "FontsizeS_b"), for: .normal)
         FontSizeView.SmallSize.setImage(UIImage(named: Style.isDark ? "FontsizeS_sw" : "FontsizeS_sb"), for: .selected)
         FontSizeView.SmallSize.addTarget(controller, action: #selector(controller.KeyboardFontSizeViewButton(_:)), for: UIControl.Event.touchUpInside)
         
-        FontSizeView.MediumSize = UIButton(type: UIButton.ButtonType.custom)
-        FontSizeView.MediumSize.frame = CGRect(x: Size.ScreenWidth / 2.0 - 25.0, y: Size.KeyboardView.Height / 2.0 - 70.0, width: 50.0, height: 50.0)
         FontSizeView.MediumSize.tag = FontSizeView.ID.MediumSize.rawValue
         FontSizeView.MediumSize.setImage(UIImage(named: Style.isDark ? "FontsizeM_w" : "FontsizeM_b"), for: .normal)
         FontSizeView.MediumSize.setImage(UIImage(named: Style.isDark ? "FontsizeM_sw" : "FontsizeM_sb"), for: .selected)
         FontSizeView.MediumSize.addTarget(controller, action: #selector(controller.KeyboardFontSizeViewButton(_:)), for: UIControl.Event.touchUpInside)
         
-        FontSizeView.LargeSize = UIButton(type: UIButton.ButtonType.custom)
-        FontSizeView.LargeSize.frame = CGRect(x: Size.ScreenWidth / 2.0 + 50.0, y: Size.KeyboardView.Height / 2.0 - 70.0, width: 50.0, height: 50.0)
         FontSizeView.LargeSize.tag = FontSizeView.ID.LargeSize.rawValue
         FontSizeView.LargeSize.setImage(UIImage(named: Style.isDark ? "FontsizeL_w" : "FontsizeL_b"), for: .normal)
         FontSizeView.LargeSize.setImage(UIImage(named: Style.isDark ? "FontsizeL_sw" : "FontsizeL_sb"), for: .selected)
         FontSizeView.LargeSize.addTarget(controller, action: #selector(controller.KeyboardFontSizeViewButton(_:)), for: UIControl.Event.touchUpInside)
         
-        FontSizeView.SizeNumberLabel = UILabel(frame: CGRect(x: Size.ScreenWidth / 2.0 - 50.0, y: Size.KeyboardView.Height / 2.0, width: 100.0, height: 60.0))
         FontSizeView.SizeNumberLabel.text = String(Int(EditView.current.size))
         FontSizeView.SizeNumberLabel.textColor = Color.theme.current
         FontSizeView.SizeNumberLabel.textAlignment = .center
         FontSizeView.SizeNumberLabel.font = Font.set(systemFontSize: 48, weight: UIFont.Weight.medium)
         
-        FontSizeView.LButton = UIButton(type: UIButton.ButtonType.custom)
-        FontSizeView.LButton.frame = CGRect(x: Size.ScreenWidth / 2.0 - 80.0, y: Size.KeyboardView.Height / 2.0 + 15.0, width: 30.0, height: 30.0)
         FontSizeView.LButton.tag = FontSizeView.ID.LButton.rawValue
         FontSizeView.LButton.setImage(UIImage(named: Style.isDark ? "Fontsize-_w" : "Fontsize-_b"), for: .normal)
         FontSizeView.LButton.setImage(UIImage(named: Style.isDark ? "Fontsize-_sw" : "Fontsize-_sb"), for: .selected)
         FontSizeView.LButton.addTarget(controller, action: #selector(controller.KeyboardFontSizeViewButton(_:)), for: UIControl.Event.touchUpInside)
         
-        FontSizeView.RButton = UIButton(type: UIButton.ButtonType.custom)
-        FontSizeView.RButton.frame = CGRect(x: Size.ScreenWidth / 2.0 + 50.0, y: Size.KeyboardView.Height / 2.0 + 15.0, width: 30.0, height: 30.0)
         FontSizeView.RButton.tag = FontSizeView.ID.RButton.rawValue
         FontSizeView.RButton.setImage(UIImage(named: Style.isDark ? "Fontsize+_w" : "Fontsize+_b"), for: .normal)
         FontSizeView.RButton.setImage(UIImage(named: Style.isDark ? "Fontsize+_sw" : "Fontsize+_sb"), for: .selected)

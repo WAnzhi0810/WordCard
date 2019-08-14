@@ -47,6 +47,10 @@
 "卡片大小" = "Card Size";
 "文字边距" = "Text Margin";
 "图片边距" = "Picture Margin";
+"文字装饰框颜色" = "Text Border Color";
+"文字装饰框粗细度" = "Text Border Width";
+"图片装饰框颜色" = "Picture Border Color";
+"图片装饰框粗细度" = "Picture Border Width";
 "图片亮度" = "Picture Brightness";
 "当前图片" = "Picture";
 "图片不透明度" = "Picture Opacity";
@@ -81,6 +85,8 @@
 // MARK: ImagePosition
 "上" = "Top";
 "下" = "Bottom";
+"左" = "Left";
+"右" = "Right";
 
 // MARK: WelcomeUI
 

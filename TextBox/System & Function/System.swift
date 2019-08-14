@@ -10,6 +10,24 @@ import UIKit
 
 class System {
     
+    static var currentOrientation = UIDevice.current.orientation
+    
+    static func getOrientation() -> UIDeviceOrientation
+    {
+        return UIDevice.current.orientation
+    }
+    
+    static func isDeviceLandscape() -> Bool
+    {
+        switch System.currentOrientation
+        {
+        case .landscapeLeft, .landscapeRight:
+            return true
+        default:
+            return false
+        }
+    }
+    
     static func FeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle)
     {
         let generator = UIImpactFeedbackGenerator(style: style)

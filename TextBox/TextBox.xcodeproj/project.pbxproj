@@ -7,17 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61075F1F22FD534F00CE2739 /* SourceHanSerifSC-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */; };
-		61075F2022FD534F00CE2739 /* SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */; };
-		61075F2122FD534F00CE2739 /* SourceHanSerifSC-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */; };
-		61075F2222FD534F00CE2739 /* SourceHanSerifSC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */; };
-		61075F2322FD534F00CE2739 /* SourceHanSerifSC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */; };
-		61075F2422FD534F00CE2739 /* SourceHanSerifSC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */; };
+		61073006230690810040F606 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61073005230690810040F606 /* Downloader.swift */; };
 		6107A5DE22E1806B008620B7 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107A5DD22E1806B008620B7 /* KeyboardView.swift */; };
 		6107A5E022E400E8008620B7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107A5DF22E400E7008620B7 /* Color.swift */; };
 		6107A5E422E4332B008620B7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6107A5E622E4332B008620B7 /* Localizable.strings */; };
 		6107A5EA22E43486008620B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6107A5EC22E43486008620B7 /* InfoPlist.strings */; };
 		6107A5EF22E699E2008620B7 /* AdjustmentSelectionTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6107A5EE22E699E1008620B7 /* AdjustmentSelectionTypeCell.swift */; };
+		61081B6E2307061E00388814 /* SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 61081B6D2307061C00388814 /* SourceHanSerifSC-Regular.otf */; };
 		618FD38B22DD69A100978D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD38A22DD69A100978D22 /* AppDelegate.swift */; };
 		618FD38D22DD69A100978D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD38C22DD69A100978D22 /* ViewController.swift */; };
 		618FD39022DD69A100978D22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 618FD38E22DD69A100978D22 /* Main.storyboard */; };
@@ -41,12 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Heavy.otf"; sourceTree = "<group>"; };
-		61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
-		61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-SemiBold.otf"; sourceTree = "<group>"; };
-		61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Bold.otf"; sourceTree = "<group>"; };
-		61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Light.otf"; sourceTree = "<group>"; };
-		61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Medium.otf"; sourceTree = "<group>"; };
+		61073005230690810040F606 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		6107A5DD22E1806B008620B7 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		6107A5DF22E400E7008620B7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6107A5E522E4332B008620B7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -54,6 +45,7 @@
 		6107A5EB22E43486008620B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6107A5ED22E43488008620B7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6107A5EE22E699E1008620B7 /* AdjustmentSelectionTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentSelectionTypeCell.swift; sourceTree = "<group>"; };
+		61081B6D2307061C00388814 /* SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceHanSerifSC-Regular.otf"; path = "SourceHanSerif/SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
 		618FD38722DD69A100978D22 /* TextBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		618FD38A22DD69A100978D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		618FD38C22DD69A100978D22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,19 +91,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		61075F1822FD531600CE2739 /* SourceHanSerif */ = {
-			isa = PBXGroup;
-			children = (
-				61075F1C22FD534900CE2739 /* SourceHanSerifSC-Bold.otf */,
-				61075F1922FD533B00CE2739 /* SourceHanSerifSC-Heavy.otf */,
-				61075F1D22FD534C00CE2739 /* SourceHanSerifSC-Light.otf */,
-				61075F1E22FD534F00CE2739 /* SourceHanSerifSC-Medium.otf */,
-				61075F1A22FD534000CE2739 /* SourceHanSerifSC-Regular.otf */,
-				61075F1B22FD534600CE2739 /* SourceHanSerifSC-SemiBold.otf */,
-			);
-			path = SourceHanSerif;
-			sourceTree = "<group>";
-		};
 		6107A5E122E432AC008620B7 /* Localize */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +138,7 @@
 		618FD39C22DDC84500978D22 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				61075F1822FD531600CE2739 /* SourceHanSerif */,
+				61081B6D2307061C00388814 /* SourceHanSerifSC-Regular.otf */,
 				618FD39D22DDC8AA00978D22 /* Songti */,
 				618FD39F22DDC8EE00978D22 /* Font.swift */,
 			);
@@ -206,6 +185,7 @@
 				618FD3AF22DEF40B00978D22 /* Constant.swift */,
 				618FD3B922DF72BA00978D22 /* String.swift */,
 				61FE036D22EC994E00BE2E94 /* System.swift */,
+				61073005230690810040F606 /* Downloader.swift */,
 			);
 			path = "System & Function";
 			sourceTree = "<group>";
@@ -272,17 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6107A5E422E4332B008620B7 /* Localizable.strings in Resources */,
-				61075F2022FD534F00CE2739 /* SourceHanSerifSC-Regular.otf in Resources */,
+				61081B6E2307061E00388814 /* SourceHanSerifSC-Regular.otf in Resources */,
 				6107A5EA22E43486008620B7 /* InfoPlist.strings in Resources */,
-				61075F2422FD534F00CE2739 /* SourceHanSerifSC-Medium.otf in Resources */,
 				618FD39522DD69A800978D22 /* LaunchScreen.storyboard in Resources */,
-				61075F2122FD534F00CE2739 /* SourceHanSerifSC-SemiBold.otf in Resources */,
-				61075F1F22FD534F00CE2739 /* SourceHanSerifSC-Heavy.otf in Resources */,
 				618FD39222DD69A800978D22 /* Assets.xcassets in Resources */,
-				61075F2222FD534F00CE2739 /* SourceHanSerifSC-Bold.otf in Resources */,
 				618FD39022DD69A100978D22 /* Main.storyboard in Resources */,
 				618FD3A922DE04DF00978D22 /* Songti.ttc in Resources */,
-				61075F2322FD534F00CE2739 /* SourceHanSerifSC-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +278,7 @@
 				6198419022F130E3007DFDEB /* BoxStyle.swift in Sources */,
 				6107A5EF22E699E2008620B7 /* AdjustmentSelectionTypeCell.swift in Sources */,
 				618FD3BA22DF72BB00978D22 /* String.swift in Sources */,
+				61073006230690810040F606 /* Downloader.swift in Sources */,
 				6198419222F167A2007DFDEB /* WelcomeUI.swift in Sources */,
 				618FD3A522DDCE1D00978D22 /* Size.swift in Sources */,
 				618FD38B22DD69A100978D22 /* AppDelegate.swift in Sources */,

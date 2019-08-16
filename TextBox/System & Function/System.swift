@@ -19,6 +19,10 @@ class System {
     
     static func isDeviceLandscape() -> Bool
     {
+        /*if UIDevice.current.userInterfaceIdiom == .pad
+        {
+            return false
+        }*/
         switch System.currentOrientation
         {
         case .landscapeLeft, .landscapeRight:

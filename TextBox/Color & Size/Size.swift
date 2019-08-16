@@ -30,7 +30,15 @@ class Size {
     
     static let StatusBarHeight = UIApplication.shared.statusBarFrame.height
     static let BottomHeight = { () -> CGFloat in
-        switch System.currentOrientation
+        if System.isDeviceLandscape()
+        {
+            return (UIApplication.shared.delegate?.window?!.safeAreaInsets.right)!
+        }
+        else
+        {
+            return (UIApplication.shared.delegate?.window?!.safeAreaInsets.bottom)!
+        }
+        /*switch System.currentOrientation
         {
         case .landscapeLeft:
             return (UIApplication.shared.delegate?.window?!.safeAreaInsets.right)!
@@ -41,7 +49,7 @@ class Size {
         default:
             break
         }
-        return 0
+        return 0*/
     }
     
     

@@ -31,6 +31,11 @@
 "字体" = "Font";
 "字体大小" = "Font Size";
 
+" (需要云加载)" = " (Cloud Loading)";
+" (数据错误)" = " (Data Error)";
+" (加载失败)" = " (Load Failed)";
+" (正在加载)" = " (Loading)";
+
 // MARK: TextBox
 
 "轻触此处，编辑文字" = "Tap here to edit the text.";

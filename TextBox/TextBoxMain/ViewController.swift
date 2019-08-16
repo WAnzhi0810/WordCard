@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate , UINavigationControllerDelegate, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
     
     var isFirstAppear = true
     
@@ -474,6 +474,29 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
             return .lightContent
         }
     }
+    
+    
+    // MARK: - URL And Session
+    var recivedData = NSMutableData()
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.recivedData.append(data)
+        
+        let currentBytes = Float(self.recivedData.length)
+        let allTotalBytes = Float((dataTask.response?.expectedContentLength)!)
+        
+        let percent = Float(currentBytes / allTotalBytes)
+        
+        print("Downloading: \(percent) %")
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        print("Download completely!")
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        completionHandler(.allow)
+    }
+    
     
 }
 

@@ -37,6 +37,20 @@ class Font {
         case SourceHanSerifH = "SourceHanSerifSC-Heavy"
     }
     
+    static let FontFileName: [Font.FontName : String] = [.SourceHanSerifR : "SourceHanSerifSC-Regular.otf",
+                                                         .SourceHanSerifL : "SourceHanSerifSC-Light.otf",
+                                                         .SourceHanSerifM : "SourceHanSerifSC-Medium.otf",
+                                                         .SourceHanSerifSB : "SourceHanSerifSC-SemiBold.otf",
+                                                         .SourceHanSerifB : "SourceHanSerifSC-Bold.otf",
+                                                         .SourceHanSerifH : "SourceHanSerifSC-Heavy.otf"]
+    
+    static let FontFileSize: [Font.FontName : Int64] = [.SourceHanSerifR : 23596412,
+                                                        .SourceHanSerifL : 23443156,
+                                                        .SourceHanSerifM : 23869636,
+                                                        .SourceHanSerifSB : 23861812,
+                                                        .SourceHanSerifB : 24667072,
+                                                        .SourceHanSerifH : 22899084]
+    
     static func set(systemFontSize size: CGFloat, weight: UIFont.Weight) -> UIFont
     {
         return UIFont.systemFont(ofSize: size, weight: weight)
@@ -61,7 +75,18 @@ class Font {
         default:
             break
         }
-        return UIFont(name: fontName.rawValue, size: size)!
+        return UIFont(name: fontName.rawValue, size: size) ?? self.set(systemFontSize: size, weight: UIFont.Weight.regular)
+    }
+    
+    static func isExist(fontName: FontName) -> Bool
+    {
+        switch fontName
+        {
+        case .SystemR, .SystemL, .SystemUL, .SystemB, .SystemH, .SystemBl:
+            return true
+        default:
+            return UIFont(name: fontName.rawValue, size: 10) == nil ? false : true
+        }
     }
     
     /*static func setFontAttr() -> [NSAttributedString.Key : UIFont]

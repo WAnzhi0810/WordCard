@@ -29,14 +29,14 @@ class Style {
             return [UIImage(named: "Style1_b")!,
                     UIImage(named: "Style2_b")!,
                     UIImage(named: "Style3_b")!,
-                    UIImage(named: "Style3_b")!]
+                    UIImage(named: "Style4_b")!]
         }
         else
         {
             return [UIImage(named: "Style1_w")!,
                     UIImage(named: "Style2_w")!,
                     UIImage(named: "Style3_w")!,
-                    UIImage(named: "Style3_w")!]
+                    UIImage(named: "Style4_w")!]
         }
     }
     

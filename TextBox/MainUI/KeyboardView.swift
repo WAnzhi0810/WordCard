@@ -90,8 +90,9 @@ class KeyboardView {
             let oneButton = UIButton(type: UIButton.ButtonType.custom)
             oneButton.frame = CGRect(x: 50, y: currentY, width: Size.ScreenWidth - 100.0, height: 60.0)
             oneButton.tag = tag
-            oneButton.setTitle(oneName.rawValue.localize(), for: .normal)
+            oneButton.setTitle(oneName.rawValue.localize() + (Font.isExist(fontName: oneName) ? "" : " (需要云加载)".localize()), for: .normal)
             oneButton.titleLabel?.font = Font.set(fontName: oneName, size: 17)
+            oneButton.titleLabel?.adjustsFontSizeToFitWidth = true
             oneButton.setTitleColor(Style.isDark ? Color.button.black.unSelectFG : Color.button.white.unSelectFG, for: .normal)
             oneButton.setTitleColor(Style.isDark ? Color.button.black.SelectFG : Color.button.white.SelectFG, for: .selected)
             oneButton.backgroundColor = Style.isDark ? Color.button.black.unSelectBG : Color.button.white.unSelectBG
@@ -189,11 +190,53 @@ class KeyboardView {
     }
     
     
+    static func FontLoadCancelled(tag: Int, in controller: ViewController)
+    {
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (需要云加载)".localize(), for: UIControl.State.normal)
+    }
+    
+    static func FontDataError(tag: Int, in controller: ViewController)
+    {
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (数据错误)".localize(), for: UIControl.State.normal)
+    }
+    
+    static func FontLoadFailed(tag: Int, in controller: ViewController)
+    {
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (加载失败)".localize(), for: UIControl.State.normal)
+    }
+    
+    static func FontLoading(percent: Int, tag: Int, in controller: ViewController)
+    {
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (\(percent) %)", for: UIControl.State.normal)
+    }
+    
+    static func FontLoaded(tag: Int, in controller: ViewController)
+    {
+        System.FeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
+        FontOperation(tag: tag, in: controller)
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize(), for: UIControl.State.normal)
+        FontView.buttons[tag].titleLabel?.font = Font.set(fontName: Font.FontName.allValues[tag], size: 17)
+    }
     
     static func FontOperation(tag: Int, in controller: ViewController)
     {
         if tag >= Font.FontName.allValues.count
         {
+            return
+        }
+        
+        if !Font.isExist(fontName: Font.FontName.allValues[tag])
+        {
+            if Downloader.loadingTag[tag]
+            {
+                KeyboardView.FontLoadCancelled(tag: tag, in: controller)
+                Downloader.loadingTag[tag] = false
+                Downloader.task[tag].suspend()
+                Downloader.progressTimer[tag].invalidate()
+                return
+            }
+            Downloader.loadFont(tag: tag, in: controller)
+            FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (正在加载)".localize(), for: UIControl.State.normal)
             return
         }
         

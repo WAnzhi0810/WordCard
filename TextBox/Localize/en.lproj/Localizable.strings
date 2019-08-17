@@ -31,10 +31,17 @@
 "字体" = "Font";
 "字体大小" = "Font Size";
 
-" (需要云加载)" = " (Cloud Loading)";
+" (需要下载: " = " (Download: ";
 " (数据错误)" = " (Data Error)";
-" (加载失败)" = " (Load Failed)";
-" (正在加载)" = " (Loading)";
+" (下载失败)" = " (Load Failed)";
+" (正在下载)" = " (Loading)";
+" (文件写入失败)" = " (File write failed)";
+" (已删除，但还可使用)" = " (Deleted，but can also be used)";
+
+"确认删除字体？" = "Delete Font？";
+"删除字体后，您仍然可以在关闭应用前离线继续使用字体。" = "After deleting the font, you can still continue to use the font offline before closing the app.";
+"确定" = "Delete";
+"取消" = "Cancel";
 
 // MARK: TextBox
 

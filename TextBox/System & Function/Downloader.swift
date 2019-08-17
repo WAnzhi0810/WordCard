@@ -71,6 +71,11 @@ class Downloader {
                         Downloader.loadingTag[tag] = false
                         KeyboardView.FontLoaded(tag: tag, in: controller)
                         progressTimer[tag].invalidate()
+                        if !File.writeFont(fileName: Font.FontFileName[Font.FontName.allValues[tag]]!, data: NSData(data: data))
+                        {
+                            KeyboardView.FontWriteFailed(tag: tag, in: controller)
+                            print("write failed")
+                        }
                     }
                     
                     print("load success")

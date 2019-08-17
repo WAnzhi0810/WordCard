@@ -37,6 +37,12 @@ class Font {
         case SourceHanSerifH = "SourceHanSerifSC-Heavy"
     }
     
+    static let FontNeedDownloading: [Font.FontName] = [.SourceHanSerifL,
+                                                       .SourceHanSerifM,
+                                                       .SourceHanSerifSB,
+                                                       .SourceHanSerifB,
+                                                       .SourceHanSerifH]
+    
     static let FontFileName: [Font.FontName : String] = [.SourceHanSerifR : "SourceHanSerifSC-Regular.otf",
                                                          .SourceHanSerifL : "SourceHanSerifSC-Light.otf",
                                                          .SourceHanSerifM : "SourceHanSerifSC-Medium.otf",
@@ -50,6 +56,13 @@ class Font {
                                                         .SourceHanSerifSB : 23861812,
                                                         .SourceHanSerifB : 24667072,
                                                         .SourceHanSerifH : 22899084]
+    
+    static let FontFileSizeDisc: [Font.FontName : String] = [.SourceHanSerifR : "22.5 MB",
+                                                             .SourceHanSerifL : "22.4 MB",
+                                                             .SourceHanSerifM : "22.8 MB",
+                                                             .SourceHanSerifSB : "22.8 MB",
+                                                             .SourceHanSerifB : "23.5 MB",
+                                                             .SourceHanSerifH : "21.8 MB"]
     
     static func set(systemFontSize size: CGFloat, weight: UIFont.Weight) -> UIFont
     {

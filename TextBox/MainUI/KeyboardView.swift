@@ -16,8 +16,10 @@ class KeyboardView {
         static var fontView : UIView?
         static var fontSizeView : UIView?
         static var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
+        static var deleteBtn = [UIButton]()
         static var buttons = [UIButton]()
         static var TitleLabel: UILabel!
+        static var currentDark = Style.isDark
     }
     
     class FontSizeView {
@@ -35,6 +37,7 @@ class KeyboardView {
         static var SizeNumberLabel: UILabel!
         static var LButton: UIButton!
         static var RButton: UIButton!
+        static var currentDark = Style.isDark
     }
     
     static func GenerateView(in controller: ViewController, tag: Int) -> UIView
@@ -44,16 +47,18 @@ class KeyboardView {
         switch tag
         {
         case EditAccessoryView.buttonID.Font.rawValue:
-            if FontView.fontView == nil
+            if FontView.fontView == nil || FontView.currentDark != Style.isDark
             {
+                FontView.currentDark = Style.isDark
                 FontView.fontView = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
                 FontView.fontView!.addSubview(GenerateFontView(in: controller))
             }
             FontOperation(tag: Font.FontName.allValues.firstIndex(of: EditView.current.font) ?? 0, in: controller)
             view.addSubview(FontView.fontView!)
         case EditAccessoryView.buttonID.Fontsize.rawValue:
-            if FontView.fontSizeView == nil
+            if FontView.fontSizeView == nil || FontSizeView.currentDark != Style.isDark
             {
+                FontView.currentDark = Style.isDark
                 FontView.fontSizeView = UIView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
                 FontView.fontSizeView!.addSubview(GenerateFontsizeView(in: controller))
             }
@@ -80,6 +85,7 @@ class KeyboardView {
     private static func GenerateFontView(in controller: ViewController) -> UIScrollView
     {
         FontView.buttons.removeAll()
+        FontView.deleteBtn.removeAll()
         
         FontView.scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: Size.ScreenWidth, height: Size.KeyboardView.Height))
         
@@ -87,10 +93,29 @@ class KeyboardView {
         
         for (tag, oneName) in Font.FontName.allValues.enumerated()
         {
+            let isExist = Font.isExist(fontName: oneName)
+            let isNeedDownloading = Font.FontNeedDownloading.firstIndex(of: oneName) == nil ? false : true
+            
+            let deleteButton = UIButton(type: UIButton.ButtonType.custom)
+            deleteButton.frame = CGRect(x: 10, y: currentY + 15.0, width: 30.0, height: 30.0)
+            deleteButton.setImage(UIImage(named: "FontDelete"), for: UIControl.State.normal)
+            deleteButton.tag = tag
+            deleteButton.isHidden = !(isNeedDownloading && isExist)
+            
+            deleteButton.addTarget(controller, action: #selector(controller.ButtonTouchDown(_:)), for: UIControl.Event.touchDown)
+            deleteButton.addTarget(controller, action: #selector(controller.ButtonTouchDown(_:)), for: UIControl.Event.touchDragEnter)
+            deleteButton.addTarget(controller, action: #selector(controller.ButtonTouchUp(_:)), for: UIControl.Event.touchCancel)
+            deleteButton.addTarget(controller, action: #selector(controller.ButtonTouchUp(_:)), for: UIControl.Event.touchDragExit)
+            deleteButton.addTarget(controller, action: #selector(controller.ButtonTouchUp(_:)), for: UIControl.Event.touchUpInside)
+            deleteButton.addTarget(controller, action: #selector(controller.KeyboardFontViewDeleteButton(_:)), for: UIControl.Event.touchUpInside)
+            
+            FontView.deleteBtn.append(deleteButton)
+            FontView.scrollView.addSubview(deleteButton)
+            
             let oneButton = UIButton(type: UIButton.ButtonType.custom)
             oneButton.frame = CGRect(x: 50, y: currentY, width: Size.ScreenWidth - 100.0, height: 60.0)
             oneButton.tag = tag
-            oneButton.setTitle(oneName.rawValue.localize() + (Font.isExist(fontName: oneName) ? "" : " (需要云加载)".localize()), for: .normal)
+            oneButton.setTitle(oneName.rawValue.localize() + (isExist ? "" : " (需要下载: ".localize() + Font.FontFileSizeDisc[oneName]! + ")"), for: .normal)
             oneButton.titleLabel?.font = Font.set(fontName: oneName, size: 17)
             oneButton.titleLabel?.adjustsFontSizeToFitWidth = true
             oneButton.setTitleColor(Style.isDark ? Color.button.black.unSelectFG : Color.button.white.unSelectFG, for: .normal)
@@ -192,7 +217,13 @@ class KeyboardView {
     
     static func FontLoadCancelled(tag: Int, in controller: ViewController)
     {
-        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (需要云加载)".localize(), for: UIControl.State.normal)
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (需要下载: ".localize() + Font.FontFileSizeDisc[Font.FontName.allValues[tag]]! + ")", for: UIControl.State.normal)
+    }
+    
+    static func FontDeleted(tag: Int, in controller: ViewController)
+    {
+        FontView.deleteBtn[tag].isHidden = true
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (已删除，但还可使用)".localize(), for: UIControl.State.normal)
     }
     
     static func FontDataError(tag: Int, in controller: ViewController)
@@ -202,7 +233,12 @@ class KeyboardView {
     
     static func FontLoadFailed(tag: Int, in controller: ViewController)
     {
-        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (加载失败)".localize(), for: UIControl.State.normal)
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (下载失败)".localize(), for: UIControl.State.normal)
+    }
+    
+    static func FontWriteFailed(tag: Int, in controller: ViewController)
+    {
+        FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (文件写入失败)".localize(), for: UIControl.State.normal)
     }
     
     static func FontLoading(percent: Int, tag: Int, in controller: ViewController)
@@ -212,6 +248,7 @@ class KeyboardView {
     
     static func FontLoaded(tag: Int, in controller: ViewController)
     {
+        FontView.deleteBtn[tag].isHidden = false
         System.FeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
         FontOperation(tag: tag, in: controller)
         FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize(), for: UIControl.State.normal)
@@ -236,7 +273,7 @@ class KeyboardView {
                 return
             }
             Downloader.loadFont(tag: tag, in: controller)
-            FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (正在加载)".localize(), for: UIControl.State.normal)
+            FontView.buttons[tag].setTitle(Font.FontName.allValues[tag].rawValue.localize() + " (正在下载)".localize(), for: UIControl.State.normal)
             return
         }
         
@@ -304,6 +341,18 @@ class KeyboardView {
         default:
             break
         }
+    }
+    
+    static func FontDeleteOperation(tag: Int, in controller: ViewController)
+    {
+        let alert = UIAlertController(title: "确认删除字体？".localize(), message: "删除字体后，您仍然可以在关闭应用前离线继续使用字体。".localize(), preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "确定".localize(), style: UIAlertAction.Style.default, handler: { (action) in
+            _ = File.deleteFont(fileName: Font.FontFileName[Font.FontName.allValues[tag]]!)
+            self.FontDeleted(tag: tag, in: controller)
+        }))
+        alert.addAction(UIAlertAction(title: "取消".localize(), style: UIAlertAction.Style.cancel, handler: nil))
+        
+        controller.present(alert, animated: true, completion: nil)
     }
     
     

@@ -84,6 +84,8 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         photoPickerViewController.sourceType = .photoLibrary
         photoPickerViewController.delegate = self
         
+        File.loadFont()
+        
         self.BackgroundEffectView.effect = nil
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChanged), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -332,6 +334,12 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     {
         System.FeedbackGenerator(style: .light)
         KeyboardView.FontSizeOperation(tag: sender.tag, in: self)
+    }
+    
+    @objc func KeyboardFontViewDeleteButton(_ sender: UIButton)
+    {
+        System.FeedbackGenerator(style: .light)
+        KeyboardView.FontDeleteOperation(tag: sender.tag, in: self)
     }
     
     func KeyboardViewOperation(tag: Int)

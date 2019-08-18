@@ -36,6 +36,9 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     @IBOutlet weak var TextBoxEditViewTop: NSLayoutConstraint!
     @IBOutlet weak var TextBoxEditViewLeading: NSLayoutConstraint!
     @IBOutlet weak var TextBoxEditViewBottom: NSLayoutConstraint!
+    //@IBOutlet weak var TextBoxEditViewHeight: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var TextBoxImageViewTrailing: NSLayoutConstraint!
     @IBOutlet weak var TextBoxImageViewTop: NSLayoutConstraint!
     @IBOutlet weak var TextBoxImageViewLeading: NSLayoutConstraint!
@@ -107,6 +110,7 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
         //self.TextBox.UpdateTopToCenter(in: self)
         
         self.TextBoxEditView.FontInit()
+        Style.UpdateTextBox(in: self)
         
         self.TextBoxLabel.text = "轻触此处，编辑文字".localize()
         
@@ -275,6 +279,11 @@ class ViewController: UIViewController, UITextViewDelegate, UICollectionViewDele
     func textViewDidChangeSelection(_ textView: UITextView) {
         self.TextBoxEditView.GetAndSetCurrentAlignment()
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        Style.UpdateTextBox(in: self)
+    }
+    
     
     
     // MARK: - Edit Accessory View

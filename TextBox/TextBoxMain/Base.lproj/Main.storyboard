@@ -93,7 +93,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKf-pC-eyb" customClass="EditView" customModule="TextBox" customModuleProvider="target">
+                                                    <textView hidden="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKf-pC-eyb" customClass="EditView" customModule="TextBox" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="20" width="230" height="230"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -113,7 +113,6 @@
                                                     <constraint firstAttribute="bottom" secondItem="0Vf-OO-VZ2" secondAttribute="bottom" id="MWs-8N-X3N"/>
                                                     <constraint firstItem="wJQ-u2-SuU" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" constant="20" id="PYs-dJ-gkA"/>
                                                     <constraint firstItem="0Vf-OO-VZ2" firstAttribute="bottom" secondItem="SbT-km-gvh" secondAttribute="bottom" id="TB2-uf-1WS"/>
-                                                    <constraint firstAttribute="bottom" secondItem="DKf-pC-eyb" secondAttribute="bottom" constant="20" id="VYL-BA-nvx"/>
                                                     <constraint firstItem="Dw9-xN-IGZ" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" constant="-20" id="XM8-dL-GJV"/>
                                                     <constraint firstAttribute="bottom" secondItem="Dw9-xN-IGZ" secondAttribute="bottom" constant="-20" id="XSJ-Ie-047"/>
                                                     <constraint firstItem="0Vf-OO-VZ2" firstAttribute="trailing" secondItem="SbT-km-gvh" secondAttribute="trailing" id="XiR-NJ-3Ei"/>
@@ -121,9 +120,10 @@
                                                     <constraint firstItem="7Ud-gg-JOl" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" id="ZlM-ha-N0L"/>
                                                     <constraint firstAttribute="bottom" secondItem="wJQ-u2-SuU" secondAttribute="bottom" constant="20" id="aW5-Aq-gSc"/>
                                                     <constraint firstItem="DKf-pC-eyb" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" constant="20" id="bOm-tY-uhB"/>
+                                                    <constraint firstItem="DKf-pC-eyb" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" constant="20" id="bn0-Ji-inw"/>
                                                     <constraint firstItem="0Vf-OO-VZ2" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" id="fIL-Ii-qw2"/>
                                                     <constraint firstItem="Dw9-xN-IGZ" firstAttribute="leading" secondItem="uvW-6n-Sbi" secondAttribute="leading" constant="-20" id="gy9-Iw-VcL"/>
-                                                    <constraint firstItem="DKf-pC-eyb" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" constant="20" id="h0Z-Sa-u81"/>
+                                                    <constraint firstAttribute="bottom" secondItem="DKf-pC-eyb" secondAttribute="bottom" constant="20" id="hVb-8f-GuT"/>
                                                     <constraint firstItem="wJQ-u2-SuU" firstAttribute="top" secondItem="uvW-6n-Sbi" secondAttribute="top" constant="20" id="l9y-9S-hk1"/>
                                                     <constraint firstAttribute="trailing" secondItem="DKf-pC-eyb" secondAttribute="trailing" constant="20" id="mUY-pz-InI"/>
                                                     <constraint firstItem="SbT-km-gvh" firstAttribute="top" secondItem="0Vf-OO-VZ2" secondAttribute="top" id="s1R-Ki-KhV"/>
@@ -160,7 +160,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2O-52-Diw">
-                                <rect key="frame" x="172.66666666666663" y="728" width="30" height="30"/>
+                                <rect key="frame" x="172.66666666666666" y="728" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Xag-sz-LfP"/>
                                     <constraint firstAttribute="height" constant="30" id="iEM-36-hHU"/>
@@ -249,7 +249,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f5D-QU-VcY">
-                                                            <rect key="frame" x="0.0" y="0.0" width="1194" height="44"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oWS-KT-ipj">
                                                                 <size key="itemSize" width="50" height="50"/>
@@ -527,9 +527,9 @@
                         <outlet property="TextBoxContent" destination="uvW-6n-Sbi" id="FuZ-W6-tlF"/>
                         <outlet property="TextBoxDecorationView" destination="7Ud-gg-JOl" id="pkY-aw-YEY"/>
                         <outlet property="TextBoxEditView" destination="DKf-pC-eyb" id="pgc-sv-8cm"/>
-                        <outlet property="TextBoxEditViewBottom" destination="VYL-BA-nvx" id="2ox-nx-Xz8"/>
+                        <outlet property="TextBoxEditViewBottom" destination="hVb-8f-GuT" id="Inj-rj-eYK"/>
                         <outlet property="TextBoxEditViewLeading" destination="bOm-tY-uhB" id="Wtg-Ik-Oy4"/>
-                        <outlet property="TextBoxEditViewTop" destination="h0Z-Sa-u81" id="ofl-PH-eMN"/>
+                        <outlet property="TextBoxEditViewTop" destination="bn0-Ji-inw" id="BJc-vD-39W"/>
                         <outlet property="TextBoxEditViewTrailing" destination="mUY-pz-InI" id="9zk-PE-oHl"/>
                         <outlet property="TextBoxHeight" destination="wea-Vo-W51" id="u2Y-dL-u1V"/>
                         <outlet property="TextBoxImageFilterView" destination="SbT-km-gvh" id="uST-xI-Wph"/>
@@ -574,7 +574,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT0-Gx-dCs">
-                                <rect key="frame" x="130.66666666666663" y="144" width="113.66666666666666" height="67"/>
+                                <rect key="frame" x="130.66666666666666" y="144" width="113.66666666666666" height="67"/>
                                 <string key="text">欢迎使用
 文字卡片</string>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
@@ -582,7 +582,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIconIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CWV-na-1sL">
-                                <rect key="frame" x="157.66666666666663" y="74" width="60" height="60"/>
+                                <rect key="frame" x="157.66666666666666" y="74" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="8pD-YF-Ycg"/>
                                     <constraint firstAttribute="width" constant="60" id="zRY-HH-wWW"/>

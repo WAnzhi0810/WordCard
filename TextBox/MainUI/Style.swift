@@ -519,9 +519,12 @@ class Style {
             case .Blank, .Picture:
                 controller.TextBoxLabel.layer.borderColor = PreviewValue.TextBorderColor[current[.TextBorderColor]!].cgColor
                 controller.TextBoxLabel.layer.borderWidth = PreviewValue.TextBorderWidth[current[.TextBorderWidth]!]
+                controller.TextBoxEditView.layer.borderColor = PreviewValue.TextBorderColor[current[.TextBorderColor]!].cgColor
+                controller.TextBoxEditView.layer.borderWidth = PreviewValue.TextBorderWidth[current[.TextBorderWidth]!]
                 
             case .Postcard, .HorizontalPostcard:
                 controller.TextBoxLabel.layer.borderWidth = 0
+                controller.TextBoxEditView.layer.borderWidth = 0
             }
             
             switch Style.current
@@ -633,16 +636,20 @@ class Style {
             let currentImageShape = self.Adjustment.current[.ImageShape]!
             let currentImageMargin = self.Adjustment.PreviewValue.ImageMargin[self.Adjustment.current[.ImageMargin]!]
             
-            let wordHeight = controller.TextBoxLabel.attributedText?.height(width: Size.TextBox.size - (controller.TextBoxLabelLeading.constant + controller.TextBoxLabelTrailing.constant))
-            if wordHeight == nil
+            guard let wordHeight = controller.TextBoxEditView.attributedText?.height(width: Size.TextBox.size - (controller.TextBoxLabelLeading.constant + controller.TextBoxLabelTrailing.constant)) else
             {
                 return
             }
-            let boxHeight = wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant <= Size.TextBox.size ? Size.TextBox.size : wordHeight! + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant + 1
+            
+            let boxHeight = wordHeight + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant <= Size.TextBox.size ? Size.TextBox.size : wordHeight + controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant + 1
             
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
+                controller.TextBoxEditViewTop.constant = (boxHeight - (wordHeight + 20.0)) / 2.0
+                controller.TextBoxEditViewBottom.constant = (boxHeight - (wordHeight + 20.0)) / 2.0
+                
                 controller.TextBoxHeight.constant = boxHeight
                 controller.TextBoxWidth.constant = Size.TextBox.size
+                
                 controller.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -668,12 +675,12 @@ class Style {
             let currentImageMargin = self.Adjustment.PreviewValue.ImageMargin[self.Adjustment.current[.ImageMargin]!]
             let currentImageShape = self.Adjustment.current[.ImageShape]!
             
-            let wordHeight = controller.TextBoxLabel.attributedText?.height(width: Size.TextBox.size - (controller.TextBoxLabelLeading.constant + controller.TextBoxLabelTrailing.constant))
-            if wordHeight == nil
+            guard let wordHeight = controller.TextBoxEditView.attributedText?.height(width: Size.TextBox.size - (controller.TextBoxLabelLeading.constant + controller.TextBoxLabelTrailing.constant)) else
             {
                 return
             }
-            let wordPart = wordHeight! + currentTextMargin * 2 <= Size.TextBox.size / 2.0 ? Size.TextBox.size / 2.0 : wordHeight! + currentTextMargin * 2
+            
+            let wordPart = wordHeight + currentTextMargin * 2 <= Size.TextBox.size / 2.0 ? Size.TextBox.size / 2.0 : wordHeight + currentTextMargin * 2
             let picPart = Size.TextBox.size - currentImageMargin
             let boxHeight = wordPart + picPart + 1
             
@@ -686,6 +693,8 @@ class Style {
                     controller.TextBoxLabelBottom.constant = currentTextMargin
                     controller.TextBoxImageViewBottom.constant = wordPart
                     controller.TextBoxLabelTop.constant = picPart + currentTextMargin
+                    controller.TextBoxEditViewTop.constant = (wordPart - (wordHeight + 20.0)) / 2.0 + picPart
+                    controller.TextBoxEditViewBottom.constant = (wordPart - (wordHeight + 20.0)) / 2.0
                 }
                 else if self.Adjustment.current[.ImagePositionTB] == 1
                 {
@@ -693,9 +702,12 @@ class Style {
                     controller.TextBoxLabelTop.constant = currentTextMargin
                     controller.TextBoxImageViewTop.constant = wordPart
                     controller.TextBoxLabelBottom.constant = picPart + currentTextMargin
+                    controller.TextBoxEditViewTop.constant = (wordPart - (wordHeight + 20.0)) / 2.0
+                    controller.TextBoxEditViewBottom.constant = (wordPart - (wordHeight + 20.0)) / 2.0 + picPart
                 }
                 controller.TextBoxHeight.constant = boxHeight
                 controller.TextBoxWidth.constant = Size.TextBox.size
+                
                 controller.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -721,12 +733,17 @@ class Style {
             let currentImageMargin = self.Adjustment.PreviewValue.ImageMargin[self.Adjustment.current[.ImageMargin]!]
             let currentImageShape = self.Adjustment.current[.ImageShape]!
             
-            let wordWidth = controller.TextBoxLabel.attributedText?.width(height: Size.TextBox.size - (controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant))
-            if wordWidth == nil
+            guard let wordWidth = controller.TextBoxEditView.attributedText?.width(height: Size.TextBox.size - (controller.TextBoxLabelTop.constant + controller.TextBoxLabelBottom.constant)) else
             {
                 return
             }
-            let wordPart = wordWidth! + currentTextMargin * 2 <= Size.TextBox.size / 2.0 ? Size.TextBox.size / 2.0 : wordWidth! + currentTextMargin * 2
+            
+            guard let wordHeight = controller.TextBoxEditView.attributedText?.height(width: wordWidth + 1.0) else
+            {
+                return
+            }
+            
+            let wordPart = wordWidth + currentTextMargin * 2 <= Size.TextBox.size / 2.0 ? Size.TextBox.size / 2.0 : wordWidth + currentTextMargin * 2
             let picPart = Size.TextBox.size - currentImageMargin
             let boxWidth = wordPart + picPart + 1
             
@@ -739,6 +756,8 @@ class Style {
                     controller.TextBoxLabelTrailing.constant = currentTextMargin
                     controller.TextBoxImageViewTrailing.constant = wordPart
                     controller.TextBoxLabelLeading.constant = picPart + currentTextMargin
+                    controller.TextBoxEditViewLeading.constant = boxWidth - currentTextMargin - (wordWidth + 20.0)
+                    controller.TextBoxEditViewTrailing.constant = currentTextMargin
                 }
                 else if self.Adjustment.current[.ImagePositionLT] == 1
                 {
@@ -746,9 +765,15 @@ class Style {
                     controller.TextBoxLabelLeading.constant = currentTextMargin
                     controller.TextBoxImageViewLeading.constant = wordPart
                     controller.TextBoxLabelTrailing.constant = picPart + currentTextMargin
+                    controller.TextBoxEditViewLeading.constant = currentTextMargin
+                    controller.TextBoxEditViewTrailing.constant = boxWidth - currentTextMargin - (wordWidth + 20.0)
                 }
+                controller.TextBoxEditViewTop.constant = (Size.TextBox.size - (wordHeight + 20.0)) / 2.0 < currentTextMargin ? currentTextMargin : (Size.TextBox.size - (wordHeight + 20.0)) / 2.0
+                controller.TextBoxEditViewBottom.constant = (Size.TextBox.size - (wordHeight + 20.0)) / 2.0 < currentTextMargin ? currentTextMargin : (Size.TextBox.size - (wordHeight + 20.0)) / 2.0
+                
                 controller.TextBoxWidth.constant = boxWidth
                 controller.TextBoxHeight.constant = Size.TextBox.size
+                
                 controller.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -944,7 +969,7 @@ class Style {
     
     static func ToEdit(in controller: ViewController)
     {
-        switch self.current
+        /*switch self.current
         {
         case .Blank, .Picture:
             UIView.easeOut(duration: Constant.AnimationInterval.Middle, delay: 0, doing: {
@@ -960,7 +985,7 @@ class Style {
                 controller.TextBoxWidth.constant = Size.TextBox.size
                 controller.view.layoutIfNeeded()
             }, completion: nil)
-        }
+        }*/
     }
     
 
